@@ -1,4 +1,4 @@
-# 🚗 TikiPark
+# 🚗 TikiPark Android Application
 
 ## 📌 Project Overview
 Το **TikiPark** είναι μια Android εφαρμογή για εύκολη διαχείριση στάθμευσης, με ασφαλή σύνδεση και cloud αποθήκευση.
@@ -7,8 +7,6 @@
 - **Android Studio** (Java)
 - **Firebase** (Authentication & Database)
 - **GitHub Actions** (CI/CD)
-
----
 
 ## 🛠 Installation
 
@@ -35,6 +33,7 @@ cd TikiPark
 git clone https://github.com/AngelosFikias0/TikiPark.git
 cd TikiPark
 git checkout main
+git fetch origin
 git pull origin main
 ```
 
@@ -55,8 +54,9 @@ implementation 'com.google.firebase:firebase-database:20.0.4'
 git checkout -b feature-branch
 ```
 
-### 4. **Pull Πριν τις Αλλαγές (Αποφυγή Conflicts)**
+### 4. **Fetch & Pull Πριν τις Αλλαγές (Αποφυγή Conflicts)**
 ```bash
+git fetch origin
 git pull origin main
 ```
 
@@ -77,6 +77,7 @@ git push origin feature-branch
 ### 7. **Ενημέρωση του Τοπικού Main Branch Μετά το Merge**
 ```bash
 git checkout main
+git fetch origin
 git pull origin main
 ```
 
@@ -85,3 +86,6 @@ git pull origin main
 git branch -d feature-branch
 git push origin --delete feature-branch
 ```
+
+## 🤝 Collaborators
+-
