@@ -1,11 +1,11 @@
 # 🚗 TikiPark Android Application
 
 <p align="center">
-  <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark" alt="Repo Size">
-  <img src="https://img.shields.io/github/issues/AngelosFikias0/TikiPark" alt="Issues">
-  <img src="https://img.shields.io/github/issues-pr/AngelosFikias0/TikiPark" alt="Pull Requests">
-  <img src="https://img.shields.io/github/last-commit/AngelosFikias0/TikiPark" alt="Last Commit">
-  <img src="https://img.shields.io/github/contributors/AngelosFikias0/TikiPark" alt="Contributors">
+  <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark?style=for-the-badge&color=blue" alt="Repo Size">
+  <img src="https://img.shields.io/github/issues/AngelosFikias0/TikiPark?style=for-the-badge&color=yellow" alt="Issues">
+  <img src="https://img.shields.io/github/issues-pr/AngelosFikias0/TikiPark?style=for-the-badge&color=brightgreen" alt="Pull Requests">
+  <img src="https://img.shields.io/github/last-commit/AngelosFikias0/TikiPark?style=for-the-badge&color=red" alt="Last Commit">
+  <img src="https://img.shields.io/github/contributors/AngelosFikias0/TikiPark?style=for-the-badge&color=purple" alt="Contributors">
 </p>
 
 ## 📌 Project Overview
@@ -13,10 +13,10 @@
 
 ## 📱 Τεχνολογίες & Εργαλεία
 <p align="center">
-  <img src="https://img.shields.io/badge/Android_Studio-Java-green" alt="Android">
-  <img src="https://img.shields.io/badge/Firebase-Authentication_&_Database-orange" alt="Firebase">
-  <img src="https://img.shields.io/badge/GitHub_Actions-CI/CD-blue" alt="GitHub Actions">
-</p>  
+  <img src="https://img.shields.io/badge/Android_Studio-Java-green?style=for-the-badge&logo=android" alt="Android">
+  <img src="https://img.shields.io/badge/Firebase-Authentication_&_Database-orange?style=for-the-badge&logo=firebase" alt="Firebase">
+  <img src="https://img.shields.io/badge/GitHub_Actions-CI/CD-blue?style=for-the-badge&logo=github-actions" alt="GitHub Actions">
+</p>
 
 ## 📊 Project Details
 
