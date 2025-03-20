@@ -1,5 +1,10 @@
 # 🚗 TikiPark Android Application
 
+## 📌 Project Overview
+Το **TikiPark** είναι μια Android εφαρμογή για εύκολη διαχείριση στάθμευσης, με ασφαλή σύνδεση και cloud αποθήκευση.
+
+## 📊 Project Details
+
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark?style=for-the-badge&color=blue" alt="Repo Size">
   <img src="https://img.shields.io/github/issues/AngelosFikias0/TikiPark?style=for-the-badge&color=yellow" alt="Issues">
@@ -8,17 +13,12 @@
   <img src="https://img.shields.io/github/contributors/AngelosFikias0/TikiPark?style=for-the-badge&color=purple" alt="Contributors">
 </p>
 
-## 📌 Project Overview
-Το **TikiPark** είναι μια Android εφαρμογή για εύκολη διαχείριση στάθμευσης, με ασφαλή σύνδεση και cloud αποθήκευση.
-
 ## 📱 Τεχνολογίες & Εργαλεία
 <p align="center">
   <img src="https://img.shields.io/badge/Android_Studio-Java-green?style=for-the-badge&logo=android" alt="Android">
   <img src="https://img.shields.io/badge/Firebase-Authentication_&_Database-orange?style=for-the-badge&logo=firebase" alt="Firebase">
   <img src="https://img.shields.io/badge/GitHub_Actions-CI/CD-blue?style=for-the-badge&logo=github-actions" alt="GitHub Actions">
 </p>
-
-## 📊 Project Details
 
 ## 🛠 Installation
 
@@ -100,4 +100,3 @@ git push origin --delete feature-branch
 ```
 
 ## 🤝 Collaborators
--
