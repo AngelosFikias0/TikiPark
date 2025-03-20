@@ -8,9 +8,6 @@
 - **Firebase** (Authentication & Database)
 - **GitHub Actions** (CI/CD)
 
-## 📸 Screenshots
-_(Πρόσθεσε εδώ screenshots της εφαρμογής)_
-
 ---
 
 ## 🛠 Installation
@@ -32,21 +29,16 @@ cd TikiPark
 
 ## 👥 Συμμετοχή & Contributing
 
-### 1. **Fork το Repository**
-
-Πριν κάνεις αλλαγές, δημιούργησε ένα αντίγραφο του repository στον λογαριασμό σου:
-
-1. Πήγαινε στο [TikiPark Repository](https://github.com/AngelosFikias0/TikiPark)
-2. Πάτα **Fork** (επάνω δεξιά) για να δημιουργήσεις ένα αντίγραφο στο δικό σου GitHub
-
-### 2. **Κλωνοποίηση του Forked Repository**
-
+### 1. **Κλωνοποίηση & Ρύθμιση του Repository**
+Πριν ξεκινήσεις, βεβαιώσου ότι έχεις την τελευταία έκδοση του κώδικα:
 ```bash
-git clone https://github.com/your-username/TikiPark.git
+git clone https://github.com/AngelosFikias0/TikiPark.git
 cd TikiPark
+git checkout main
+git pull origin main
 ```
 
-### 3. **Ρύθμιση Firebase**
+### 2. **Ρύθμιση Firebase**
 1. Δημιούργησε ένα **Firebase Project** στο [Firebase Console](https://console.firebase.google.com/)
 2. Πρόσθεσε την εφαρμογή Android και κατέβασε το **google-services.json**
 3. Αντιγραφή του `google-services.json` στον φάκελο `app/`
@@ -58,47 +50,37 @@ implementation 'com.google.firebase:firebase-database:20.0.4'
 ```
 5. Συγχρονισμός του project στο Android Studio
 
-### 4. **Δημιουργία Branch για τις αλλαγές σου**
-
+### 3. **Δημιουργία Branch για τις Αλλαγές σου**
 ```bash
-git checkout -b feature-branch main
+git checkout -b feature-branch
 ```
 
-### 5. **Commit & Push των αλλαγών σου**
+### 4. **Pull Πριν τις Αλλαγές (Αποφυγή Conflicts)**
+```bash
+git pull origin main
+```
 
-Μετά τις αλλαγές σου, προσθέτεις τα αρχεία και κάνεις commit:
-
+### 5. **Commit & Push των Αλλαγών σου**
 ```bash
 git add .
 git commit -m "Προσθήκη νέας λειτουργίας"
-```
-
-Στη συνέχεια, κάνεις push το branch στο απομακρυσμένο repository σου:
-
-```bash
 git push origin feature-branch
 ```
 
-### 6. **Δημιουργία Pull Request**
+### 6. **Δημιουργία Pull Request (PR)**
+1. Πήγαινε στο repository στο GitHub
+2. Πάτα **New Pull Request**
+3. Επίλεξε το `feature-branch` και σύγκρινέ το με το `main`
+4. Πρόσθεσε περιγραφή και πάτα **Create Pull Request**
+5. Περίμενε έγκριση και merge από τους maintainers
 
-1. Πήγαινε στο repository σου στο GitHub
-2. Θα δεις μια ειδοποίηση για να ανοίξεις ένα **Pull Request**
-3. Συμπλήρωσε μια περιγραφή των αλλαγών σου και πάτα **Create Pull Request**
-4. Περιμένε να εγκριθεί το PR και να συγχωνευθεί στο **main**
-
-### 7. **Ενημέρωση του Τοπικού σου Main Branch**
-
-Αφού συγχωνευτεί το PR, ενημέρωσε το τοπικό σου repository:
-
+### 7. **Ενημέρωση του Τοπικού Main Branch Μετά το Merge**
 ```bash
 git checkout main
 git pull origin main
 ```
 
-### 8. **Διαγραφή του Feature Branch (Προαιρετικό)**
-
-Αν το branch δεν χρειάζεται πλέον, μπορείς να το διαγράψεις:
-
+### 8. **Διαγραφή του Feature Branch (Τοπικά & Remote, Προαιρετικό)**
 ```bash
 git branch -d feature-branch
 git push origin --delete feature-branch
