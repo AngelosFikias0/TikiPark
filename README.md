@@ -5,6 +5,8 @@
 
 ## 📊 Project Details
 
+---
+
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark?style=for-the-badge&color=blue" alt="Repo Size">
   <img src="https://img.shields.io/github/issues/AngelosFikias0/TikiPark?style=for-the-badge&color=yellow" alt="Issues">
@@ -19,6 +21,8 @@
   <img src="https://img.shields.io/badge/Firebase-Authentication_&_Database-orange?style=for-the-badge&logo=firebase" alt="Firebase">
   <img src="https://img.shields.io/badge/GitHub_Actions-CI/CD-blue?style=for-the-badge&logo=github-actions" alt="GitHub Actions">
 </p>
+
+---
 
 ## 🛠 Installation
 
@@ -98,5 +102,6 @@ git pull origin main
 git branch -d feature-branch
 git push origin --delete feature-branch
 ```
+---
 
 ## 🤝 Collaborators
