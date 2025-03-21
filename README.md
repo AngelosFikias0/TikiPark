@@ -105,3 +105,4 @@ git push origin --delete feature-branch
 ---
 
 ## 🤝 Collaborators
+![Contributors](https://contrib.rocks/image?repo=AngelosFikias0/TikiPark)
