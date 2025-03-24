@@ -1,7 +1,6 @@
 # 🚗 TikiPark Android Application
 
 ## 📌 Project Overview
-Το **TikiPark** είναι μια Android εφαρμογή για εύκολη διαχείριση στάθμευσης, με ασφαλή σύνδεση και cloud αποθήκευση.
 
 ## 📊 Project Details
 
