@@ -2,9 +2,9 @@
 
 ## 📌 Project Overview
 
-## 📊 Project Details
-
 ---
+
+## 📊 Project Details
 
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark?style=for-the-badge&color=blue" alt="Repo Size">
