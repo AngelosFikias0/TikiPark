@@ -1,0 +1,87 @@
+1. Users Table
+Stores user information, including roles (admin, user) and wallet balance.
+
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    wallet_balance DECIMAL(10, 2) DEFAULT 0.00,
+    role ENUM('user', 'admin') DEFAULT 'user',
+);
+
+---
+
+2. Parking Spots Table
+Stores parking spot details. Admin will be responsible for CRUD operations.
+
+CREATE TABLE parking_spots (
+    spot_id INT AUTO_INCREMENT PRIMARY KEY,
+    location VARCHAR(255) NOT NULL,
+    status ENUM('available', 'occupied', 'reserved') DEFAULT 'available',
+    price_per_hour DECIMAL(10, 2) NOT NULL,
+);
+
+---
+
+3. Reservations Table
+Tracks each parking spot reservation by users.
+
+CREATE TABLE reservations (
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    spot_id INT NOT NULL,
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP NOT NULL,
+    status ENUM('active', 'completed', 'cancelled') DEFAULT 'active',
+    total_amount DECIMAL(10, 2) NOT NULL,
+    payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (spot_id) REFERENCES parking_spots(spot_id)
+);
+
+---
+4. Statistics Table
+Statistics per User
+
+CREATE TABLE user_statistics (
+    user_id INT PRIMARY KEY,
+    total_amount_spent DECIMAL(10, 2) DEFAULT 0.00,
+    total_reservations INT DEFAULT 0,
+    total_parking_time INT DEFAULT 0,  -- In minutes, or another unit
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+------
+
+1. Android App:
+-User Action: The user fills out a form and clicks a button.
+-Data Preparation: The app collects data from form fields (e.g., parking spot details).
+-Send Request: The app sends an HTTP POST request to the PHP server, containing the form data.
+
+2. Apache Server:
+-Receives Request: Apache accepts the incoming HTTP request from the Android app.
+-Routes to PHP: Apache looks at the URL in the request to determine which PHP script to execute. The URL path after the domain (e.g., /parking/create.php) tells Apache which PHP file should handle the request. -Apache checks the server's file system to find the corresponding PHP script (e.g., create.php in the parking/ directory). If the file exists, Apache forwards the request to the PHP interpreter for processing.
+
+3. PHP Script:
+-Process Data: The PHP script processes the incoming data (e.g., validates it, sanitizes input).
+-Interact with MySQL: PHP connects to the MySQL database and executes SQL queries (e.g., inserts the data into the parking_spots table).
+
+4. MySQL Database:
+-Store Data: MySQL stores the data in the appropriate tables (e.g., parking_spots).
+-Return Results: MySQL returns the result of the operation (success or failure) to PHP.
+
+5. PHP to Android (Response):
+-Prepare Response: PHP prepares a response, often in JSON format (e.g., success message or error).
+-Send Response: PHP sends the response back to Android via HTTP.
+
+6. Android App:
+-Receive Response: The Android app receives the response from the PHP server.
+-Update UI: The app updates the user interface (e.g., displays success message or error notification).
+
+
+Summary of Communication:
+-Android to PHP: Android sends a POST request with data.
+-PHP to MySQL: PHP interacts with MySQL to store or retrieve data.
+-PHP to Android: PHP sends back a response (success/error).
+-Android Updates UI based on the response.
