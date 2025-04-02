@@ -7,7 +7,6 @@
 ## 📊 Project Details
 
 <p align="center">
-  ![Logo](Mockups/logo.jpg)
   <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark?style=for-the-badge&color=blue" alt="Repo Size">
   <img src="https://img.shields.io/github/issues/AngelosFikias0/TikiPark?style=for-the-badge&color=yellow" alt="Issues">
   <img src="https://img.shields.io/github/issues-pr/AngelosFikias0/TikiPark?style=for-the-badge&color=brightgreen" alt="Pull Requests">
