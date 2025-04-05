@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.authtestproject'
+    namespace 'com.example.phptestproject'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.authtestproject"
+        applicationId "com.example.phptestproject"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -26,9 +26,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildFeatures {
-        viewBinding true // If you're using ViewBinding, add this
-    }
 }
 
 dependencies {
@@ -38,11 +35,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.navigation:navigation-fragment:2.4.1'
     implementation 'androidx.navigation:navigation-ui:2.4.1'
-
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    implementation 'mysql:mysql-connector-java:8.0.29'
-
-
 }

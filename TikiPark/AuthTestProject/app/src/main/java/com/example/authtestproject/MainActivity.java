@@ -29,21 +29,30 @@ public class MainActivity extends AppCompatActivity {
             String username = usernameEditText.getText().toString().trim(); // Trim extra spaces
             String password = passwordEditText.getText().toString().trim(); // Trim extra spaces
 
-            // Simple validation
-            if (username.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Username is required", Toast.LENGTH_SHORT).show();
-            } else if (password.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Password is required", Toast.LENGTH_SHORT).show();
-            } else {
-                // If username and password are both valid, navigate to the WelcomeActivity
-                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                intent.putExtra("USERNAME", username);
-                intent.putExtra("ROLE", "admin"); // Example role, modify as needed
-                startActivity(intent);
+            new Thread(() -> {
+                boolean isValid = DatabaseHelper.validateUser(username, password);
 
-                // Optionally show a toast for a successful login
-                Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-            }
+                if (username.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Username is required", Toast.LENGTH_SHORT).show();
+                } else if (password.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Password is required", Toast.LENGTH_SHORT).show();
+                } else {
+                    runOnUiThread(() -> {
+                        if (isValid) {
+                            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                            // If username and password are both valid, navigate to the WelcomeActivity
+                            Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+                            intent.putExtra("USERNAME", username);
+                            intent.putExtra("ROLE", "user"); // Example role, modify as needed
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+            }).start();
+
         });
     }
 }
