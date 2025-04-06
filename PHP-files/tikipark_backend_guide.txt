@@ -1,0 +1,91 @@
+## 1. 🧰 Install XAMPP (if not already)
+- [Download XAMPP](https://www.apachefriends.org/index.html)
+- Install & launch **XAMPP Control Panel**
+- Start only **Apache** (MySQL optional, we use PHP + `mysqli`)
+
+---
+
+## 2. 📁 Setup Project Directory
+
+1. Navigate to XAMPP's root:
+   
+   C:\xampp\htdocs\
+   
+2. Create folder:
+   
+   C:\xampp\htdocs\tikipark\
+   
+3. Copy **ALL PHP files** into `tikipark/`:
+
+---
+
+## 3. 🌐 Find Your Local IP (used by Android)
+On the machine running XAMPP:
+
+- Open terminal and run:
+  ifconfig       # on Linux/Mac
+  ipconfig       # on Windows
+  
+- Copy your **local IP** (e.g., `192.168.1.226` from `wlp1s0`)
+⚠️ Don't use `127.0.0.1` or `localhost` on your phone/emulator — it won’t work!
+
+---
+
+## 4. ✅ Confirm PHP Server is Live
+
+1. Open browser on the same machine:
+
+   http://192.168.1.226/tikipark/init_db.php
+  
+2. You should see:
+  
+   Database and tables initialized successfully.
+  
+If not → XAMPP isn’t running, or firewall blocks Apache.
+
+---
+
+## 5. 📱 Test from Android Device
+
+- **Real phone on same WiFi**
+- Try hitting the same link:  
+  `http://192.168.1.226/tikipark/login.php`  
+  → Should load with no errors (even if empty or JSON)
+
+---
+
+## 6. 🧠 Android Studio Integration
+
+Make sure the app:
+- Uses exact IP:
+  
+  URL url = new URL("http://192.168.1.226/tikipark/login.php");
+  
+- Includes `INTERNET` permission in `AndroidManifest.xml`:
+  
+  <uses-permission android:name="android.permission.INTERNET"/>
+  
+- Calls `createDB()` once at startup (calls `init_db.php`)
+
+---
+
+## 7. 🧪 Test Login / Register
+
+Try:
+- Registering a new user
+- Logging in as:
+  - New user
+  - Default admin (`admin` / `123`)
+
+---
+
+## 8. 📌 Gotchas to Avoid
+
+| Problem                          | Solution                            |
+|----------------------------------|-------------------------------------|
+| `localhost` not working          | Use your **LAN IP**, not `127.0.0.1` |
+| PHP not loading                  | Start **Apache** in XAMPP           |
+| JSON parse error on Android      | Ensure `php` **returns clean JSON**, no HTML or echo before `json_encode` |
+| "Network Error" in app           | Phone not on same WiFi OR IP is wrong |
+
+---

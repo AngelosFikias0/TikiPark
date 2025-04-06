@@ -1,33 +1,107 @@
-1. Αυθεντικοποίηση Χρήστη & Οθόνες Καλωσορίσματος
-📝 SQL DB
-📝 Αυθεντικοποίηση Χρήστη (Login/Signup)
-📝 Οθόνες Καλωσορίσματος 
-[0 + 1 + 2]
+PLAN:
+---
 
-2. Διαχείριση Χώρων Στάθμευσης (Διαχ)
-📝 Διαχείριση CRUD Χώρων Στάθμευσης από Admin
-📝 Ενσωμάτωση Google Maps API για τοποθεσίες
-[3 + 4 + 5 + 6]
-
-3. Χαρακτηριστικά Χρήστη
-📝 Διαχείριση Πορτοφολιού (Κατάθεση, Ανάληψη)
-📝 Αναζήτηση Χώρων Στάθμευσης
-[8,9]
-
-4. Κράτηση Χώρου Στάθμευσης & Πληρωμή
-📝 Έναρξη Στάθμευσης
-📝 Ολοκλήρωση Στάθμευσης και Ενημέρωση Κατάστασης Κράτησης
-📝 Επεξεργασία Πληρωμής
-[10 + 11 + 12 + 13]
-
-5. Στατιστικά Χρήστη
-📝 Προβολή Στατιστικών Χρήστη
-[7]
-
-6. Τεκμηρίωση
-📝 Έγγραφο Απαιτήσεων (Word) + Σύνδεσμος
-📝 Βίντεο Οδηγίας (YouTube Tutorial)
-📝 Εγχειρίδιο Χρήσης (Word)
+Created DB, PHP connection and Login Screen (screen 0) and prepared both welcome screens (1, 4) [1/12]
+1: -
+2: 
+3:
+4: -
+5:
+6:
+7:
+8:
+9:
+10:
+11:
 
 -------------------------------------------------------------------
-- PHP, PHP + ANDROID
+NOTES:
+---
+
+com.example.tikiparkapp
+
+---
+
+- Imports
+- File > Sync Project with Gradle Files Or press Ctrl + Alt + Y 
+- "Build" > "Make Project" or use Ctrl + B
+- Run > Run 'app'
+- Choose an emulator 
+- Electric Eel error fix in Depedencies!
+- Empty Activity
+- Activities
+- Activities.xml
+- gradle :app
+- Android-Manifest.xml
+- intents to move in between screens 
+- Sql user[`role`] for Auth
+
+---
+
+<resources>
+    <!-- Required for themes to work -->
+    <color name="purple_200">#BB86FC</color>
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Your Custom Colors -->
+    <color name="primary_background">#FCE9C8</color>
+    <color name="secondary_background">#135D39</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#135D39</color>
+    <color name="button_background">#008C31</color>
+    <color name="button_text">#FFFFFF</color>
+    <color name="input_background">#FFFFFF</color>
+    <color name="input_border">#5A3E2B</color>
+    <color name="accent">#EFA143</color>
+</resources>
+
+---
+
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.example.tikiparkapp'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.tikiparkapp"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment:2.4.1'
+    implementation 'androidx.navigation:navigation-ui:2.4.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+---

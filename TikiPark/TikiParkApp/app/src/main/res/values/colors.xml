@@ -1,0 +1,21 @@
+<resources>
+    <!-- Required for themes to work (Keep default names, change values to your custom ones) -->
+    <color name="purple_200">#FCE9C8</color> <!-- Custom background color -->
+    <color name="purple_500">#135D39</color> <!-- Custom text color -->
+    <color name="purple_700">#212121</color> <!-- Custom dark color -->
+    <color name="teal_200">#008C31</color> <!-- Custom button background color -->
+    <color name="teal_700">#FFFFFF</color> <!-- Custom button text color -->
+    <color name="black">#5A3E2B</color> <!-- Custom accent color -->
+    <color name="white">#EFA143</color> <!-- Custom primary text color -->
+
+    <!-- Your Custom Colors -->
+    <color name="primary_background">#FCE9C8</color> <!-- Background color -->
+    <color name="secondary_background">#135D39</color> <!-- Secondary background color -->
+    <color name="primary_text">#212121</color> <!-- Primary text color -->
+    <color name="secondary_text">#135D39</color> <!-- Secondary text color -->
+    <color name="button_background">#008C31</color> <!-- Button background color -->
+    <color name="button_text">#FFFFFF</color> <!-- Button text color -->
+    <color name="input_background">#FFFFFF</color> <!-- Input field background -->
+    <color name="input_border">#5A3E2B</color> <!-- Input border color -->
+    <color name="accent">#EFA143</color> <!-- Accent color -->
+</resources>

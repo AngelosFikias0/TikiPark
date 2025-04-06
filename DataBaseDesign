@@ -20,6 +20,8 @@ CREATE TABLE parking_spots (
     location VARCHAR(255) NOT NULL,
     status ENUM('available', 'occupied', 'reserved') DEFAULT 'available',
     price_per_hour DECIMAL(10, 2) NOT NULL,
+    latitude DECIMAL(9,6) NOT NULL,
+    longitude DECIMAL(9,6) NOT NULL
 );
 
 ---

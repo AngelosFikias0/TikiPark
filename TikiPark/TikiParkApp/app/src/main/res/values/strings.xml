@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TikiParkApp</string>
+    <string name="create_but">Create profile</string>
+    <string name="login_but">Login</string>
+    <string name="username_input">Username</string>
+    <string name="password_input">Password</string>
+</resources>
