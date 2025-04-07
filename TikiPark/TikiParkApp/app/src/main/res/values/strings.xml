@@ -2,6 +2,9 @@
     <string name="app_name">TikiParkApp</string>
     <string name="create_but">Create profile</string>
     <string name="login_but">Login</string>
+    <string name="email_input">Email</string>
     <string name="username_input">Username</string>
     <string name="password_input">Password</string>
+    <string name="welcome_user">Welcome User</string>
+    <string name="welcome_admin">Welcome Admin</string>
 </resources>
