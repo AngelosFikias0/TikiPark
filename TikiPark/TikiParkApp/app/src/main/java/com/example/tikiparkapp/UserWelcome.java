@@ -2,6 +2,7 @@ package com.example.tikiparkapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,14 +24,27 @@ public class UserWelcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_welcome);
 
+        // Initialize views
         welcomeTextView = findViewById(R.id.welcomeUserTextview);
+        Button exitButton = findViewById(R.id.exit);
 
+        // Get intent extras
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String role = intent.getStringExtra("role");
 
-        // Make network request to fetch user welcome message
+        // Fetch welcome message based on username and role
         fetchWelcomeMessage(username, role);
+        LocalCache localCache = new LocalCache(this);
+
+        // Handle exit button click
+        exitButton.setOnClickListener(v -> {
+            localCache.clearSession();
+            Intent exitIntent = new Intent(UserWelcome.this, MainActivity.class);
+            exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(exitIntent);
+            finish(); // Finish current activity
+        });
     }
 
     private void fetchWelcomeMessage(String username, String role) {

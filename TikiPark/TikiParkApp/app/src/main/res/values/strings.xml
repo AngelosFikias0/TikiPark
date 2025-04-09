@@ -7,4 +7,5 @@
     <string name="password_input">Password</string>
     <string name="welcome_user">Welcome User</string>
     <string name="welcome_admin">Welcome Admin</string>
+    <string name="exit">Exit</string>
 </resources>

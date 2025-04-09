@@ -2,6 +2,7 @@ package com.example.tikiparkapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,15 +24,29 @@ public class AdminWelcome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_welcome);
 
+        // Initialize views
         welcomeTextView = findViewById(R.id.welcomeAdminTextview);
+        Button exitButton = findViewById(R.id.exit);
 
+        // Get intent extras
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String role = intent.getStringExtra("role");
 
-        // Make network request to fetch admin welcome message
+        // Fetch welcome message based on username and role
         fetchWelcomeMessage(username, role);
+        LocalCache localCache = new LocalCache(this);
+
+        // Handle exit button click
+        exitButton.setOnClickListener(v -> {
+            localCache.clearSession();
+            Intent exitIntent = new Intent(AdminWelcome.this, MainActivity.class);
+            exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(exitIntent);
+            finish(); // Finish current activity
+        });
     }
+
 
     private void fetchWelcomeMessage(String username, String role) {
         new Thread(() -> {
