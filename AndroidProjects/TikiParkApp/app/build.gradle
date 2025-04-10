@@ -3,8 +3,13 @@ plugins {
 }
 
 android {
+
     namespace 'com.example.tikiparkapp'
     compileSdk 33
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+    def localIp = properties.getProperty('localIp')
 
     defaultConfig {
         applicationId "com.example.tikiparkapp"
@@ -17,7 +22,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "LOCAL_IP", localIp
+        }
+
         release {
+            buildConfigField "String", "LOCAL_IP", localIp
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

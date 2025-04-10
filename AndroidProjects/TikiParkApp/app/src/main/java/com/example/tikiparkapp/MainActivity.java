@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private void registerUser(String email, String username, String password) {
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.226/tikipark/register_user.php");
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/register_user.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     private void loginUser(String username, String password) {
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.226/tikipark/login.php");
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/login.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
     public void createDB() {
         new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.226/tikipark/init_db.php");
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/init_db.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 int responseCode = conn.getResponseCode();
