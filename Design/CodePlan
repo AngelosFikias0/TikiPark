@@ -1,11 +1,13 @@
 PLAN:
 ---
 
-Created DB, PHP connection and Login Screen (screen 0) and prepared both welcome screens (1, 4) [1/12]
-1: -
-2: 
-3:
-4: -
+28/4/25 !
+. Sceen 4(Welcome user), 1(Welcome admin [Total users, Total spots [Read]) -> 2(CreateForms [Create, BackToMAin]), 3(ViewAll [Update, Delete, BackToMain])
+
+1: ->
+2: !
+3: !
+4: ->
 5:
 6:
 7:
