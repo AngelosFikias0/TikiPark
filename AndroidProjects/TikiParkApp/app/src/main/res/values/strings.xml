@@ -8,4 +8,17 @@
     <string name="welcome_user">Welcome User</string>
     <string name="welcome_admin">Welcome Admin</string>
     <string name="exit">Exit</string>
+    <string name="search">Search</string>
+    <string name="manageWallet">Wallet</string>
+    <string name="viewStats">Statistics</string>
+    <string name="locationInput">Location</string>
+    <string name="park">Select Spot</string>
+    <string name="back">Back</string>
+    <string name="create_parking_spot">Create Parking Spot</string>
+    <string-array name="parking_status_options">
+        <item>Available</item>
+        <item>Occupied</item>
+        <item>Reserved</item>
+    </string-array>
+
 </resources>

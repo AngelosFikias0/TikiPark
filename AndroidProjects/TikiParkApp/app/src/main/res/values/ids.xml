@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="btn_delete" type="id" />
+    <item name="edit_container" type="id" />
+    <item name="spot_list_container" type="id" />
+    <item name="edit_status" type="id" />
+    <item name="edit_price" type="id" />
+    <item name="btn_update" type="id" />
+</resources>

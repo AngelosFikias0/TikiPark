@@ -1,7 +1,9 @@
 <?php
+// Database connection
+//These are placeholder, put actual values here:
 $host = 'localhost';
 $user = 'root';
-$pass = '';
+$pass = '123';
 $dbname = 'tikipark';
 
 // Establish connection
