@@ -42,4 +42,9 @@ public class ParkingSpot {
     public float getLongitude() {
         return longitude;
     }
+
+    @Override
+    public String toString() {
+        return "" + location + ", " + id;
+    }
 }
