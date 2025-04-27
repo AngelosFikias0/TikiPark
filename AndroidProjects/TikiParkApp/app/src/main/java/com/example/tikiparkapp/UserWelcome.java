@@ -1,5 +1,6 @@
 package com.example.tikiparkapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,15 +11,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class UserWelcome extends AppCompatActivity {
-    private TextView welcomeTextView;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_welcome);
 
         // Initialize views
-        welcomeTextView = findViewById(R.id.welcomeUserTextview);
+        TextView welcomeTextView = findViewById(R.id.welcomeUserTextview);
         Button exitButton = findViewById(R.id.exit);
         EditText locationInput = findViewById(R.id.locationInput);
         Button search = findViewById(R.id.search);
@@ -74,13 +75,20 @@ public class UserWelcome extends AppCompatActivity {
 
         // Handle exit button click
         exitButton.setOnClickListener(v -> {
-            // Clear session data and navigate to MainActivity
-            LocalCache localCache = new LocalCache(this);
-            localCache.clearSession();
-            Intent exitIntent = new Intent(UserWelcome.this, MainActivity.class);
-            exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(exitIntent);
-            finish(); // Finish current activity to prevent returning to UserWelcome
+            try {
+                LocalCache localCache = new LocalCache(UserWelcome.this);
+                localCache.clearSession();
+
+                Intent exitIntent = new Intent(UserWelcome.this, MainActivity.class);
+                exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(exitIntent);
+                finish(); // Kill UserWelcome to avoid returning
+            } catch (Exception e) {
+                Toast.makeText(UserWelcome.this, "Error clearing session. Please try again.", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+                finish();
+            }
         });
+
     }
 }

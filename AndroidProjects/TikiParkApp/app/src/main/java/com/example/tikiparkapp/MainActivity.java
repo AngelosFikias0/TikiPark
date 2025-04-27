@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
+            InputStream is = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/register_user.php");
                 conn = (HttpURLConnection) url.openConnection();
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 os.flush();
                 os.close();
 
-                InputStream is = conn.getInputStream();
+                is = conn.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
                 String line;
@@ -105,8 +106,12 @@ public class MainActivity extends AppCompatActivity {
                 if (reader != null) {
                     try {
                         reader.close();
-                    } catch (IOException ignored) {
-                    }
+                    } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException ignored) {}
                 }
                 if (conn != null) {
                     conn.disconnect();
@@ -119,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
+            InputStream is = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/login.php");
                 conn = (HttpURLConnection) url.openConnection();
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 os.flush();
                 os.close();
 
-                InputStream is = conn.getInputStream();
+                is = conn.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
                 String line;
@@ -169,8 +175,12 @@ public class MainActivity extends AppCompatActivity {
                 if (reader != null) {
                     try {
                         reader.close();
-                    } catch (IOException ignored) {
-                    }
+                    } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException ignored) {}
                 }
                 if (conn != null) {
                     conn.disconnect();

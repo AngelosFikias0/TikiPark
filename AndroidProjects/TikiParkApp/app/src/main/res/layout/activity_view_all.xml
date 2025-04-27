@@ -47,7 +47,8 @@
             android:inputType="text"
             android:minHeight="48dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/edit_price"
@@ -59,7 +60,8 @@
             android:inputType="numberDecimal"
             android:minHeight="48dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btn_update"

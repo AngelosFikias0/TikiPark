@@ -29,11 +29,10 @@ public class ViewAllActivity extends AppCompatActivity {
     // Declare UI components
     private TextView editSpotTitle;
     private EditText editStatus, editPrice;
-    private Button btnUpdate, btnDelete, btnBack;
     private ListView listSpots;
 
-    // List to hold data from JSON
-    private ArrayList<String[]> spotList = new ArrayList<>();
+    // List of String arrays to hold data from JSON
+    private final ArrayList<String[]> spotList = new ArrayList<>();
     private int selectedSpotPosition = -1;
 
     private int selectedSpotId = -1;
@@ -47,9 +46,9 @@ public class ViewAllActivity extends AppCompatActivity {
         editSpotTitle = findViewById(R.id.edit_spot_title);
         editStatus = findViewById(R.id.edit_status);
         editPrice = findViewById(R.id.edit_price);
-        btnUpdate = findViewById(R.id.btn_update);
-        btnDelete = findViewById(R.id.btn_delete);
-        btnBack = findViewById(R.id.btn_back);
+        Button btnUpdate = findViewById(R.id.btn_update);
+        Button btnDelete = findViewById(R.id.btn_delete);
+        Button btnBack = findViewById(R.id.btn_back);
         listSpots = findViewById(R.id.list_spots);
 
         // Fetch spots from the PHP backend
@@ -61,8 +60,8 @@ public class ViewAllActivity extends AppCompatActivity {
             String[] selectedSpot = spotList.get(position);
             editSpotTitle.setText(selectedSpot[0]);   // name
             editStatus.setText(selectedSpot[1]);      // status
-            editPrice.setText(selectedSpot[2]);
-            selectedSpotId = Integer.parseInt(selectedSpot[3]);
+            editPrice.setText(selectedSpot[2]);       // price
+            selectedSpotId = Integer.parseInt(selectedSpot[3]); //Id
         });
 
 
@@ -86,21 +85,17 @@ public class ViewAllActivity extends AppCompatActivity {
 
         // Back button click listener
         btnBack.setOnClickListener(v -> {
-            // Get the current intent (to retrieve the username and role from the current activity)
             Intent currentIntent = getIntent();
             String username = currentIntent.getStringExtra("username");
             String role = currentIntent.getStringExtra("role");
 
-            // Create a new intent to navigate back to AdminWelcome activity
             Intent intent = new Intent(ViewAllActivity.this, AdminWelcome.class);
 
-            // Pass the username and role to the new activity
             intent.putExtra("username", username);
             intent.putExtra("role", role);
 
-            // Start AdminWelcome activity
             startActivity(intent);
-            finish(); // Finish the current activity to prevent returning to ViewAllActivity
+            finish();
         });
 
 
@@ -111,12 +106,13 @@ public class ViewAllActivity extends AppCompatActivity {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
+            InputStream is = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/get_spots.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
 
-                InputStream is = conn.getInputStream();
+                is = conn.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
                 String line;
@@ -145,7 +141,6 @@ public class ViewAllActivity extends AppCompatActivity {
 
                     // Update the ListView on the main thread
                     runOnUiThread(() -> {
-                        String[] spotArray;
                         ArrayList<String> spotStrings = new ArrayList<>();
                         for (String[] spot : spotList) {
                             spotStrings.add("Name: " + spot[0] + " | Status: " + spot[1] + " | Price: $" + spot[2]);
@@ -161,10 +156,10 @@ public class ViewAllActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(ViewAllActivity.this, "Error fetching spots", Toast.LENGTH_SHORT).show());
             }finally {
                 if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException ignored) {
-                    }
+                    try { reader.close(); } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try { is.close(); } catch (IOException ignored) {}
                 }
                 if (conn != null) {
                     conn.disconnect();
@@ -187,6 +182,7 @@ public class ViewAllActivity extends AppCompatActivity {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
+            InputStream is = null ;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/update_spot.php");
                 conn = (HttpURLConnection) url.openConnection();
@@ -205,8 +201,7 @@ public class ViewAllActivity extends AppCompatActivity {
                     os.flush();
                 }
 
-                int responseCode = conn.getResponseCode();
-                InputStream is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                is = conn.getInputStream();
 
                 reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
@@ -216,7 +211,6 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
 
                 JSONObject response = new JSONObject(result.toString());
-                boolean success = response.getBoolean("success");
                 String message = response.getString("message");
 
                 runOnUiThread(() -> Toast.makeText(ViewAllActivity.this, message, Toast.LENGTH_SHORT).show());
@@ -225,10 +219,10 @@ public class ViewAllActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(ViewAllActivity.this, "Error updating spot", Toast.LENGTH_SHORT).show());
             } finally {
                 if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException ignored) {
-                    }
+                    try { reader.close(); } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try { is.close(); } catch (IOException ignored) {}
                 }
                 if (conn != null) {
                     conn.disconnect();
@@ -241,6 +235,7 @@ public class ViewAllActivity extends AppCompatActivity {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
+            InputStream is = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/delete_spot.php");
                 conn = (HttpURLConnection) url.openConnection();
@@ -257,8 +252,7 @@ public class ViewAllActivity extends AppCompatActivity {
                     os.flush();
                 }
 
-                int responseCode = conn.getResponseCode();
-                InputStream is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                is = conn.getInputStream();
 
                 reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
@@ -283,10 +277,10 @@ public class ViewAllActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(ViewAllActivity.this, "Error deleting spot", Toast.LENGTH_SHORT).show());
             } finally {
                 if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException ignored) {
-                    }
+                    try { reader.close(); } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try { is.close(); } catch (IOException ignored) {}
                 }
                 if (conn != null) {
                     conn.disconnect();

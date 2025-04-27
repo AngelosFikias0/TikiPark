@@ -56,7 +56,8 @@
             android:inputType="text"
             android:minHeight="48dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btn_update_user"

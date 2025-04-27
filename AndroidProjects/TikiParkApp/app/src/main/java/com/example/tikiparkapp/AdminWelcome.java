@@ -1,5 +1,6 @@
 package com.example.tikiparkapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -11,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class AdminWelcome extends AppCompatActivity {
-    private TextView welcomeTextView;
 
     // Declare statistics TextViews
     private TextView totalUsersTextView;
@@ -26,13 +29,14 @@ public class AdminWelcome extends AppCompatActivity {
     private TextView totalReservationsTextView;
     private TextView totalParkingTimeTextView;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_welcome);
 
         // Initialize views
-        welcomeTextView = findViewById(R.id.welcomeAdminTextview);
+        TextView welcomeTextView = findViewById(R.id.welcomeAdminTextview);
         Button exitButton = findViewById(R.id.exit);
         Button createParkingSpotsButton = findViewById(R.id.create_parking_spots_button);
         Button viewAllButton = findViewById(R.id.view_all_button);
@@ -102,70 +106,87 @@ public class AdminWelcome extends AppCompatActivity {
         });
     }
 
-    // Method to update the statistics
+    // Updates the admin dashboard statistics from the server
     private void updateStatistics() {
-        // Start a new thread to perform the network operation (to avoid blocking the UI thread)
         new Thread(() -> {
             HttpURLConnection conn = null;
-            BufferedReader in = null;
+            BufferedReader reader = null;
+            InputStream is = null;
+
             try {
-                // Construct the URL to the PHP file (update the URL as needed)
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/welcome_admin.php");
 
-                // Open a connection to the server
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
 
-                // Send a request to the server (you can send any parameters if needed)
-                conn.getOutputStream().write("action=getStatistics".getBytes());
-
-                // Check the response code
-                int responseCode = conn.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    // Read the response from the server
-                    InputStreamReader inputStreamReader = new InputStreamReader(conn.getInputStream());
-                    in = new BufferedReader(inputStreamReader);
-                    String inputLine;
-                    StringBuilder response = new StringBuilder();
-                    while ((inputLine = in.readLine()) != null) {
-                        response.append(inputLine);
-                    }
-                    in.close();
-
-                    // Assuming the response is a JSON string with the statistics
-                    JSONObject jsonResponse = new JSONObject(response.toString());
-
-                    // Extract values from the JSON response
-                    String totalUsers = jsonResponse.getString("total_users");
-                    String totalSpots = jsonResponse.getString("total_spots");
-                    String totalAvailableSpots = jsonResponse.getString("total_available_spots");
-                    String totalAmountGained = jsonResponse.getString("total_amount_gained");
-                    String totalReservations = jsonResponse.getString("total_reservations");
-                    String totalParkingTime = jsonResponse.getString("total_parking_time");
-
-                    // Update the UI on the main thread using runOnUiThread
-                    runOnUiThread(() -> {
-                        totalUsersTextView.setText("Total Users: " + totalUsers);
-                        totalSpotsTextView.setText("Total Parking Spots: " + totalSpots);
-                        totalAvailableSpotsTextView.setText("Total Available Spots: " + totalAvailableSpots);
-                        totalAmountGainedTextView.setText("Total Amount Gained: $" + totalAmountGained);
-                        totalReservationsTextView.setText("Total Reservations: " + totalReservations);
-                        totalParkingTimeTextView.setText("Total Parking Time: " + totalParkingTime + " hrs");
-                    });
-                } else {
-                    // Handle server error or invalid response
-                    runOnUiThread(() -> {
-                        Toast.makeText(AdminWelcome.this, "Failed to fetch statistics. Try again.", Toast.LENGTH_LONG).show();
-                    });
+                // Send POST parameters
+                String postData = "action=getStatistics";
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(postData.getBytes());
+                    os.flush();
                 }
+
+                int responseCode = conn.getResponseCode();
+                is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(is));
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                JSONObject jsonResponse = new JSONObject(responseBuilder.toString());
+
+                // Extract statistics
+                String totalUsers = jsonResponse.optString("total_users", "0");
+                String totalSpots = jsonResponse.optString("total_spots", "0");
+                String totalAvailableSpots = jsonResponse.optString("total_available_spots", "0");
+                String totalAmountGained = jsonResponse.optString("total_amount_gained", "0");
+                String totalReservations = jsonResponse.optString("total_reservations", "0");
+                String totalParkingTime = jsonResponse.optString("total_parking_time", "0");
+
+                // Update UI on the main thread
+                runOnUiThread(() -> updateStatisticsUI(
+                        totalUsers,
+                        totalSpots,
+                        totalAvailableSpots,
+                        totalAmountGained,
+                        totalReservations,
+                        totalParkingTime
+                ));
             } catch (Exception e) {
-                // Handle network or JSON parsing errors
-                runOnUiThread(() -> {
-                    Toast.makeText(AdminWelcome.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+                showError("Error: " + e.getMessage());
+            } finally {
+                if (reader != null) {
+                    try { reader.close(); } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try { is.close(); } catch (IOException ignored) {}
+                }
+                if (conn != null) {
+                    conn.disconnect();
+                }
             }
-        }).start(); // Start the thread
+        }).start();
     }
 
+     //Updates the TextViews with fetched statistics.
+    @SuppressLint("SetTextI18n")
+    private void updateStatisticsUI(String totalUsers, String totalSpots, String totalAvailableSpots,
+                                    String totalAmountGained, String totalReservations, String totalParkingTime) {
+        totalUsersTextView.setText("Total Users: " + totalUsers);
+        totalSpotsTextView.setText("Total Parking Spots: " + totalSpots);
+        totalAvailableSpotsTextView.setText("Total Available Spots: " + totalAvailableSpots);
+        totalAmountGainedTextView.setText("Total Amount Gained: $" + totalAmountGained);
+        totalReservationsTextView.setText("Total Reservations: " + totalReservations);
+        totalParkingTimeTextView.setText("Total Parking Time: " + totalParkingTime + " hrs");
+    }
+
+     //Displays an error message via a Toast on the UI thread.
+    private void showError(String message) {
+        runOnUiThread(() -> Toast.makeText(AdminWelcome.this, message, Toast.LENGTH_LONG).show());
+    }
 }

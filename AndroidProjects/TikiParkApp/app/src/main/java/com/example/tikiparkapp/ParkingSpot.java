@@ -1,5 +1,7 @@
 package com.example.tikiparkapp;
 
+import androidx.annotation.NonNull;
+
 public class ParkingSpot {
 
     int id;
@@ -43,6 +45,7 @@ public class ParkingSpot {
         return longitude;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "" + location + ", " + id;
