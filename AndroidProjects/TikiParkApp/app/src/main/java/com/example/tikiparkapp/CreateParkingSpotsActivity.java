@@ -1,5 +1,6 @@
 package com.example.tikiparkapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -60,25 +62,41 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
             }
         });
 
-        // Handle "Back" button click
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Finish the activity and go back to the previous screen
-                finish();
-            }
+        // Back button click listener
+        // Back button click listener
+        btnBack.setOnClickListener(v -> {
+            // Get the current intent (to retrieve the username and role from the current activity)
+            Intent currentIntent = getIntent();
+            String username = currentIntent.getStringExtra("username");
+            String role = currentIntent.getStringExtra("role");
+
+            // Create a new intent to navigate back to AdminWelcome activity
+            Intent intent = new Intent(CreateParkingSpotsActivity.this, AdminWelcome.class);
+
+            // Pass the username and role to the new activity
+            intent.putExtra("username", username);
+            intent.putExtra("role", role);
+
+            // Start AdminWelcome activity
+            startActivity(intent);
+            finish(); // Finish the current activity to prevent returning to ViewAllActivity
         });
+
     }
 
     private void createParkingSpot(final String location, final String pricePerHour, final String latitude, final String longitude, final String status) {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                HttpURLConnection conn = null;
+                BufferedReader reader = null;
                 try {
                     // Define the URL for the PHP script
                     URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/create_parking_spot.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
+                    conn.setConnectTimeout(5000); // 5 seconds timeout
+                    conn.setReadTimeout(5000);    // 5 seconds timeout
                     conn.setDoOutput(true);
 
                     // Prepare POST data
@@ -95,7 +113,7 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
                     os.close();
 
                     // Read response
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                     StringBuilder result = new StringBuilder();
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -125,6 +143,16 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
                             Toast.makeText(CreateParkingSpotsActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+                }finally {
+                    if (reader != null) {
+                        try {
+                            reader.close();
+                        } catch (IOException ignored) {
+                        }
+                    }
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
                 }
             }
         }).start();

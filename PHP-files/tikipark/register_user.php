@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 // Database connection
 //These are placeholder, put actual values here:
 $host = 'localhost';

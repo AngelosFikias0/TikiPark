@@ -63,7 +63,7 @@ public class AdminWelcome extends AppCompatActivity {
             finish(); // Finish current activity to prevent returning to AdminWelcome
         }
 
-        // Update the statistics TextViews (you can replace these with actual data)
+        // Update the statistics TextViews
         updateStatistics();
 
         // Handle exit button click
@@ -80,32 +80,40 @@ public class AdminWelcome extends AppCompatActivity {
         // Handle create parking spots button click
         createParkingSpotsButton.setOnClickListener(v -> {
             Intent createParkingIntent = new Intent(AdminWelcome.this, CreateParkingSpotsActivity.class);
+            createParkingIntent.putExtra("username", username);
+            createParkingIntent.putExtra("role", role);
             startActivity(createParkingIntent);
         });
 
         // Handle view all button click
         viewAllButton.setOnClickListener(v -> {
             Intent viewAllIntent = new Intent(AdminWelcome.this, ViewAllActivity.class);
+            viewAllIntent.putExtra("username", username);
+            viewAllIntent.putExtra("role", role);
             startActivity(viewAllIntent);
         });
 
         // Handle manage users button click
         manageUsersButton.setOnClickListener(v -> {
             Intent manageUsersIntent = new Intent(AdminWelcome.this, ManageUsersActivity.class);
+            manageUsersIntent.putExtra("username", username);
+            manageUsersIntent.putExtra("role", role);
             startActivity(manageUsersIntent);
         });
     }
 
-    // Method to update the statistics (replace these with actual data)
+    // Method to update the statistics
     private void updateStatistics() {
         // Start a new thread to perform the network operation (to avoid blocking the UI thread)
         new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader in = null;
             try {
                 // Construct the URL to the PHP file (update the URL as needed)
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/welcome_admin.php");
 
                 // Open a connection to the server
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
 
@@ -117,7 +125,7 @@ public class AdminWelcome extends AppCompatActivity {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     // Read the response from the server
                     InputStreamReader inputStreamReader = new InputStreamReader(conn.getInputStream());
-                    BufferedReader in = new BufferedReader(inputStreamReader);
+                    in = new BufferedReader(inputStreamReader);
                     String inputLine;
                     StringBuilder response = new StringBuilder();
                     while ((inputLine = in.readLine()) != null) {

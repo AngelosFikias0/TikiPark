@@ -23,25 +23,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="1dp" />
 
-    <!-- Scrollable list of users -->
-    <ScrollView
-        android:id="@+id/scrollView_users"
+    <!-- ListView for users -->
+    <ListView
+        android:id="@+id/listView_users"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/design_default_color_background"
-        app:layout_constraintBottom_toTopOf="@+id/edit_user_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/primary_background"
         app:layout_constraintTop_toBottomOf="@id/manage_users_title"
-        tools:ignore="SpeakableTextPresentCheck">
-
-        <LinearLayout
-            android:id="@+id/user_list_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp" />
-    </ScrollView>
+        app:layout_constraintBottom_toTopOf="@id/edit_user_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,UnknownId" />
 
     <!-- Edit Container (Role Only) -->
     <LinearLayout
