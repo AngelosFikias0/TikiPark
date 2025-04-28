@@ -7,30 +7,7 @@
     android:background="@color/primary_background"
     tools:context=".AdminWelcome">
 
-    <ImageView
-        android:id="@+id/user_icon"
-        android:layout_width="165dp"
-        android:layout_height="136dp"
-        android:contentDescription="@string/app_name"
-        app:srcCompat="@mipmap/ic_launcher"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp" />
-
-    <TextView
-        android:id="@+id/welcomeAdminTextview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_admin"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/user_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
-
+    <!-- Exit Button -->
     <Button
         android:id="@+id/exit"
         android:layout_width="wrap_content"
@@ -38,6 +15,156 @@
         android:text="@string/exit"
         android:textColor="#FFB74D"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- User Icon -->
+    <ImageView
+        android:id="@+id/user_icon"
+        android:layout_width="165dp"
+        android:layout_height="136dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/exit"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="4dp" />
+
+    <!-- Welcome Admin Text -->
+    <TextView
+        android:id="@+id/welcomeAdminTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_admin"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/user_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Statistics Box (CardView) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/statistics_box"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/cardview_shadow_start_color"
+        app:layout_constraintTop_toBottomOf="@id/welcomeAdminTextview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <!-- Inside CardView: Statistics Text Views -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/total_users"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Users: 0"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/total_spots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Parking Spots: 0"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/total_available_spots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Available Spots: 0"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/total_amount_gained"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Amount Gained: $0.00"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/total_reservations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Reservations: 0"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/total_parking_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Parking Time: 0 hrs"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Create Parking Spots Button -->
+    <Button
+        android:id="@+id/create_parking_spots_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Create Parking Spots"
+        android:textColor="#FFB74D"
+        app:layout_constraintTop_toBottomOf="@id/statistics_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
+
+    <!-- View All Button -->
+    <Button
+        android:id="@+id/view_all_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="View All"
+        android:textColor="#FFB74D"
+        app:layout_constraintTop_toBottomOf="@id/create_parking_spots_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
+
+    <!-- Manage Users Button -->
+    <Button
+        android:id="@+id/manage_users_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Manage Users"
+        android:textColor="#FFB74D"
+        app:layout_constraintTop_toBottomOf="@id/view_all_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

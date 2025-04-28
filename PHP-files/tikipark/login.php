@@ -1,8 +1,11 @@
 <?php
+header('Content-Type: application/json');
+
 // Database connection
+//These are placeholder, put actual values here:
 $host = 'localhost';
 $user = 'root';
-$pass = '';
+$pass = '123';
 $dbname = 'tikipark';
 
 $conn = new mysqli($host, $user, $pass, $dbname);

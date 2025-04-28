@@ -1,7 +1,6 @@
 package com.example.tikiparkapp;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -13,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -41,12 +41,11 @@ public class MainActivity extends AppCompatActivity {
         createDB();
 
         // Auto-login if session is cached
-        Cursor session = localCache.getUserSession();
-        if (session.moveToFirst()) {
-            String cachedUsername = session.getString(0);
-            String cachedRole = session.getString(1);
+        LocalCache.UserSession session = localCache.getUserSession();
+        if (session != null) {
+            String cachedUsername = session.username;
+            String cachedRole = session.role;
             goToWelcomeScreen(cachedUsername, cachedRole);
-            session.close();
             return; // Skip login screen
         }
 
@@ -68,9 +67,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerUser(String email, String username, String password) {
         new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            InputStream is = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/register_user.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
 
@@ -83,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 os.flush();
                 os.close();
 
-                InputStream is = conn.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                is = conn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
                 String line;
 
@@ -100,15 +102,32 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException ignored) {}
+                }
+                if (conn != null) {
+                    conn.disconnect();
+                }
             }
         }).start();
     }
 
     private void loginUser(String username, String password) {
         new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            InputStream is = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/login.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
 
@@ -120,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
                 os.flush();
                 os.close();
 
-                InputStream is = conn.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                is = conn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
                 String line;
 
@@ -152,6 +171,20 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException ignored) {}
+                }
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException ignored) {}
+                }
+                if (conn != null) {
+                    conn.disconnect();
+                }
             }
         }).start();
     }
@@ -172,14 +205,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void createDB() {
         new Thread(() -> {
+            HttpURLConnection conn = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/init_db.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 int responseCode = conn.getResponseCode();
                 Log.d("DB_INIT", "Response Code: " + responseCode);
             } catch (Exception e) {
                 e.printStackTrace();
+            }finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
             }
         }).start();
     }

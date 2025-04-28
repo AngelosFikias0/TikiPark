@@ -1,91 +1,94 @@
 package com.example.tikiparkapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class UserWelcome extends AppCompatActivity {
-    private TextView welcomeTextView;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_welcome);
 
         // Initialize views
-        welcomeTextView = findViewById(R.id.welcomeUserTextview);
+        TextView welcomeTextView = findViewById(R.id.welcomeUserTextview);
         Button exitButton = findViewById(R.id.exit);
+        EditText locationInput = findViewById(R.id.locationInput);
+        Button search = findViewById(R.id.search);
+        Button wallet = findViewById(R.id.manageWallet);
+        Button stats = findViewById(R.id.viewStats);
 
-        // Get intent extras
+        // Get intent extras (username, role)
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String role = intent.getStringExtra("role");
 
-        // Fetch welcome message based on username and role
-        fetchWelcomeMessage(username, role);
-        LocalCache localCache = new LocalCache(this);
+        // Check if username and role are valid
+        if (username != null && role != null) {
+            // Use the passed username and role to show the welcome message
+            welcomeTextView.setText("Welcome, " + role + ": \"" + username + "\"!");
+        } else {
+            // Handle case where username or role is not passed correctly
+            Toast.makeText(UserWelcome.this, "Session expired or invalid", Toast.LENGTH_LONG).show();
+            // Redirect to MainActivity if session data is invalid
+            Intent redirectIntent = new Intent(UserWelcome.this, MainActivity.class);
+            startActivity(redirectIntent);
+            finish();
+        }
+
+        // Handle Search Logic
+        search.setOnClickListener(v -> {
+            // Get the location input
+            String location = locationInput.getText().toString();
+
+            // Create an Intent to pass the location to a new activity (SearchActivity)
+            Intent searchIntent = new Intent(UserWelcome.this, SearchActivity.class);
+            searchIntent.putExtra("location", location);
+            searchIntent.putExtra("username",username);
+            startActivity(searchIntent);
+        });
+
+        // Handle Wallet Management Logic
+        wallet.setOnClickListener(v -> {
+            // Create an Intent to go to the wallet management screen
+            Intent walletIntent = new Intent(UserWelcome.this, WalletManagementActivity.class);
+            walletIntent.putExtra("username",username);
+            startActivity(walletIntent);
+        });
+
+        // Handle Statistics Logic
+        stats.setOnClickListener(v -> {
+            // Create an Intent to go to the statistics screen
+            Intent statsIntent = new Intent(UserWelcome.this, StatsActivity.class);
+            statsIntent.putExtra("username",username);
+            startActivity(statsIntent);
+        });
+
 
         // Handle exit button click
         exitButton.setOnClickListener(v -> {
-            localCache.clearSession();
-            Intent exitIntent = new Intent(UserWelcome.this, MainActivity.class);
-            exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(exitIntent);
-            finish(); // Finish current activity
-        });
-    }
-
-    private void fetchWelcomeMessage(String username, String role) {
-        new Thread(() -> {
             try {
-                URL url = new URL("http://192.168.1.226/tikipark/welcome_user.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
+                LocalCache localCache = new LocalCache(UserWelcome.this);
+                localCache.clearSession();
 
-                // Prepare the POST data
-                String postData = "username=" + username + "&role=" + role;
-                conn.getOutputStream().write(postData.getBytes());
-
-                // Get the response from the server
-                InputStream is = conn.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                StringBuilder result = new StringBuilder();
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    result.append(line);
-                }
-
-                // Parse the JSON response
-                JSONObject response = new JSONObject(result.toString());
-                boolean success = response.getBoolean("success");
-                String message = response.getString("message");
-
-                // Run UI updates on the main thread
-                runOnUiThread(() -> {
-                    if (success) {
-                        welcomeTextView.setText(message);
-                    } else {
-                        Toast.makeText(UserWelcome.this, message, Toast.LENGTH_LONG).show();
-                    }
-                });
+                Intent exitIntent = new Intent(UserWelcome.this, MainActivity.class);
+                exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(exitIntent);
+                finish(); // Kill UserWelcome to avoid returning
             } catch (Exception e) {
+                Toast.makeText(UserWelcome.this, "Error clearing session. Please try again.", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(UserWelcome.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                finish();
             }
-        }).start();
+        });
+
     }
 }
