@@ -98,7 +98,6 @@ public class ViewAllActivity extends AppCompatActivity {
             finish();
         });
 
-
     }
 
     private void fetchSpots() {

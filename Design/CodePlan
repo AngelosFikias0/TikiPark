@@ -7,9 +7,10 @@ PLAN:
 0: done +fe
 1: done
 2: done
-3, 3.2: !
+3: done
+3.2: done
 4: done
-5: -> +st
+5: -> +pay
 6: -> +gm
 7:
 8:
