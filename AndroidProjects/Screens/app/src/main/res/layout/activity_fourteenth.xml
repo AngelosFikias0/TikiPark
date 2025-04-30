@@ -25,7 +25,7 @@
             android:layout_height="240dp"
             android:layout_marginBottom="32dp"
             android:contentDescription="TikiPark Logo"
-            android:src="@drawable/Screen1" />
+            android:src="@drawable/screen_1" />
 
         <TextView
             android:layout_width="wrap_content"
