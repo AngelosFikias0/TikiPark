@@ -29,7 +29,7 @@
             android:layout_height="210dp"
             android:layout_marginBottom="32dp"
             android:contentDescription="TikiPark Logo"
-            android:src="@drawable/screen_1" />
+            android:src="@drawable/Screen1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/CancelButton"
+        android:id="@+id/loginButton"
         android:layout_width="160dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -64,9 +64,9 @@
         android:text="Αναφορά προβλήματος"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/CancelButton"
+        app:layout_constraintBottom_toBottomOf="@+id/loginButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/CancelButton"
+        app:layout_constraintTop_toTopOf="@+id/loginButton"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

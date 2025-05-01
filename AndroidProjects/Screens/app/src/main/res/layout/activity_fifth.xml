@@ -12,7 +12,7 @@
 
 
         <Button
-        android:id="@+id/CancelButton"
+        android:id="@+id/loginButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@id/LocationImage"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/location_image" />
+        app:srcCompat="@drawable/LocationImage" />
 
     <TextView
         android:id="@+id/LocationText"

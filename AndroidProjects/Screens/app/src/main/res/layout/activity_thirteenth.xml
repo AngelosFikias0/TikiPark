@@ -34,7 +34,7 @@
             android:layout_height="200dp"
             android:layout_marginBottom="32dp"
             android:contentDescription="TikiPark Logo"
-            android:src="@drawable/screen_1" />
+            android:src="@drawable/Screen1" />
 
 
 
@@ -94,7 +94,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/CancelButton"
+        android:id="@+id/loginButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
