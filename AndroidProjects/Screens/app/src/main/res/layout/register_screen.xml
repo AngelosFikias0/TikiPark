@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Register"
+                android:text="Εγγραφη"
                 android:textColor="#000000"
                 android:textSize="28sp"
                 android:textStyle="bold" />
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Username: "
+                    android:text="Ψευδώνυμο: "
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -87,7 +87,7 @@
                     android:id="@+id/usernameInputTxt"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_weight="8"
+                    android:layout_weight="14"
                     android:background="#FFFFFF"
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
@@ -105,7 +105,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Password:"
+                    android:text="Κωδικός:"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -130,20 +130,20 @@
 
                 <Button
                     android:id="@+id/okBtn"
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/rounded_green_button"
-                    android:text="OK"
+                    android:text="Επιβεβαιωση"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/cancelBtn"
-                    android:layout_width="130dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_green_button"
-                    android:text="Cancel"
+                    android:text="Ακυρωση"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
             </LinearLayout>

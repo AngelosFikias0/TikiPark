@@ -13,14 +13,14 @@
     tools:ignore="ExtraText">
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/findParkingBtn"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_below="@id/Screen1Image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Login"
+        android:text="Συνδεση"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,13 +62,13 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Register"
+        android:text="Εγγραφη"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/loginButton"
-        app:layout_constraintStart_toStartOf="@+id/loginButton"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="@+id/findParkingBtn"
+        app:layout_constraintStart_toStartOf="@+id/findParkingBtn"
+        app:layout_constraintTop_toBottomOf="@+id/findParkingBtn"
         app:layout_constraintVertical_bias="0.19" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

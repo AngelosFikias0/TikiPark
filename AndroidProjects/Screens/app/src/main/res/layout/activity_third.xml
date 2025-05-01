@@ -11,34 +11,20 @@
     tools:context=".ThirdActivity">
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/findParkingBtn"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_below="@id/Screen1Image"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="104dp"
+        android:layout_marginTop="216dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Έναρξη Στάθμευσης"
+        android:text="Εύρεση Στάθμευσης"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/Screen1Image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/LocationText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.924"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Screen1" />
+        app:layout_constraintTop_toBottomOf="@+id/LocationText" />
 
     <TextView
         android:id="@+id/LocationText"
@@ -46,14 +32,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/Screen1Image"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginTop="44dp"
         android:text="TikiPark"
         android:textColor="#000000"
         android:textSize="36sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toEndOf="@+id/logoutBtn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/logoutBtn"
+        android:layout_width="64dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

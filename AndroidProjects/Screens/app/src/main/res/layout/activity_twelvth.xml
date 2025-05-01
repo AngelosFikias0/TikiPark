@@ -126,7 +126,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/findParkingBtn"
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
