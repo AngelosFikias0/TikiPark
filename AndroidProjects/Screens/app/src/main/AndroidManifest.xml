@@ -63,7 +63,7 @@
             android:name=".ThirdActivity"
             android:exported="false" />
         <activity
-            android:name=".SecondActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".EntryActivity"
