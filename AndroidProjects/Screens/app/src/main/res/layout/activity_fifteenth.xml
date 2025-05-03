@@ -31,7 +31,8 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/Screen1" />
+            app:srcCompat="@drawable/screen_1"
+            tools:srcCompat="@drawable/screen_1" />
 
         <!-- Duration & Cost Section -->
         <LinearLayout

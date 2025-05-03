@@ -101,6 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
         }).start();
     }
 
+    // Currently you can only register Users. There is no option to register an admin.
+    // (It makes sense. Admins are probably going to be created from some other screen.)
     private void goToWelcomeScreen(String username, String role) {
         Intent intent;
         intent = new Intent(RegisterActivity.this, UserWelcome.class);

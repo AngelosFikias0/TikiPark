@@ -20,14 +20,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/Screen1Image"
-            android:layout_width="210dp"
-            android:layout_height="210dp"
-            android:layout_marginBottom="32dp"
-            android:contentDescription="TikiPark Logo"
-            android:src="@drawable/Screen1" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
