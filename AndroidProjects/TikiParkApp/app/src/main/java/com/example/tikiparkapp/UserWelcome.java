@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,15 +16,14 @@ public class UserWelcome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_welcome);
+        setContentView(R.layout.act_user_welcome);
 
         // Initialize views
-        TextView welcomeTextView = findViewById(R.id.welcomeUserTextview);
-        Button exitButton = findViewById(R.id.exit);
-        EditText locationInput = findViewById(R.id.locationInput);
-        Button search = findViewById(R.id.search);
-        Button wallet = findViewById(R.id.manageWallet);
-        Button stats = findViewById(R.id.viewStats);
+        TextView welcomeTextView = findViewById(R.id.welcomeUserTxt);
+        ImageButton exitButton = findViewById(R.id.logoutBtn);
+        Button search = findViewById(R.id.loginBtn);
+        ImageButton wallet = findViewById(R.id.walletBtn);
+        ImageButton stats = findViewById(R.id.statsBtn);
 
         // Get intent extras (username, role)
         Intent intent = getIntent();
@@ -46,12 +45,8 @@ public class UserWelcome extends AppCompatActivity {
 
         // Handle Search Logic
         search.setOnClickListener(v -> {
-            // Get the location input
-            String location = locationInput.getText().toString();
-
             // Create an Intent to pass the location to a new activity (SearchActivity)
             Intent searchIntent = new Intent(UserWelcome.this, SearchActivity.class);
-            searchIntent.putExtra("location", location);
             searchIntent.putExtra("username",username);
             startActivity(searchIntent);
         });
@@ -79,7 +74,7 @@ public class UserWelcome extends AppCompatActivity {
                 LocalCache localCache = new LocalCache(UserWelcome.this);
                 localCache.clearSession();
 
-                Intent exitIntent = new Intent(UserWelcome.this, MainActivity.class);
+                Intent exitIntent = new Intent(UserWelcome.this, EntryActivity.class);
                 exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(exitIntent);
                 finish(); // Kill UserWelcome to avoid returning

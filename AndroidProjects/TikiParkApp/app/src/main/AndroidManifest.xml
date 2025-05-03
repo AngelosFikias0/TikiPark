@@ -33,7 +33,16 @@
             android:name=".SearchActivity"
             android:exported="false" />
         <activity
+            android:name=".EntryActivity"
+            android:exported="true" />
+        <activity
             android:name=".AdminWelcome"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".UserWelcome"
