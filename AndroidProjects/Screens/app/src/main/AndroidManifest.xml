@@ -60,7 +60,7 @@
             android:name=".FourthActivity"
             android:exported="false" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".UserMenuActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
