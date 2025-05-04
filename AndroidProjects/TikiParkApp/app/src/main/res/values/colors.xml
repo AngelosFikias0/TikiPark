@@ -6,7 +6,7 @@
     <color name="teal_200">#008C31</color> <!-- Custom button background color -->
     <color name="teal_700">#FFFFFF</color> <!-- Custom button text color -->
     <color name="black">#5A3E2B</color> <!-- Custom accent color -->
-    <color name="white">#EFA143</color> <!-- Custom primary text color -->
+    <color name="white">#FFFFFF</color> <!-- Custom primary text color -->
 
     <!-- Your Custom Colors -->
     <color name="primary_background">#FCE9C8</color> <!-- Background color -->
@@ -18,4 +18,6 @@
     <color name="input_background">#FFFFFF</color> <!-- Input field background -->
     <color name="input_border">#5A3E2B</color> <!-- Input border color -->
     <color name="accent">#EFA143</color> <!-- Accent color -->
+    <color name="grey">#7C7979</color>
+    <color name="light_white">#E3E3E3</color>
 </resources>

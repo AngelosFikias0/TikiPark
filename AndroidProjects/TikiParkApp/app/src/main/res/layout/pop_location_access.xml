@@ -5,7 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="16dp"
-    app:cardElevation="10dp">
+    app:cardElevation="10dp"
+    app:backgroundTint="@null">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,8 +20,8 @@
             android:fontFamily="@font/alexandria_medium"
             android:text="Θέλετε να επιτρέψετε πρόσβαση της τοποθεσίας σας στην εφαρμογή;"
             android:textAlignment="center"
-            android:textSize="20sp"
             android:textColor="@color/light_white"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +41,11 @@
 
             <Button
                 android:id="@+id/popupDecline"
-                android:layout_weight="1"
                 android:layout_width="0dp"
+                app:backgroundTint="@null"
+                android:background="@color/button_background"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="@font/alexandria_medium"
                 android:text="Οχι" />
 
@@ -55,6 +58,8 @@
             <Button
                 android:layout_weight="1"
                 android:id="@+id/popupAccept"
+                app:backgroundTint="@null"
+                android:background="@color/button_background"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alexandria_medium"
