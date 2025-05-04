@@ -11,7 +11,7 @@
     tools:context=".UserMenuActivity">
 
     <Button
-        android:id="@+id/findParkingBtn"
+        android:id="@+id/findLocationCancelBtn"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -73,8 +73,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/statsBtn"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/findParkingBtn"
-        app:layout_constraintTop_toBottomOf="@+id/findParkingBtn" />
+        app:layout_constraintStart_toStartOf="@+id/findLocationCancelBtn"
+        app:layout_constraintTop_toBottomOf="@+id/findLocationCancelBtn" />
 
     <ImageButton
         android:id="@+id/statsBtn"
@@ -84,7 +84,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/stats"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/findParkingBtn"
-        app:layout_constraintTop_toBottomOf="@+id/findParkingBtn" />
+        app:layout_constraintEnd_toEndOf="@+id/findLocationCancelBtn"
+        app:layout_constraintTop_toBottomOf="@+id/findLocationCancelBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

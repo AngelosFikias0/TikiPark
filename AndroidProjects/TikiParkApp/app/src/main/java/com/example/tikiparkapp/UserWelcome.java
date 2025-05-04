@@ -1,8 +1,12 @@
 package com.example.tikiparkapp;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -25,6 +29,16 @@ public class UserWelcome extends AppCompatActivity {
         ImageButton wallet = findViewById(R.id.walletBtn);
         ImageButton stats = findViewById(R.id.statsBtn);
 
+        // Popup and views
+        Dialog popLocationAllow = new Dialog(UserWelcome.this);
+        popLocationAllow.setContentView(R.layout.pop_location_allow);
+        popLocationAllow.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popLocationAllow.getWindow().setBackgroundDrawable(getDrawable(R.drawable.pop_location_access_bg));
+        popLocationAllow.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button popAccept = popLocationAllow.findViewById(R.id.popAcceptBtn);
+        Button popDecline = popLocationAllow.findViewById(R.id.popDeclineBtn);
+
         // Get intent extras (username, role)
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -45,10 +59,20 @@ public class UserWelcome extends AppCompatActivity {
 
         // Handle Search Logic
         search.setOnClickListener(v -> {
+            popLocationAllow.show();
+        });
+
+        popAccept.setOnClickListener(view -> {
             // Create an Intent to pass the location to a new activity (SearchActivity)
-            Intent searchIntent = new Intent(UserWelcome.this, SearchActivity.class);
+            Intent searchIntent = new Intent(UserWelcome.this, FindParkingActivity.class);
             searchIntent.putExtra("username",username);
             startActivity(searchIntent);
+            popLocationAllow.dismiss();
+            finish();
+        });
+
+        popDecline.setOnClickListener(view -> {
+            popLocationAllow.dismiss();
         });
 
         // Handle Wallet Management Logic

@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A3FDE2A1"
-    tools:context=".TwelvthActivity">
+    tools:context=".SixthActivity"
+    android:background="#A3FDE2A1">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
@@ -24,9 +24,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Ανεπαρκές υπόλοιπο"
+            android:text="Στάθμευση πραγματοποιήθηκε!"
             android:textColor="#000000"
-            android:textSize="26sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <!-- Image -->
         <ImageView
@@ -36,9 +37,9 @@
             android:contentDescription="TikiPark Logo"
             android:src="@drawable/screen_1" />
 
-
+        <!-- Start Time -->
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
@@ -47,22 +48,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Απαιτούνται:"
+                android:text="Ώρα έναρξης:"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textStartTime"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5$"
+                android:text="11:29:33πμ"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
-
+        <!-- Duration -->
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
@@ -71,22 +72,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Υπόλοιπο:"
+                android:text="Διάρκεια:"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textDuration"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3$"
+                android:text="02:03:50"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
-
+        <!-- Estimated Cost -->
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -94,53 +95,37 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Διαφορά:"
+                android:text="Εκτιμώμενο κόστος:"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textCost"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2$"
+                android:text="6,5$"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/AddMoneyButton"
+        android:id="@+id/parkCompletionBackBtn"
         android:layout_width="160dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="85dp"
+        app:backgroundTint="@null"
         android:background="@drawable/rounded_green_button"
-        android:text="Προσθήκη χρημάτων"
+        android:text="Πισω στην αρχικη"
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/findLocationCancelBtn"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/rounded_green_button"
-        android:text="Ακύρωση"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/AddMoneyButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.229"
-        app:layout_constraintStart_toEndOf="@+id/AddMoneyButton"
-        app:layout_constraintTop_toTopOf="@+id/AddMoneyButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

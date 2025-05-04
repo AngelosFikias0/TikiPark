@@ -13,7 +13,7 @@
     tools:ignore="ExtraText">
 
     <Button
-        android:id="@+id/findParkingBtn"
+        android:id="@+id/findLocationCancelBtn"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_below="@id/Screen1Image"
@@ -66,9 +66,9 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/findParkingBtn"
-        app:layout_constraintStart_toStartOf="@+id/findParkingBtn"
-        app:layout_constraintTop_toBottomOf="@+id/findParkingBtn"
+        app:layout_constraintEnd_toEndOf="@+id/findLocationCancelBtn"
+        app:layout_constraintStart_toStartOf="@+id/findLocationCancelBtn"
+        app:layout_constraintTop_toBottomOf="@+id/findLocationCancelBtn"
         app:layout_constraintVertical_bias="0.19" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

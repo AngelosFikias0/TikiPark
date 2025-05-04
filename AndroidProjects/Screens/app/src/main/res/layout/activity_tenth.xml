@@ -40,7 +40,7 @@
         app:srcCompat="@drawable/no_location_image" />
 
     <Button
-        android:id="@+id/findParkingBtn"
+        android:id="@+id/findLocationCancelBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@id/NoLocationImage"
@@ -100,7 +100,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="10dp"
-            android:layout_toStartOf="@+id/clearButton"
+            android:layout_toStartOf="@+id/findLocationClearSearchBtn"
             android:background="@android:color/transparent"
             android:hint="Αναζήτηση"
             android:padding="0dp"
@@ -108,7 +108,7 @@
             android:textSize="16sp" />
 
         <ImageButton
-            android:id="@+id/clearButton"
+            android:id="@+id/findLocationClearSearchBtn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_alignParentEnd="true"

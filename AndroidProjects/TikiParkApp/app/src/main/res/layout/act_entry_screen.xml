@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LocationText" />
+        app:layout_constraintTop_toBottomOf="@+id/findParkingTxt" />
 
     <ImageView
         android:id="@+id/Screen1Image"
@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/screen_1" />
 
     <TextView
-        android:id="@+id/LocationText"
+        android:id="@+id/findParkingTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/Screen1Image"

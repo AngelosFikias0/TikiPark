@@ -118,7 +118,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginBottom="85dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Ολοκλήρωση Στάθμευσης"
+        android:text="Ολοκληρωση Σταθμευσης"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"

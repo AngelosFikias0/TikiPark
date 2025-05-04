@@ -12,7 +12,7 @@
 
 
         <Button
-        android:id="@+id/findParkingBtn"
+        android:id="@+id/findLocationCancelBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@id/LocationImage"
@@ -24,12 +24,12 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ConfirmButton"
+        app:layout_constraintStart_toEndOf="@+id/findLocationConfirmBtn"
         app:layout_constraintTop_toBottomOf="@+id/LocationImage"
         app:layout_constraintVertical_bias="0.374" />
 
     <Button
-        android:id="@+id/ConfirmButton"
+        android:id="@+id/findLocationConfirmBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@id/LocationImage"

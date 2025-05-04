@@ -30,7 +30,7 @@
             android:name=".WalletManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".FindParkingActivity"
             android:exported="false" />
         <activity
             android:name=".EntryActivity"
@@ -43,6 +43,9 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ParkCompletionActivity"
             android:exported="false" />
         <activity
             android:name=".UserWelcome"

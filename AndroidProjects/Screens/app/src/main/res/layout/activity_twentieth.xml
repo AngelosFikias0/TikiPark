@@ -43,7 +43,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/findParkingBtn"
+        android:id="@+id/findLocationCancelBtn"
         android:layout_width="160dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -64,9 +64,9 @@
         android:text="Αναφορά προβλήματος"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/findParkingBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/findLocationCancelBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/findParkingBtn"
+        app:layout_constraintTop_toTopOf="@+id/findLocationCancelBtn"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

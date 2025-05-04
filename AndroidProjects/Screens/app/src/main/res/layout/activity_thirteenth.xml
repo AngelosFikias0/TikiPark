@@ -78,7 +78,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/ConfirmButton"
+        android:id="@+id/findLocationConfirmBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
@@ -94,7 +94,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/findParkingBtn"
+        android:id="@+id/findLocationCancelBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
@@ -104,11 +104,11 @@
         android:text="Ακύρωση"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ConfirmButton"
+        app:layout_constraintBottom_toBottomOf="@+id/findLocationConfirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/ConfirmButton"
-        app:layout_constraintTop_toTopOf="@+id/ConfirmButton"
+        app:layout_constraintStart_toEndOf="@+id/findLocationConfirmBtn"
+        app:layout_constraintTop_toTopOf="@+id/findLocationConfirmBtn"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
