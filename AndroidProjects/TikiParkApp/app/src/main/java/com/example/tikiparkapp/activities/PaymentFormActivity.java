@@ -1,14 +1,16 @@
-package com.example.tikiparkapp;
+package com.example.tikiparkapp.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class StatsActivity extends AppCompatActivity {
+import com.example.tikiparkapp.R;
+
+public class PaymentFormActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stats);
+        setContentView(R.layout.act_payment_form);
     }
 }

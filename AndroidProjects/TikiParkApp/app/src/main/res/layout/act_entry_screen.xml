@@ -9,7 +9,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".EntryActivity"
+    tools:context=".activities.EntryActivity"
     tools:ignore="ExtraText">
 
     <Button

@@ -1,4 +1,4 @@
-package com.example.tikiparkapp;
+package com.example.tikiparkapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tikiparkapp.BuildConfig;
+import com.example.tikiparkapp.R;
+import com.example.tikiparkapp.UserWelcome;
 
 import org.json.JSONObject;
 

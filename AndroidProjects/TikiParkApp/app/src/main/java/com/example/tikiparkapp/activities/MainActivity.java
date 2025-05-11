@@ -1,4 +1,4 @@
-package com.example.tikiparkapp;
+package com.example.tikiparkapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tikiparkapp.BuildConfig;
+import com.example.tikiparkapp.R;
+import com.example.tikiparkapp.UserWelcome;
+import com.example.tikiparkapp.db.LocalCache;
 
 import org.json.JSONObject;
 
@@ -192,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
     private void goToWelcomeScreen(String username, String role) {
         Intent intent;
         if (role.equalsIgnoreCase("admin")) {
-            intent = new Intent(MainActivity.this, AdminWelcome.class);
+            intent = new Intent(MainActivity.this, AdminWelcomeActivity.class);
         } else {
             intent = new Intent(MainActivity.this, UserWelcome.class);
         }

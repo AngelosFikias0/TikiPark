@@ -1,4 +1,4 @@
-package com.example.tikiparkapp;
+package com.example.tikiparkapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tikiparkapp.BuildConfig;
+import com.example.tikiparkapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,7 +59,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             String username = currentIntent.getStringExtra("username");
             String role = currentIntent.getStringExtra("role");
 
-            Intent intent = new Intent(ManageUsersActivity.this, AdminWelcome.class);
+            Intent intent = new Intent(ManageUsersActivity.this, AdminWelcomeActivity.class);
 
             intent.putExtra("username", username);
             intent.putExtra("role", role);

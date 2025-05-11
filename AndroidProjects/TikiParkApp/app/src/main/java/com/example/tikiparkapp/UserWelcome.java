@@ -14,6 +14,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tikiparkapp.activities.EntryActivity;
+import com.example.tikiparkapp.activities.FindParkingActivity;
+import com.example.tikiparkapp.activities.MainActivity;
+import com.example.tikiparkapp.activities.StatsActivity;
+import com.example.tikiparkapp.activities.WalletManagementActivity;
+import com.example.tikiparkapp.db.LocalCache;
+
 public class UserWelcome extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")

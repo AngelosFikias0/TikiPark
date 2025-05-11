@@ -1,4 +1,4 @@
-package com.example.tikiparkapp;
+package com.example.tikiparkapp.db;
 
 import android.content.Context;
 import android.database.Cursor;

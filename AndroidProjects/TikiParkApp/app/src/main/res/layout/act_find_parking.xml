@@ -8,7 +8,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".FindParkingActivity">
+    tools:context=".activities.FindParkingActivity">
 
     <TextView
         android:id="@+id/findParkingTxt"
