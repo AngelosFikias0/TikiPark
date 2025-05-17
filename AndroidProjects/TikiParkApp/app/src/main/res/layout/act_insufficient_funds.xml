@@ -24,9 +24,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Ανεπαρκές υπόλοιπο"
+            android:text="Ανεπαρκές Υπόλοιπο"
+            android:fontFamily="@font/ubuntu_mono"
             android:textColor="#000000"
-            android:textSize="26sp" />
+            android:textSize="32sp" />
 
         <!-- Image -->
         <ImageView
@@ -47,12 +48,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/ubuntu_mono"
                 android:text="Απαιτούνται:"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textStartTime"
+                android:id="@+id/insufFunds_requiredAmount_Txt"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="5$"
@@ -71,12 +73,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/ubuntu_mono"
                 android:text="Υπόλοιπο:"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textDuration"
+                android:id="@+id/insufFunds_currentAmount_Txt"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="3$"
@@ -95,11 +98,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Διαφορά:"
+                android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textCost"
+                android:id="@+id/insufFunds_difference_Txt"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="2$"
@@ -110,7 +114,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/AddMoneyButton"
+        android:id="@+id/insufFunds_addMoney_Btn"
         android:layout_width="160dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
@@ -118,16 +122,18 @@
         android:layout_marginBottom="80dp"
         android:background="@drawable/rounded_green_button"
         app:backgroundTint="@null"
-        android:text="Προσθήκη χρημάτων"
+        android:text="Προσθηκη χρηματων"
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/findLocationCancelBtn"
+        android:id="@+id/insufFunds_decline_Btn"
         android:layout_width="160dp"
         android:layout_height="50dp"
         app:backgroundTint="@null"
@@ -135,14 +141,16 @@
         android:layout_marginStart="28dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Ακύρωση"
-        android:textColor="#FFFFFF"
+        android:text="Ακυρωση"
+        android:fontFamily="@font/ubuntu_mono"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/AddMoneyButton"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/insufFunds_addMoney_Btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.229"
-        app:layout_constraintStart_toEndOf="@+id/AddMoneyButton"
-        app:layout_constraintTop_toTopOf="@+id/AddMoneyButton"
+        app:layout_constraintStart_toEndOf="@+id/insufFunds_addMoney_Btn"
+        app:layout_constraintTop_toTopOf="@+id/insufFunds_addMoney_Btn"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

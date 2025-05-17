@@ -24,9 +24,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Προσθήκη χρημάτων"
+            android:fontFamily="@font/ubuntu_mono"
+            android:text="Προσθήκη Χρημάτων"
             android:textColor="#000000"
-            android:textSize="26sp" />
+            android:textSize="34sp" />
 
         <!-- Image -->
         <ImageView
@@ -35,11 +36,6 @@
             android:layout_marginBottom="32dp"
             android:contentDescription="TikiPark Logo"
             android:src="@drawable/screen_1" />
-
-
-
-
-
 
         <LinearLayout
             android:layout_width="200dp"
@@ -51,11 +47,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="Ποσό:"
+                android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
-                android:textSize="22sp" />
+                android:textSize="26sp" />
 
             <EditText
-                android:id="@+id/editAmount"
+                android:id="@+id/addFunds_Amount_EdTxt"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -78,40 +75,44 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/findLocationConfirmBtn"
+        android:id="@+id/addFunds_Confirm_Btn"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        app:backgroundTint="@null"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Επιβεβαίωση"
+        android:fontFamily="@font/ubuntu_mono"
+        android:text="Επιβεβαιωση"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/findLocationCancelBtn"
+        android:id="@+id/insufFunds_decline_Btn"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        app:backgroundTine="@null"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="32dp"
-        app:backgroundTint="@null"
         android:background="@drawable/rounded_green_button"
-        android:text="Ακύρωση"
+        android:fontFamily="@font/ubuntu_mono"
+        android:text="Ακυρωση"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/findLocationConfirmBtn"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTine="@null"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/addFunds_Confirm_Btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/findLocationConfirmBtn"
-        app:layout_constraintTop_toTopOf="@+id/findLocationConfirmBtn"
+        app:layout_constraintStart_toEndOf="@+id/addFunds_Confirm_Btn"
+        app:layout_constraintTop_toTopOf="@+id/addFunds_Confirm_Btn"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

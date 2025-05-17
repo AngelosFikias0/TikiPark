@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SixthActivity"
+    tools:context=".activities.ParkCompletionActivity"
     android:background="#A3FDE2A1">
 
     <LinearLayout
@@ -24,8 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Στάθμευση πραγματοποιήθηκε!"
+            android:text="Η Στάθμευση πραγματοποιήθηκε!"
             android:textColor="#000000"
+            android:fontFamily="@font/ubuntu_mono"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -49,11 +50,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Ώρα έναρξης:"
+                android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textStartTime"
+                android:id="@+id/parkCompletion_startTime_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="11:29:33πμ"
@@ -73,11 +75,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Διάρκεια:"
+                android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textDuration"
+                android:id="@+id/parkCompletion_duration_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="02:03:50"
@@ -96,11 +99,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Εκτιμώμενο κόστος:"
+                android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textCost"
+                android:id="@+id/parkCompletion_cost_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6,5$"
@@ -111,7 +115,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/parkCompletionBackBtn"
+        android:id="@+id/parkCompletion_confirm_btn"
         android:layout_width="160dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -121,7 +125,9 @@
         android:background="@drawable/rounded_green_button"
         android:text="Πισω στην αρχικη"
         android:textColor="#FFFFFF"
-        android:textSize="15sp"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -13,16 +13,19 @@
     tools:ignore="ExtraText">
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/entry_Login_Btn"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_below="@id/Screen1Image"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
         android:background="@drawable/rounded_green_button"
+        android:fontFamily="@font/ubuntu_mono"
         android:text="Συνδεση"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +52,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:text="TikiPark"
+        android:fontFamily="@font/ubuntu_mono"
         android:textColor="#000000"
-        android:textSize="36sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -58,17 +62,20 @@
         app:layout_constraintTop_toBottomOf="@+id/Screen1Image" />
 
     <Button
-        android:id="@+id/registerBtn"
+        android:id="@+id/entry_Register_Btn"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/rounded_green_button"
         android:text="Εγγραφη"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/loginBtn"
-        app:layout_constraintStart_toStartOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintEnd_toEndOf="@+id/entry_Login_Btn"
+        app:layout_constraintStart_toStartOf="@+id/entry_Login_Btn"
+        app:layout_constraintTop_toBottomOf="@+id/entry_Login_Btn"
         app:layout_constraintVertical_bias="0.19" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

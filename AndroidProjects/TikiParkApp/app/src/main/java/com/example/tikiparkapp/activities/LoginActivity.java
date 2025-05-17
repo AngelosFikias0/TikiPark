@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
-import com.example.tikiparkapp.UserWelcome;
 import com.example.tikiparkapp.db.LocalCache;
 
 import org.json.JSONObject;
@@ -35,10 +34,10 @@ public class LoginActivity extends AppCompatActivity {
 
         localCache = new LocalCache(this);
 
-        EditText usernameInputTxt = findViewById(R.id.usernameInputLoginTxt);
-        EditText passwordInputTxt = findViewById(R.id.passwordInputTxt);
-        Button okBtn = findViewById(R.id.okBtn);
-        Button cancelBtn = findViewById(R.id.cancelBtn);
+        EditText usernameInputTxt = findViewById(R.id.login_usernameInput_Txt);
+        EditText passwordInputTxt = findViewById(R.id.login_passwordInput_Txt);
+        Button okBtn = findViewById(R.id.login_confirm_btn);
+        Button cancelBtn = findViewById(R.id.login_decline_btn);
 
         okBtn.setOnClickListener(view -> {
             String username = usernameInputTxt.getText().toString();

@@ -54,7 +54,7 @@
             android:name=".activities.AddFundsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ParkingPaymentActivity"
+            android:name=".activities.PaymentOptions"
             android:exported="false" />
         <activity
             android:name=".activities.PaymentFormActivity"
@@ -63,7 +63,7 @@
             android:name=".activities.PaymentDoneActivity"
             android:exported="false" />
         <activity
-            android:name=".UserWelcome"
+            android:name=".activities.UserWelcome"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"

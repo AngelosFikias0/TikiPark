@@ -9,7 +9,6 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.R;
-import com.example.tikiparkapp.UserWelcome;
 
 public class FindParkingActivity extends AppCompatActivity {
 
@@ -18,17 +17,17 @@ public class FindParkingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_find_parking);
 
-        ImageButton cancelSearchBtn = findViewById(R.id.findParkingClearSearchBtn);
-        Button findParkingBtn = findViewById(R.id.findParkingConfirmBtn);
-        Button cancelBtn = findViewById(R.id.findParkingCancelBtn);
-        EditText searchInput = findViewById(R.id.findParkingSearchInputTxt);
+        ImageButton clearSearchBtn = findViewById(R.id.findParking_ClearSearch_ImgBtn);
+        Button findParkingBtn = findViewById(R.id.findParking_Confirm_Btn);
+        Button cancelBtn = findViewById(R.id.findParking_Cancel_Btn);
+        EditText searchInputText = findViewById(R.id.findParking_Search_InputTxt);
 
-        cancelSearchBtn.setOnClickListener(view -> {
-            searchInput.setText("");
+        clearSearchBtn.setOnClickListener(view -> {
+            searchInputText.setText("");
         });
 
         findParkingBtn.setOnClickListener(view -> {
-
+            // TODO Find parking code.
         });
 
         cancelBtn.setOnClickListener(view -> {

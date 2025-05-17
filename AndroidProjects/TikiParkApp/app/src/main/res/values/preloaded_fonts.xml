@@ -2,5 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/alexandria_medium</item>
+        <item>@font/ubuntu_mono</item>
     </array>
 </resources>

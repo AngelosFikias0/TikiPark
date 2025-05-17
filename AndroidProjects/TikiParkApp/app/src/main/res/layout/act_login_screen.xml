@@ -26,9 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:fontFamily="@font/ubuntu_mono"
                 android:text="Σύνδεση"
                 android:textColor="#000000"
-                android:textSize="28sp"
+                android:textSize="34sp"
                 android:textStyle="bold" />
 
             <!-- User Icon -->
@@ -52,12 +53,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/ubuntu_mono"
                     android:text="Ψευδώνυμο:"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
                 <EditText
-                    android:id="@+id/usernameInputLoginTxt"
+                    android:id="@+id/login_usernameInput_Txt"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="2"
@@ -79,12 +81,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/ubuntu_mono"
                     android:text="Κωδικός:"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
                 <EditText
-                    android:id="@+id/passwordInputTxt"
+                    android:id="@+id/login_passwordInput_Txt"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="2"
@@ -103,23 +106,28 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/okBtn"
+                    android:id="@+id/login_confirm_btn"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/ubuntu_mono"
                     android:background="@drawable/rounded_green_button"
-                    android:text="Επιβεβαίωση"
+                    app:backgroundTint="@null"
+                    android:text="Επιβεβαιωση"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
 
                 <Button
-                    android:id="@+id/cancelBtn"
+                    android:id="@+id/login_decline_btn"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    app:backgroundTint="@null"
                     android:background="@drawable/rounded_green_button"
                     android:text="Ακυρωση"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:fontFamily="@font/ubuntu_mono"
+                    android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

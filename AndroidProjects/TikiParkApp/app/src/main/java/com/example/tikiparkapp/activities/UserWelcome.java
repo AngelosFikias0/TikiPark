@@ -1,4 +1,4 @@
-package com.example.tikiparkapp;
+package com.example.tikiparkapp.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -14,11 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tikiparkapp.activities.EntryActivity;
-import com.example.tikiparkapp.activities.FindParkingActivity;
-import com.example.tikiparkapp.activities.MainActivity;
-import com.example.tikiparkapp.activities.StatsActivity;
-import com.example.tikiparkapp.activities.WalletManagementActivity;
+import com.example.tikiparkapp.R;
 import com.example.tikiparkapp.db.LocalCache;
 
 public class UserWelcome extends AppCompatActivity {
@@ -32,7 +28,7 @@ public class UserWelcome extends AppCompatActivity {
         // Initialize views
         TextView welcomeTextView = findViewById(R.id.welcomeUserTxt);
         ImageButton exitButton = findViewById(R.id.logoutBtn);
-        Button search = findViewById(R.id.loginBtn);
+        Button search = findViewById(R.id.entry_Login_Btn);
         ImageButton wallet = findViewById(R.id.walletBtn);
         ImageButton stats = findViewById(R.id.statsBtn);
 

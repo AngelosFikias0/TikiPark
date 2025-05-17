@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
-import com.example.tikiparkapp.UserWelcome;
 import com.example.tikiparkapp.db.LocalCache;
 
 import java.net.HttpURLConnection;
@@ -26,8 +25,8 @@ public class EntryActivity extends AppCompatActivity {
 
         localCache = new LocalCache(this);
 
-        Button loginBtn = findViewById(R.id.loginBtn);
-        Button registerBtn = findViewById(R.id.registerBtn);
+        Button loginBtn = findViewById(R.id.entry_Login_Btn);
+        Button registerBtn = findViewById(R.id.entry_Register_Btn);
 
         //Creates DB once the app starts for the first time
         createDB();

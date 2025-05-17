@@ -8,10 +8,10 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".UserWelcome">
+    tools:context=".activities.UserWelcome">
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/entry_Login_Btn"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
@@ -73,8 +73,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/statsBtn"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+        app:layout_constraintStart_toStartOf="@+id/entry_Login_Btn"
+        app:layout_constraintTop_toBottomOf="@+id/entry_Login_Btn" />
 
     <ImageButton
         android:id="@+id/statsBtn"
@@ -84,8 +84,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/stats"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+        app:layout_constraintEnd_toEndOf="@+id/entry_Login_Btn"
+        app:layout_constraintTop_toBottomOf="@+id/entry_Login_Btn" />
 
     <TextView
         android:id="@+id/welcomeUserTxt"

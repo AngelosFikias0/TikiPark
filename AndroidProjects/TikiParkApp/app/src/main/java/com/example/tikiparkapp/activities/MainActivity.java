@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
-import com.example.tikiparkapp.UserWelcome;
 import com.example.tikiparkapp.db.LocalCache;
 
 import org.json.JSONObject;

@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
-import com.example.tikiparkapp.UserWelcome;
 
 import org.json.JSONObject;
 
@@ -33,8 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
         EditText emailInput = findViewById(R.id.emailInputRegisterTxt);
         EditText usernameInput = findViewById(R.id.usernameInputRegisterTxt);
         EditText passwordInput = findViewById(R.id.passwordInputRegisterTxt);
-        Button okBtn = findViewById(R.id.okBtn);
-        Button cancelBtn = findViewById(R.id.cancelBtn);
+        Button okBtn = findViewById(R.id.login_confirm_btn);
+        Button cancelBtn = findViewById(R.id.login_decline_btn);
 
         okBtn.setOnClickListener(view -> {
             String email = emailInput.getText().toString();

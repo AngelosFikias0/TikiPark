@@ -16,10 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/ubuntu_mono"
         android:text="Εισαγωγή Τοποθεσίας"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="25sp"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +30,7 @@
     <!-- Search bar -->
 
     <Button
-        android:id="@+id/findParkingCancelBtn"
+        android:id="@+id/findParking_Cancel_Btn"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
@@ -38,14 +40,16 @@
         android:background="@drawable/rounded_green_button"
         android:text="Ακυρωση"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/findParkingConfirmBtn" />
+        app:layout_constraintStart_toEndOf="@+id/findParking_Confirm_Btn" />
 
     <Button
-        android:id="@+id/findParkingConfirmBtn"
+        android:id="@+id/findParking_Confirm_Btn"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
@@ -55,9 +59,11 @@
         android:text="Επιβεβαιωση"
         app:backgroundTint="@null"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/findParkingCancelBtn"
+        app:layout_constraintEnd_toStartOf="@+id/findParking_Cancel_Btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -78,12 +84,12 @@
             android:src="@android:drawable/ic_menu_search" />
 
         <EditText
-            android:id="@+id/findParkingSearchInputTxt"
+            android:id="@+id/findParking_Search_InputTxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="17dp"
-            android:layout_toStartOf="@+id/findParkingClearSearchBtn"
+            android:layout_toStartOf="@+id/findParking_ClearSearch_ImgBtn"
             android:background="@android:color/transparent"
             android:hint="Αναζήτηση"
             android:padding="0dp"
@@ -91,7 +97,7 @@
             android:textSize="16sp" />
 
         <ImageButton
-            android:id="@+id/findParkingClearSearchBtn"
+            android:id="@+id/findParking_ClearSearch_ImgBtn"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_alignParentEnd="true"

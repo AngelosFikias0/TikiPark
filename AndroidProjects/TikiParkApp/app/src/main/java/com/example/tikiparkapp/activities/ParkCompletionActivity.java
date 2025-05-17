@@ -3,11 +3,11 @@ package com.example.tikiparkapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.R;
-import com.example.tikiparkapp.UserWelcome;
 
 public class ParkCompletionActivity extends AppCompatActivity {
 
@@ -16,7 +16,10 @@ public class ParkCompletionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_park_completion);
 
-        Button backHome = findViewById(R.id.parkCompletionBackBtn);
+        Button backHome = findViewById(R.id.parkCompletion_confirm_btn);
+        TextView duration = findViewById(R.id.parkCompletion_duration_txt);
+        TextView cost = findViewById(R.id.parkCompletion_cost_txt);
+        TextView startTime = findViewById(R.id.parkCompletion_startTime_txt);
 
         backHome.setOnClickListener(view -> {
             startActivity(new Intent(ParkCompletionActivity.this, UserWelcome.class));

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ParkingPaymentActivity"
+    tools:context=".activities.PaymentOptions"
     android:background="#A3FDE2A1">
 
     <LinearLayout
@@ -23,8 +23,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="Επισκόπηση και Πληρωμή"
+            android:fontFamily="@font/ubuntu_mono"
             android:textColor="#000000"
-            android:textSize="24sp" />
+            android:textSize="26sp" />
 
         <!-- Logo -->
         <ImageView
@@ -51,12 +52,13 @@
                 <TextView
                     android:layout_width="255dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ubuntu_mono"
                     android:text="Διάρκεια:"
                     android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <TextView
-                    android:id="@+id/textDuration"
+                    android:id="@+id/paymentOptions_duration_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="00:00:00"
@@ -73,12 +75,13 @@
                 <TextView
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ubuntu_mono"
                     android:text="Κόστος:"
                     android:textColor="#000000"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
 
                 <TextView
-                    android:id="@+id/textCost"
+                    android:id="@+id/paymentOptions_cost_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0,00$"
@@ -89,7 +92,7 @@
 
         <!-- Google Pay Button -->
         <LinearLayout
-            android:id="@+id/buttonGooglePay"
+            android:id="@+id/parkPayment_gpay_btn"
             android:layout_width="360dp"
             android:layout_height="45dp"
             android:background="@drawable/google_pay_button_background"
@@ -137,9 +140,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/ubuntu_mono"
                 android:text="ή πληρωμή με"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -156,8 +160,8 @@
             android:orientation="horizontal"
             android:weightSum="3">
 
-            <ImageView
-                android:id="@+id/imageMasterCard"
+            <ImageButton
+                android:id="@+id/paymentOptions_mastercard_imgBtn"
                 android:layout_width="10dp"
                 android:layout_height="80dp"
                 android:layout_margin="4dp"
@@ -168,8 +172,8 @@
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/mastercard_logo" />
 
-            <ImageView
-                android:id="@+id/imageVisa"
+            <ImageButton
+                android:id="@+id/paymentOptions_visa_imgBtn"
                 android:layout_width="10dp"
                 android:layout_height="80dp"
                 android:layout_margin="4dp"
@@ -180,8 +184,8 @@
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/visa_logo" />
 
-            <ImageView
-                android:id="@+id/imagePaypal"
+            <ImageButton
+                android:id="@+id/paymentOptions_paypal_imgBtn"
                 android:layout_width="10dp"
                 android:layout_height="80dp"
                 android:layout_margin="4dp"

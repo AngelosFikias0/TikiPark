@@ -1,6 +1,7 @@
 package com.example.tikiparkapp.activities;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,5 +13,11 @@ public class PaymentDoneActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_payment_done);
+
+        Button confirmBtn = findViewById(R.id.paymentDone_confirm_btn);
+
+        confirmBtn.setOnClickListener(v -> {
+
+        });
     }
 }
