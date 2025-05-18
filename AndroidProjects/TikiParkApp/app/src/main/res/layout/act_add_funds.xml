@@ -106,7 +106,6 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:backgroundTine="@null"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="@+id/addFunds_Confirm_Btn"
         app:layout_constraintEnd_toEndOf="parent"
