@@ -15,52 +15,52 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".activities.ManageUsersActivity"
+            android:name=".activities.ManageUsers"
             android:exported="false" />
         <activity
             android:name=".activities.ViewAllActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.CreateParkingSpotsActivity"
+            android:name=".activities.CreateParkingSpots"
             android:exported="false" />
         <activity
-            android:name=".activities.StatsActivity"
+            android:name=".activities.Stats"
             android:exported="false" />
         <activity
-            android:name=".activities.WalletManagementActivity"
+            android:name=".activities.WalletManagement"
             android:exported="false" />
         <activity
-            android:name=".activities.FindParkingActivity"
+            android:name=".activities.FindParking"
             android:exported="false" />
         <activity
-            android:name=".activities.EntryActivity"
+            android:name=".activities.Entry"
             android:exported="true" />
         <activity
-            android:name=".activities.AdminWelcomeActivity"
+            android:name=".activities.AdminWelcome"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.Login"
             android:exported="false" />
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".activities.Register"
             android:exported="false" />
         <activity
-            android:name=".activities.ParkCompletionActivity"
+            android:name=".activities.ParkCompletion"
             android:exported="false" />
         <activity
-            android:name=".activities.InsufficientFundsActivity"
+            android:name=".activities.InsufficientFunds"
             android:exported="false" />
         <activity
-            android:name=".activities.AddFundsActivity"
+            android:name=".activities.AddFunds"
             android:exported="false" />
         <activity
             android:name=".activities.PaymentOptions"
             android:exported="false" />
         <activity
-            android:name=".activities.PaymentFormActivity"
+            android:name=".activities.PaymentForm"
             android:exported="false" />
         <activity
-            android:name=".activities.PaymentDoneActivity"
+            android:name=".activities.PaymentDone"
             android:exported="false" />
         <activity
             android:name=".activities.UserWelcome"

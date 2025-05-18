@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@color/primary_background"
-    tools:context=".activities.ManageUsersActivity">
+    tools:context=".activities.ManageUsers">
 
     <!-- Title -->
     <TextView

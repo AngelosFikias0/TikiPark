@@ -24,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class CreateParkingSpotsActivity extends AppCompatActivity {
+public class CreateParkingSpots extends AppCompatActivity {
 
     private EditText editLocation, editPricePerHour, editLatitude, editLongitude;
     private Spinner spinnerStatus;
@@ -32,7 +32,7 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_parking_spots);
+        setContentView(R.layout.act_create_parking_spots);
 
         // Initialize views
         editLocation = findViewById(R.id.edit_location);
@@ -54,7 +54,7 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
 
             // Validate inputs (basic validation)
             if (location.isEmpty() || pricePerHour.isEmpty() || latitude.isEmpty() || longitude.isEmpty()) {
-                Toast.makeText(CreateParkingSpotsActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateParkingSpots.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -68,7 +68,7 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
             String username = currentIntent.getStringExtra("username");
             String role = currentIntent.getStringExtra("role");
 
-            Intent intent = new Intent(CreateParkingSpotsActivity.this, AdminWelcomeActivity.class);
+            Intent intent = new Intent(CreateParkingSpots.this, AdminWelcome.class);
 
             intent.putExtra("username", username);
             intent.putExtra("role", role);
@@ -146,7 +146,7 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
 
      //Handles the server response after creating a parking spot.
     private void handleCreateSpotResponse(String message) {
-        Toast.makeText(CreateParkingSpotsActivity.this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(CreateParkingSpots.this, message, Toast.LENGTH_SHORT).show();
         if ("Parking spot created successfully".equals(message)) {
             finish();
         }
@@ -154,7 +154,7 @@ public class CreateParkingSpotsActivity extends AppCompatActivity {
 
      //Displays an error message via Toast.
     private void showError(String error) {
-        runOnUiThread(() -> Toast.makeText(CreateParkingSpotsActivity.this, error, Toast.LENGTH_SHORT).show());
+        runOnUiThread(() -> Toast.makeText(CreateParkingSpots.this, error, Toast.LENGTH_SHORT).show());
     }
 
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A3FDE2A1"
-    tools:context=".activities.InsufficientFundsActivity">
+    tools:context=".activities.InsufficientFunds">
 
     <LinearLayout
         android:id="@+id/linearLayout2"

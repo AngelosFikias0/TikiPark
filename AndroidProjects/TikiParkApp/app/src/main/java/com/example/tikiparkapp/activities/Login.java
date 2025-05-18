@@ -23,7 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class LoginActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     private LocalCache localCache;
 
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         cancelBtn.setOnClickListener(view -> {
-            startActivity(new Intent(LoginActivity.this, EntryActivity.class));
+            startActivity(new Intent(Login.this, Entry.class));
             finish();
         });
     }
@@ -91,17 +91,17 @@ public class LoginActivity extends AppCompatActivity {
                     localCache.cacheUserSession(userFromServer, role);
 
                     runOnUiThread(() -> {
-                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
                         goToWelcomeScreen(userFromServer, role);
                     });
 
                 } else {
-                    runOnUiThread(() -> Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show());
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(Login.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }finally {
                 if (reader != null) {
                     try {
@@ -123,9 +123,9 @@ public class LoginActivity extends AppCompatActivity {
     private void goToWelcomeScreen(String username, String role) {
         Intent intent;
         if (role.equalsIgnoreCase("admin")) {
-            intent = new Intent(LoginActivity.this, AdminWelcomeActivity.class);
+            intent = new Intent(Login.this, AdminWelcome.class);
         } else {
-            intent = new Intent(LoginActivity.this, UserWelcome.class);
+            intent = new Intent(Login.this, UserWelcome.class);
         }
 
         intent.putExtra("username", username);

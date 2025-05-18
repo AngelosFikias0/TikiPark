@@ -92,7 +92,7 @@ public class ViewAllActivity extends AppCompatActivity {
             String username = currentIntent.getStringExtra("username");
             String role = currentIntent.getStringExtra("role");
 
-            Intent intent = new Intent(ViewAllActivity.this, AdminWelcomeActivity.class);
+            Intent intent = new Intent(ViewAllActivity.this, AdminWelcome.class);
 
             intent.putExtra("username", username);
             intent.putExtra("role", role);

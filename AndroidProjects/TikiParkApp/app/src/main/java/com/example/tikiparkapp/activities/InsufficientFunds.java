@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.R;
 
-public class InsufficientFundsActivity extends AppCompatActivity {
+public class InsufficientFunds extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

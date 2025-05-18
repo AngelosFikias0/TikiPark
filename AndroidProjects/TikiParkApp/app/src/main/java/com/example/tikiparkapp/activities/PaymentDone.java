@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.R;
 
-public class PaymentDoneActivity extends AppCompatActivity {
+public class PaymentDone extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

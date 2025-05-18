@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.R;
 
-public class ParkCompletionActivity extends AppCompatActivity {
+public class ParkCompletion extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class ParkCompletionActivity extends AppCompatActivity {
         TextView startTime = findViewById(R.id.parkCompletion_startTime_txt);
 
         backHome.setOnClickListener(view -> {
-            startActivity(new Intent(ParkCompletionActivity.this, UserWelcome.class));
+            startActivity(new Intent(ParkCompletion.this, UserWelcome.class));
             finish();
         });
     }

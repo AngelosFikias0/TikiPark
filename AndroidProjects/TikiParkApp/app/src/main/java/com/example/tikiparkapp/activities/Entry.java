@@ -14,7 +14,7 @@ import com.example.tikiparkapp.db.LocalCache;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class EntryActivity extends AppCompatActivity {
+public class Entry extends AppCompatActivity {
 
     private LocalCache localCache;
 
@@ -25,7 +25,7 @@ public class EntryActivity extends AppCompatActivity {
 
         localCache = new LocalCache(this);
 
-        Button loginBtn = findViewById(R.id.entry_Login_Btn);
+        Button loginBtn = findViewById(R.id.userWeclome_findParking_btn);
         Button registerBtn = findViewById(R.id.entry_Register_Btn);
 
         //Creates DB once the app starts for the first time
@@ -41,12 +41,12 @@ public class EntryActivity extends AppCompatActivity {
         }
 
         loginBtn.setOnClickListener(view -> {
-            startActivity(new Intent(EntryActivity.this, LoginActivity.class));
+            startActivity(new Intent(Entry.this, Login.class));
             finish();
         });
 
         registerBtn.setOnClickListener(view -> {
-            startActivity(new Intent(EntryActivity.this, RegisterActivity.class));
+            startActivity(new Intent(Entry.this, Register.class));
             finish();
         });
     }
@@ -54,9 +54,9 @@ public class EntryActivity extends AppCompatActivity {
     private void goToWelcomeScreen(String username, String role) {
         Intent intent;
         if (role.equalsIgnoreCase("admin")) {
-            intent = new Intent(EntryActivity.this, AdminWelcomeActivity.class);
+            intent = new Intent(Entry.this, AdminWelcome.class);
         } else {
-            intent = new Intent(EntryActivity.this, UserWelcome.class);
+            intent = new Intent(Entry.this, UserWelcome.class);
         }
 
         intent.putExtra("username", username);

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.R;
 
-public class FindParkingActivity extends AppCompatActivity {
+public class FindParking extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class FindParkingActivity extends AppCompatActivity {
         });
 
         cancelBtn.setOnClickListener(view -> {
-            startActivity(new Intent(FindParkingActivity.this, UserWelcome.class));
+            startActivity(new Intent(FindParking.this, UserWelcome.class));
             finish();
         });
     }

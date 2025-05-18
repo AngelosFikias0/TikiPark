@@ -9,11 +9,11 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".activities.EntryActivity"
+    tools:context=".activities.Entry"
     tools:ignore="ExtraText">
 
     <Button
-        android:id="@+id/entry_Login_Btn"
+        android:id="@+id/userWeclome_findParking_btn"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_below="@id/Screen1Image"
@@ -73,9 +73,9 @@
         android:textStyle="bold"
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/entry_Login_Btn"
-        app:layout_constraintStart_toStartOf="@+id/entry_Login_Btn"
-        app:layout_constraintTop_toBottomOf="@+id/entry_Login_Btn"
+        app:layout_constraintEnd_toEndOf="@+id/userWeclome_findParking_btn"
+        app:layout_constraintStart_toStartOf="@+id/userWeclome_findParking_btn"
+        app:layout_constraintTop_toBottomOf="@+id/userWeclome_findParking_btn"
         app:layout_constraintVertical_bias="0.19" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

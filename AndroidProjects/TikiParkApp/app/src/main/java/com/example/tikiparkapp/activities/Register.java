@@ -22,18 +22,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class RegisterActivity extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_register_screen);
 
-        EditText emailInput = findViewById(R.id.emailInputRegisterTxt);
-        EditText usernameInput = findViewById(R.id.usernameInputRegisterTxt);
-        EditText passwordInput = findViewById(R.id.passwordInputRegisterTxt);
-        Button okBtn = findViewById(R.id.login_confirm_btn);
-        Button cancelBtn = findViewById(R.id.login_decline_btn);
+        EditText emailInput = findViewById(R.id.register_emailInput_txt);
+        EditText usernameInput = findViewById(R.id.register_usernameInput_txt);
+        EditText passwordInput = findViewById(R.id.register_passwordInput_txt);
+        Button okBtn = findViewById(R.id.register_confirm_btn);
+        Button cancelBtn = findViewById(R.id.register_decline_btn);
 
         okBtn.setOnClickListener(view -> {
             String email = emailInput.getText().toString();
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         cancelBtn.setOnClickListener(view -> {
-            startActivity(new Intent(RegisterActivity.this, EntryActivity.class));
+            startActivity(new Intent(Register.this, Entry.class));
         });
 
     }
@@ -80,12 +80,12 @@ public class RegisterActivity extends AppCompatActivity {
                 JSONObject response = new JSONObject(result.toString());
                 String message = response.getString("message");
 
-                runOnUiThread(() -> Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(Register.this, message, Toast.LENGTH_SHORT).show());
                 goToWelcomeScreen(username, "user");
 
             } catch (Exception e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(RegisterActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(Register.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
             }finally {
                 if (reader != null) {
                     try {
@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
     // (It makes sense. Admins are probably going to be created from some other screen.)
     private void goToWelcomeScreen(String username, String role) {
         Intent intent;
-        intent = new Intent(RegisterActivity.this, UserWelcome.class);
+        intent = new Intent(Register.this, UserWelcome.class);
 
         intent.putExtra("username", username);
         intent.putExtra("role", role);

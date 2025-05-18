@@ -26,11 +26,11 @@ public class UserWelcome extends AppCompatActivity {
         setContentView(R.layout.act_user_welcome);
 
         // Initialize views
-        TextView welcomeTextView = findViewById(R.id.welcomeUserTxt);
-        ImageButton exitButton = findViewById(R.id.logoutBtn);
-        Button search = findViewById(R.id.entry_Login_Btn);
-        ImageButton wallet = findViewById(R.id.walletBtn);
-        ImageButton stats = findViewById(R.id.statsBtn);
+        TextView welcomeTextView = findViewById(R.id.userWeclome_welcome_txt);
+        ImageButton exitButton = findViewById(R.id.userWelcome_logout_imgBtn);
+        Button search = findViewById(R.id.userWeclome_findParking_btn);
+        ImageButton wallet = findViewById(R.id.userWelcome_wallet_imgBtn);
+        ImageButton stats = findViewById(R.id.userWelcome_stats_imgBtn);
 
         // Popup and views
         Dialog popLocationAllow = new Dialog(UserWelcome.this);
@@ -67,7 +67,7 @@ public class UserWelcome extends AppCompatActivity {
 
         popAccept.setOnClickListener(view -> {
             // Create an Intent to pass the location to a new activity (SearchActivity)
-            Intent searchIntent = new Intent(UserWelcome.this, FindParkingActivity.class);
+            Intent searchIntent = new Intent(UserWelcome.this, FindParking.class);
             searchIntent.putExtra("username",username);
             startActivity(searchIntent);
             popLocationAllow.dismiss();
@@ -81,7 +81,7 @@ public class UserWelcome extends AppCompatActivity {
         // Handle Wallet Management Logic
         wallet.setOnClickListener(v -> {
             // Create an Intent to go to the wallet management screen
-            Intent walletIntent = new Intent(UserWelcome.this, WalletManagementActivity.class);
+            Intent walletIntent = new Intent(UserWelcome.this, WalletManagement.class);
             walletIntent.putExtra("username",username);
             startActivity(walletIntent);
         });
@@ -89,7 +89,7 @@ public class UserWelcome extends AppCompatActivity {
         // Handle Statistics Logic
         stats.setOnClickListener(v -> {
             // Create an Intent to go to the statistics screen
-            Intent statsIntent = new Intent(UserWelcome.this, StatsActivity.class);
+            Intent statsIntent = new Intent(UserWelcome.this, Stats.class);
             statsIntent.putExtra("username",username);
             startActivity(statsIntent);
         });
@@ -101,7 +101,7 @@ public class UserWelcome extends AppCompatActivity {
                 LocalCache localCache = new LocalCache(UserWelcome.this);
                 localCache.clearSession();
 
-                Intent exitIntent = new Intent(UserWelcome.this, EntryActivity.class);
+                Intent exitIntent = new Intent(UserWelcome.this, Entry.class);
                 exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(exitIntent);
                 finish(); // Kill UserWelcome to avoid returning

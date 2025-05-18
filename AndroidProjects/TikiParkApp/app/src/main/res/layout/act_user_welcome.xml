@@ -11,15 +11,18 @@
     tools:context=".activities.UserWelcome">
 
     <Button
-        android:id="@+id/entry_Login_Btn"
+        android:id="@+id/userWeclome_findParking_btn"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Εύρεση Στάθμευσης"
+        android:text="Ευρεση Σταθμευσης"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:fontFamily="@font/ubuntu_mono"
+        app:backgroundTint="@null"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/imageView"
@@ -30,22 +33,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
+        android:fontFamily="@font/ubuntu_mono"
+        android:layout_marginTop="4dp"
         android:text="TikiPark"
         android:textColor="#000000"
-        android:textSize="48sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/logoutBtn"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/userWelcome_logout_imgBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/logoutBtn"
+        android:id="@+id/userWelcome_logout_imgBtn"
         android:layout_width="64dp"
         android:layout_height="69dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:visibility="visible"
@@ -61,42 +65,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.41"
         app:srcCompat="@drawable/screen_1" />
 
     <ImageButton
-        android:id="@+id/walletBtn"
+        android:id="@+id/userWelcome_wallet_imgBtn"
         android:layout_width="64dp"
         android:layout_height="60dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/wallet"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/statsBtn"
+        app:layout_constraintEnd_toStartOf="@+id/userWelcome_stats_imgBtn"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/entry_Login_Btn"
-        app:layout_constraintTop_toBottomOf="@+id/entry_Login_Btn" />
+        app:layout_constraintStart_toStartOf="@+id/userWeclome_findParking_btn"
+        app:layout_constraintTop_toBottomOf="@+id/userWeclome_findParking_btn" />
 
     <ImageButton
-        android:id="@+id/statsBtn"
+        android:id="@+id/userWelcome_stats_imgBtn"
         android:layout_width="64dp"
         android:layout_height="60dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:src="@drawable/stats"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/entry_Login_Btn"
-        app:layout_constraintTop_toBottomOf="@+id/entry_Login_Btn" />
+        app:layout_constraintEnd_toEndOf="@+id/userWeclome_findParking_btn"
+        app:layout_constraintTop_toBottomOf="@+id/userWeclome_findParking_btn" />
 
     <TextView
-        android:id="@+id/welcomeUserTxt"
+        android:id="@+id/userWeclome_welcome_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_mono"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76" />
+        app:layout_constraintVertical_bias="0.782" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

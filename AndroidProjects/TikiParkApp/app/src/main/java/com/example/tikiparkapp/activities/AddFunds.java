@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tikiparkapp.R;
 
-public class AddFundsActivity extends AppCompatActivity {
+public class AddFunds extends AppCompatActivity {
 
     EditText amountInput;
 

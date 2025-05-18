@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
     private void goToWelcomeScreen(String username, String role) {
         Intent intent;
         if (role.equalsIgnoreCase("admin")) {
-            intent = new Intent(MainActivity.this, AdminWelcomeActivity.class);
+            intent = new Intent(MainActivity.this, AdminWelcome.class);
         } else {
             intent = new Intent(MainActivity.this, UserWelcome.class);
         }

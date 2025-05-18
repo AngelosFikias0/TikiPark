@@ -23,7 +23,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class AdminWelcomeActivity extends AppCompatActivity {
+public class AdminWelcome extends AppCompatActivity {
 
     // Declare statistics TextViews
     private TextView totalUsersTextView;
@@ -37,7 +37,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_welcome);
+        setContentView(R.layout.act_admin_welcome);
 
         // Initialize views
         TextView welcomeTextView = findViewById(R.id.welcomeAdminTextview);
@@ -64,9 +64,9 @@ public class AdminWelcomeActivity extends AppCompatActivity {
             welcomeTextView.setText("Welcome, " + role + " \"" + username + "\"!");
         } else {
             // Handle case where the session is not valid (username or role is not passed)
-            Toast.makeText(AdminWelcomeActivity.this, "Session expired or invalid", Toast.LENGTH_LONG).show();
+            Toast.makeText(AdminWelcome.this, "Session expired or invalid", Toast.LENGTH_LONG).show();
             // Optionally, redirect to the MainActivity (login screen)
-            Intent redirectIntent = new Intent(AdminWelcomeActivity.this, MainActivity.class);
+            Intent redirectIntent = new Intent(AdminWelcome.this, MainActivity.class);
             startActivity(redirectIntent);
             finish(); // Finish current activity to prevent returning to AdminWelcome
         }
@@ -79,7 +79,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
             // Clear session and navigate to MainActivity (login screen)
             LocalCache localCache = new LocalCache(this);
             localCache.clearSession();
-            Intent exitIntent = new Intent(AdminWelcomeActivity.this, MainActivity.class);
+            Intent exitIntent = new Intent(AdminWelcome.this, MainActivity.class);
             exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(exitIntent);
             finish(); // Finish current activity to prevent returning to AdminWelcome
@@ -87,7 +87,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
 
         // Handle create parking spots button click
         createParkingSpotsButton.setOnClickListener(v -> {
-            Intent createParkingIntent = new Intent(AdminWelcomeActivity.this, CreateParkingSpotsActivity.class);
+            Intent createParkingIntent = new Intent(AdminWelcome.this, CreateParkingSpots.class);
             createParkingIntent.putExtra("username", username);
             createParkingIntent.putExtra("role", role);
             startActivity(createParkingIntent);
@@ -95,7 +95,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
 
         // Handle view all button click
         viewAllButton.setOnClickListener(v -> {
-            Intent viewAllIntent = new Intent(AdminWelcomeActivity.this, ViewAllActivity.class);
+            Intent viewAllIntent = new Intent(AdminWelcome.this, ViewAllActivity.class);
             viewAllIntent.putExtra("username", username);
             viewAllIntent.putExtra("role", role);
             startActivity(viewAllIntent);
@@ -103,7 +103,7 @@ public class AdminWelcomeActivity extends AppCompatActivity {
 
         // Handle manage users button click
         manageUsersButton.setOnClickListener(v -> {
-            Intent manageUsersIntent = new Intent(AdminWelcomeActivity.this, ManageUsersActivity.class);
+            Intent manageUsersIntent = new Intent(AdminWelcome.this, ManageUsers.class);
             manageUsersIntent.putExtra("username", username);
             manageUsersIntent.putExtra("role", role);
             startActivity(manageUsersIntent);
@@ -191,6 +191,6 @@ public class AdminWelcomeActivity extends AppCompatActivity {
 
      //Displays an error message via a Toast on the UI thread.
     private void showError(String message) {
-        runOnUiThread(() -> Toast.makeText(AdminWelcomeActivity.this, message, Toast.LENGTH_LONG).show());
+        runOnUiThread(() -> Toast.makeText(AdminWelcome.this, message, Toast.LENGTH_LONG).show());
     }
 }

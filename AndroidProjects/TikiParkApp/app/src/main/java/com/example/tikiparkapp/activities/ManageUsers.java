@@ -26,7 +26,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class ManageUsersActivity extends AppCompatActivity {
+public class ManageUsers extends AppCompatActivity {
 
     private ListView usersListView;
     private EditText editRoleEditText;
@@ -36,7 +36,7 @@ public class ManageUsersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_users);
+        setContentView(R.layout.act_manage_users);
 
         usersListView = findViewById(R.id.listView_users);
         editRoleEditText = findViewById(R.id.edit_role);
@@ -59,7 +59,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             String username = currentIntent.getStringExtra("username");
             String role = currentIntent.getStringExtra("role");
 
-            Intent intent = new Intent(ManageUsersActivity.this, AdminWelcomeActivity.class);
+            Intent intent = new Intent(ManageUsers.this, AdminWelcome.class);
 
             intent.putExtra("username", username);
             intent.putExtra("role", role);
@@ -104,7 +104,7 @@ public class ManageUsersActivity extends AppCompatActivity {
                     }
 
                     runOnUiThread(() -> {
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ManageUsersActivity.this, android.R.layout.simple_list_item_1, usernames);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(ManageUsers.this, android.R.layout.simple_list_item_1, usernames);
                         usersListView.setAdapter(adapter);
 
                         // Listen to clicks
@@ -115,12 +115,12 @@ public class ManageUsersActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    runOnUiThread(() -> Toast.makeText(ManageUsersActivity.this, "Failed to load users.", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(ManageUsers.this, "Failed to load users.", Toast.LENGTH_SHORT).show());
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(ManageUsersActivity.this, "Error fetching users.", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(ManageUsers.this, "Error fetching users.", Toast.LENGTH_SHORT).show());
             } finally {
                 if (reader != null) {
                     try { reader.close(); } catch (IOException ignored) {}
@@ -180,13 +180,13 @@ public class ManageUsersActivity extends AppCompatActivity {
                 String message = response.getString("message");
 
                 runOnUiThread(() -> {
-                    Toast.makeText(ManageUsersActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ManageUsers.this, message, Toast.LENGTH_SHORT).show();
                     fetchUsers(); // Refresh the user list after update
                 });
 
             } catch (Exception e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(ManageUsersActivity.this, "Error updating user.", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(ManageUsers.this, "Error updating user.", Toast.LENGTH_SHORT).show());
             } finally {
                 if (reader != null) {
                     try { reader.close(); } catch (IOException ignored) {}
@@ -239,7 +239,7 @@ public class ManageUsersActivity extends AppCompatActivity {
                 String message = response.getString("message");
 
                 runOnUiThread(() -> {
-                    Toast.makeText(ManageUsersActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ManageUsers.this, message, Toast.LENGTH_SHORT).show();
                     selectedUsername = null; // Reset selection
                     editRoleEditText.setText(""); // Clear edit text
                     fetchUsers(); // Refresh the user list after deletion
@@ -247,7 +247,7 @@ public class ManageUsersActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(ManageUsersActivity.this, "Error deleting user.", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(ManageUsers.this, "Error deleting user.", Toast.LENGTH_SHORT).show());
             } finally {
                 if (reader != null) {
                     try { reader.close(); } catch (IOException ignored) {}
