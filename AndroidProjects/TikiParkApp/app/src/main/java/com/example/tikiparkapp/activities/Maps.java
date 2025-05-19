@@ -1,18 +1,19 @@
 package com.example.tikiparkapp.activities;
 
-import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.tikiparkapp.R;
+import com.example.tikiparkapp.databinding.ActMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.tikiparkapp.activities.databinding.ActMapsBinding;
 
-public class Maps extends FragmentActivity implements OnMapReadyCallback {
+public class Maps extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActMapsBinding binding;

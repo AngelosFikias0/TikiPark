@@ -68,6 +68,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="30dp"
@@ -106,5 +107,14 @@
             android:contentDescription="Clear"
             android:src="@android:drawable/ic_menu_close_clear_cancel" />
     </RelativeLayout>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/findParking_map_gmap"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,5 +20,6 @@
         <item>Occupied</item>
         <item>Reserved</item>
     </string-array>
+    <string name="title_activity_maps">Maps</string>
 
 </resources>
