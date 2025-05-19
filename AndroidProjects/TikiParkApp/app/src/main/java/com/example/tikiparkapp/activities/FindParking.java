@@ -51,6 +51,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         Button findParkingBtn = findViewById(R.id.findParking_confirm_Btn);
         Button cancelBtn = findViewById(R.id.findParking_cancel_Btn);
         Spinner parkingSpots = findViewById(R.id.findParking_parkingSpots_spinner);
+        parkingSpots.setOnItemSelectedListener(this);
 
         pManager.addParkingSpot("Gkaite Tzovaropoulou 12", 40.623737, 22.964687);
         pManager.addParkingSpot("Lysimachou Kaftanzoglou", 40.624566, 22.964454);
@@ -135,6 +136,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        gMap.clear();
         ParkingSpot selectedSpot = pManager.getParkingSpot(adapterView.getItemAtPosition(i).toString());
         LatLng position = new LatLng(selectedSpot.getLat(), selectedSpot.getLon());
         gMap.moveCamera(CameraUpdateFactory.newLatLng(position));
