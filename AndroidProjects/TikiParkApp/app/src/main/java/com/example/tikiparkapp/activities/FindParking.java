@@ -16,12 +16,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class FindParking extends AppCompatActivity implements OnMapReadyCallback {
 
     private MapView mMapView;
+    private GoogleMap gMap;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
 
     @Override
@@ -49,6 +51,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
         findParkingBtn.setOnClickListener(v -> {
             // TODO Find parking code.
+            gMap.addMarker(new MarkerOptions().position(new LatLng(25, 25)).title("Marker"));
         });
 
         cancelBtn.setOnClickListener(v -> {
@@ -90,7 +93,9 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        gMap = map;
+        //gMap.addMarker(new MarkerOptions().position(new LatLng(39.362356, 22.946812)).title("Marker"));
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(39.362356, 22.946812), 16.0f));
     }
 
     @Override
