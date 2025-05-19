@@ -2,29 +2,35 @@ package com.example.tikiparkapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tikiparkapp.ParkingSpot;
+import com.example.tikiparkapp.ParkingSpotManager;
 import com.example.tikiparkapp.R;
-import com.example.tikiparkapp.databinding.ActMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class FindParking extends AppCompatActivity implements OnMapReadyCallback {
+import java.lang.reflect.Array;
+
+public class FindParking extends AppCompatActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
     private MapView mMapView;
     private GoogleMap gMap;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+
+    ParkingSpotManager pManager = new ParkingSpotManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +46,25 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         mMapView.getMapAsync(this);
 //        applyInsets(map);
 
-        ImageButton clearSearchBtn = findViewById(R.id.findParking_ClearSearch_ImgBtn);
-        Button findParkingBtn = findViewById(R.id.findParking_Confirm_Btn);
-        Button cancelBtn = findViewById(R.id.findParking_Cancel_Btn);
-        EditText searchInputText = findViewById(R.id.findParking_Search_InputTxt);
+//        EditText searchInputText = findViewById(R.id.findParking_Search_InputTxt);
+//        ImageButton clearSearchBtn = findViewById(R.id.findParking_ClearSearch_ImgBtn);
+        Button findParkingBtn = findViewById(R.id.findParking_confirm_Btn);
+        Button cancelBtn = findViewById(R.id.findParking_cancel_Btn);
+        Spinner parkingSpots = findViewById(R.id.findParking_parkingSpots_spinner);
 
-        clearSearchBtn.setOnClickListener(v -> {
-            searchInputText.setText("");
-        });
+        pManager.addParkingSpot("Gkaite Tzovaropoulou 12", 40.623737, 22.964687);
+        pManager.addParkingSpot("Lysimachou Kaftanzoglou", 40.624566, 22.964454);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                pManager.getParkingSpotNames());
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        parkingSpots.setAdapter(adapter);
+
+//        clearSearchBtn.setOnClickListener(v -> {
+//            searchInputText.setText("");
+//        });
 
         findParkingBtn.setOnClickListener(v -> {
             // TODO Find parking code.
@@ -116,4 +133,16 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         mMapView.onLowMemory();
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        ParkingSpot selectedSpot = pManager.getParkingSpot(adapterView.getItemAtPosition(i).toString());
+        LatLng position = new LatLng(selectedSpot.getLat(), selectedSpot.getLon());
+        gMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+        gMap.addMarker(new MarkerOptions().position(position)).setTitle("Parking Spot");
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }
