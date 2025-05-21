@@ -18,7 +18,7 @@
             android:layout_width="280dp"
             android:layout_height="105dp"
             android:fontFamily="@font/alexandria_medium"
-            android:text="Υπήρξε σφάλμα κατά τον εντοπισμό της τοποθεσίας. Προσπαθήστε ξανά."
+            android:text="There was a problem fetching the location, please try again."
             android:textAlignment="center"
             android:textColor="@color/light_white"
             android:textSize="20sp"

@@ -79,7 +79,7 @@ public class AdminWelcome extends AppCompatActivity {
             // Clear session and navigate to MainActivity (login screen)
             LocalCache localCache = new LocalCache(this);
             localCache.clearSession();
-            Intent exitIntent = new Intent(AdminWelcome.this, MainActivity.class);
+            Intent exitIntent = new Intent(AdminWelcome.this, Entry.class);
             exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(exitIntent);
             finish(); // Finish current activity to prevent returning to AdminWelcome

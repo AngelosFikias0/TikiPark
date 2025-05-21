@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Η Πληρωμή ολοκληρώθηκε!"
+            android:text="Transaction Completed!"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Έχει αποσταλεί ηλεκτρονική απόδειξη στο email σας."
+            android:text="Your reciept will be sent to you Email Adress!"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />
@@ -54,7 +54,7 @@
         app:backgroundTint="@null"
         android:fontFamily="@font/ubuntu_mono"
         android:background="@drawable/rounded_green_button"
-        android:text="Συνεχεια"
+        android:text="Continue"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

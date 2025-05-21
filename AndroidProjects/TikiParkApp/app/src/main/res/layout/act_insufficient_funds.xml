@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Ανεπαρκές Υπόλοιπο"
+            android:text="Insufficient Funds"
             android:fontFamily="@font/ubuntu_mono"
             android:textColor="#000000"
             android:textSize="32sp" />
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Απαιτούνται:"
+                android:text="Needed:"
                 android:textColor="#000000"
                 android:textSize="24sp" />
 
@@ -57,7 +57,7 @@
                 android:id="@+id/insufFunds_requiredAmount_Txt"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="5$"
+                android:text="-"
                 android:textColor="#000000"
                 android:textSize="22sp" />
         </LinearLayout>
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Υπόλοιπο:"
+                android:text="Balance:"
                 android:textColor="#000000"
                 android:textSize="24sp" />
 
@@ -82,7 +82,7 @@
                 android:id="@+id/insufFunds_currentAmount_Txt"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="3$"
+                android:text="-"
                 android:textColor="#000000"
                 android:textSize="22sp" />
         </LinearLayout>
@@ -97,7 +97,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Διαφορά:"
+                android:text="Difference:"
                 android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -106,7 +106,7 @@
                 android:id="@+id/insufFunds_difference_Txt"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:text="2$"
+                android:text="-"
                 android:textColor="#000000"
                 android:textSize="22sp" />
         </LinearLayout>
@@ -122,7 +122,7 @@
         android:layout_marginBottom="80dp"
         android:background="@drawable/rounded_green_button"
         app:backgroundTint="@null"
-        android:text="Προσθηκη χρηματων"
+        android:text="Add cash"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/ubuntu_mono"
         android:textSize="16sp"
@@ -131,26 +131,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/insufFunds_decline_Btn"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        app:backgroundTint="@null"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/rounded_green_button"
-        android:text="Ακυρωση"
-        android:fontFamily="@font/ubuntu_mono"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/insufFunds_addMoney_Btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.229"
-        app:layout_constraintStart_toEndOf="@+id/insufFunds_addMoney_Btn"
-        app:layout_constraintTop_toTopOf="@+id/insufFunds_addMoney_Btn"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

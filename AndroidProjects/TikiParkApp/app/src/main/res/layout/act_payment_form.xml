@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Πληρωμή"
+            android:text="Payment"
             android:textColor="#000000"
             android:textSize="26sp" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:text="15,00$"
+            android:text="-"
             android:textSize="22sp" />
 
         <ImageView
@@ -57,7 +57,7 @@
                 android:fontFamily="@font/ubuntu_mono"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="Αριθμός κάρτας:"
+                android:text="Card Number:"
                 android:textSize="20sp" />
 
             <EditText
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Όνομα κατόχου:"
+                android:text="Cardholder Name:"
                 android:textSize="20sp" />
 
             <EditText
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Λήξη:"
+                android:text="Expiration Date:"
                 android:textSize="20sp" />
 
             <EditText
@@ -171,7 +171,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="16dp"
                 android:background="@drawable/rounded_green_button"
-                android:text="Επιβεβαιωση"
+                android:text="Confirm"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -190,7 +190,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="5dp"
                 android:background="@drawable/rounded_green_button"
-                android:text="Ακυρωση"
+                android:text="Cancel"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:textSize="20sp"

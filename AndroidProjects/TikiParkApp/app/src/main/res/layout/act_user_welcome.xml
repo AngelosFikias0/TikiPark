@@ -17,7 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:background="@drawable/rounded_green_button"
-        android:text="Ευρεση Σταθμευσης"
+        android:text="Search for spot"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/ubuntu_mono"
         app:backgroundTint="@null"

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Σύνδεση"
+                android:text="Login"
                 android:textColor="#000000"
                 android:textSize="34sp"
                 android:textStyle="bold" />
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/ubuntu_mono"
-                    android:text="Ψευδώνυμο:"
+                    android:text="Username:"
                     android:textColor="#000000"
                     android:textSize="22sp" />
 
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/ubuntu_mono"
-                    android:text="Κωδικός:"
+                    android:text="Password:"
                     android:textColor="#000000"
                     android:textSize="22sp" />
 
@@ -113,7 +113,7 @@
                     android:fontFamily="@font/ubuntu_mono"
                     android:background="@drawable/rounded_green_button"
                     app:backgroundTint="@null"
-                    android:text="Επιβεβαιωση"
+                    android:text="Confirm"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     android:textSize="20sp" />
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     app:backgroundTint="@null"
                     android:background="@drawable/rounded_green_button"
-                    android:text="Ακυρωση"
+                    android:text="Cancel"
                     android:textColor="#FFFFFF"
                     android:fontFamily="@font/ubuntu_mono"
                     android:textSize="20sp" />

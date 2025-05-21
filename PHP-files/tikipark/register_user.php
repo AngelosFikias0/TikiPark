@@ -2,7 +2,6 @@
 header('Content-Type: application/json');
 
 // Database connection
-//These are placeholder, put actual values here:
 $host = 'localhost';
 $user = 'root';
 $pass = '123';
@@ -21,61 +20,58 @@ $username = trim($_POST['username'] ?? '');
 $email = trim($_POST['email'] ?? '');
 $password = $_POST['password'] ?? '';
 
-$response = array();
+$response = [];
 
-// Basic validation to ensure no empty fields
+// Basic validation
 if (empty($username) || empty($email) || empty($password)) {
-    $response['success'] = false;
-    $response['message'] = "All fields are required.";
-    echo json_encode($response);
+    echo json_encode(["success" => false, "message" => "All fields are required."]);
     exit;
 }
 
-// Validate email format
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $response['success'] = false;
-    $response['message'] = "Invalid email format.";
-    echo json_encode($response);
+    echo json_encode(["success" => false, "message" => "Invalid email format."]);
     exit;
 }
 
-// Check if username or email already exists in the database
+// Check if username or email already exists
 $stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ? OR email = ?");
 $stmt->bind_param("ss", $username, $email);
 $stmt->execute();
 $stmt->store_result();
-
-// If username or email already exists, return error
 if ($stmt->num_rows > 0) {
-    $response['success'] = false;
-    $response['message'] = "Username or email already in use.";
-    echo json_encode($response);
+    echo json_encode(["success" => false, "message" => "Username or email already in use."]);
     exit;
 }
 
-// Hash the password for security
+// Hash password and insert user
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-// Default role for new users
 $defaultRole = "user";
 
-// Insert new user into the database
 $insertStmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
 $insertStmt->bind_param("ssss", $username, $email, $hashedPassword, $defaultRole);
 
 if ($insertStmt->execute()) {
-    // Successful registration
-    $response['success'] = true;
-    $response['message'] = "User registered successfully.";
+    $userId = $insertStmt->insert_id;
+
+    // Insert row into user_statistics
+    $statsStmt = $conn->prepare("INSERT INTO user_statistics (user_id) VALUES (?)");
+    $statsStmt->bind_param("i", $userId);
+
+    if ($statsStmt->execute()) {
+        $response['success'] = true;
+        $response['message'] = "User registered successfully.";
+    } else {
+        $response['success'] = false;
+        $response['message'] = "Critical failure";
+    }
+
+    $statsStmt->close();
 } else {
-    // Error during registration
     $response['success'] = false;
     $response['message'] = "Error occurred during registration.";
 }
 
-// Output response as JSON
+// Return JSON response
 echo json_encode($response);
-
-// Close the database connection
 $conn->close();
 ?>

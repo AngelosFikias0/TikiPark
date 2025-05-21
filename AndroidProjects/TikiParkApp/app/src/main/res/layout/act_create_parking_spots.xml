@@ -93,6 +93,7 @@
 
     <!-- Create Button -->
     <Button
+        android:background="@drawable/rounded_green_button"
         android:id="@+id/btn_create_spot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -105,6 +106,7 @@
 
     <!-- Back Button -->
     <Button
+        android:background="@drawable/rounded_green_button"
         android:id="@+id/btn_back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

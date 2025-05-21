@@ -16,13 +16,17 @@ public class ParkCompletion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_park_completion);
 
-        Button backHome = findViewById(R.id.parkCompletion_confirm_btn);
+        Button pay = findViewById(R.id.parkCompletion_confirm_btn);
         TextView duration = findViewById(R.id.parkCompletion_duration_txt);
         TextView cost = findViewById(R.id.parkCompletion_cost_txt);
         TextView startTime = findViewById(R.id.parkCompletion_startTime_txt);
+        double amount=0;
 
-        backHome.setOnClickListener(view -> {
-            startActivity(new Intent(ParkCompletion.this, UserWelcome.class));
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+
+        pay.setOnClickListener(view -> {
+            startActivity(new Intent(ParkCompletion.this, InsufficientFunds.class).putExtra("amount",amount).putExtra("cause","Pay").putExtra("username",username));
             finish();
         });
     }

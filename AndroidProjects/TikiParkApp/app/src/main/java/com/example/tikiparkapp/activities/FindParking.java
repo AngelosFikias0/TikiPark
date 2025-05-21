@@ -7,11 +7,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.ParkingSpot;
 import com.example.tikiparkapp.ParkingSpotManager;
 import com.example.tikiparkapp.R;
@@ -22,7 +22,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.lang.reflect.Array;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class FindParking extends AppCompatActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
@@ -53,22 +62,14 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         Spinner parkingSpots = findViewById(R.id.findParking_parkingSpots_spinner);
         parkingSpots.setOnItemSelectedListener(this);
 
-        pManager.addParkingSpot("Gkaite Tzovaropoulou 12", 40.623737, 22.964687);
-        pManager.addParkingSpot("Lysimachou Kaftanzoglou", 40.624566, 22.964454);
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item,
-                pManager.getParkingSpotNames());
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        parkingSpots.setAdapter(adapter);
-
-//        clearSearchBtn.setOnClickListener(v -> {
-//            searchInputText.setText("");
-//        });
+        fillSpots(parkingSpots);
 
         findParkingBtn.setOnClickListener(v -> {
-            // TODO Find parking code.
+            startActivity(new Intent(FindParking.this, ParkCompletion.class).putExtra("username",username));
+            finish();
             gMap.addMarker(new MarkerOptions().position(new LatLng(25, 25)).title("Marker"));
         });
 
@@ -76,6 +77,64 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
             startActivity(new Intent(FindParking.this, UserWelcome.class));
             finish();
         });
+    }
+
+    private void fillSpots(Spinner parkingSpots) {
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            InputStream is = null;
+
+            try {
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/fillSpots.php");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setDoOutput(true);
+
+                int responseCode = conn.getResponseCode();
+                is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(is));
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                JSONObject jsonResponse = new JSONObject(responseBuilder.toString());
+                JSONArray spotsArray = jsonResponse.getJSONArray("spots");
+
+                for (int i = 0; i < spotsArray.length(); i++) {
+                    JSONObject spot = spotsArray.getJSONObject(i);
+                    String location = spot.getString("location");
+                    double lat = spot.getDouble("latitude");
+                    double lon = spot.getDouble("longitude");
+
+                    // Add to your manager (adjust based on your implementation)
+                    pManager.addParkingSpot(location, lat, lon);
+                }
+
+                // UI update must be run on main thread
+                runOnUiThread(() -> {
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(FindParking.this,
+                            android.R.layout.simple_spinner_dropdown_item,
+                            pManager.getParkingSpotNames());
+
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    parkingSpots.setAdapter(adapter);
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try { if (reader != null) reader.close(); } catch (IOException ignored) {}
+                try { if (is != null) is.close(); } catch (IOException ignored) {}
+                if (conn != null) conn.disconnect();
+            }
+        }).start();
     }
 
     @Override
@@ -113,7 +172,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap map) {
         gMap = map;
         //gMap.addMarker(new MarkerOptions().position(new LatLng(39.362356, 22.946812)).title("Marker"));
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(39.362356, 22.946812), 16.0f));
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(21.315603, -157.858093), 16.0f));
     }
 
     @Override

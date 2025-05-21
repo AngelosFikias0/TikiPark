@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Προσθήκη Χρημάτων"
+            android:text="Add funds"
             android:textColor="#000000"
             android:textSize="34sp" />
 
@@ -46,7 +46,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="Ποσό:"
+                android:text="Amount:"
                 android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
                 android:textSize="26sp" />
@@ -66,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$"
+                android:text="-"
                 android:textSize="18sp"
                 android:textColor="#000000"
                 android:layout_marginStart="8dp"/>
@@ -83,7 +83,7 @@
         android:layout_marginBottom="50dp"
         android:background="@drawable/rounded_green_button"
         android:fontFamily="@font/ubuntu_mono"
-        android:text="Επιβεβαιωση"
+        android:text="Confirm"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -102,7 +102,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_green_button"
         android:fontFamily="@font/ubuntu_mono"
-        android:text="Ακυρωση"
+        android:text="Cancel"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"

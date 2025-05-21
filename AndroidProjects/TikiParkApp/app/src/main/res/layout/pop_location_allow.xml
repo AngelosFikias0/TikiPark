@@ -18,7 +18,7 @@
             android:layout_width="280dp"
             android:layout_height="105dp"
             android:fontFamily="@font/alexandria_medium"
-            android:text="Θέλετε να επιτρέψετε πρόσβαση της τοποθεσίας σας στην εφαρμογή;"
+            android:text="Do you want to authorise this app to know your location?"
             android:textAlignment="center"
             android:textColor="@color/light_white"
             android:textSize="20sp"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/alexandria_medium"
-                android:text="Οχι" />
+                android:text="No" />
 
             <TextView
                 android:id="@+id/layoutPadding"
@@ -63,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alexandria_medium"
-                android:text="Ναι" />
+                android:text="Yes" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

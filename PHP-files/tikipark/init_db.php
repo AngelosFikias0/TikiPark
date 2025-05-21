@@ -2,7 +2,6 @@
 header('Content-Type: application/json');
 
 // Database connection
-//These are placeholder, put actual values here:
 $host = 'localhost';
 $user = 'root';
 $pass = '123';
@@ -14,7 +13,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Create the database if not exists
+// Create database if not exists
 $conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
 $conn->select_db($dbname);
 
@@ -48,7 +47,7 @@ CREATE TABLE IF NOT EXISTS reservations (
     spot_id INT NOT NULL,
     start_time TIMESTAMP NULL,
     end_time TIMESTAMP NULL,
-    status ENUM('active', 'completed', 'cancelled') DEFAULT 'active',
+    status ENUM('active', 'completed') DEFAULT 'active',
     total_amount DECIMAL(10, 2) NOT NULL,
     payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
     FOREIGN KEY (user_id) REFERENCES users(user_id),
@@ -71,10 +70,30 @@ if ($checkAdmin->num_rows == 0) {
     $hashedPassword = password_hash('admin123', PASSWORD_DEFAULT);
     $email = 'admin@example.com';
     $role = 'admin';
-
     $conn->query("INSERT INTO users (username, password, role, email) VALUES ('$role', '$hashedPassword', '$role', '$email')");
 }
 
-echo "Database and tables initialized successfully.";
+// Insert predefined parking spots (Honolulu-based) if not already inserted
+$checkSpots = $conn->query("SELECT COUNT(*) as count FROM parking_spots");
+$row = $checkSpots->fetch_assoc();
+
+if ((int)$row['count'] === 0) {
+    $spots = [
+        ['Ala Moana Mall', 3.50, 21.291982, -157.843144],
+        ['Waikiki Beachfront', 4.00, 21.275760, -157.827507],
+        ['Downtown Honolulu', 3.00, 21.306944, -157.858333],
+        ['University of Hawaii Manoa', 2.50, 21.300855, -157.817347],
+        ['Diamond Head Trail Lot', 2.75, 21.261563, -157.805661],
+    ];
+
+    $stmt = $conn->prepare("INSERT INTO parking_spots (location, price_per_hour, latitude, longitude) VALUES (?, ?, ?, ?)");
+    foreach ($spots as $spot) {
+        $stmt->bind_param("sddd", $spot[0], $spot[1], $spot[2], $spot[3]);
+        $stmt->execute();
+    }
+    $stmt->close();
+}
+
+echo json_encode(["message" => "Database and tables initialized successfully. Default data inserted."]);
 $conn->close();
 ?>

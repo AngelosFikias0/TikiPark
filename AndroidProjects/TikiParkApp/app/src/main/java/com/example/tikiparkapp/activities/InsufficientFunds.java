@@ -1,5 +1,6 @@
 package com.example.tikiparkapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,8 +22,13 @@ public class InsufficientFunds extends AppCompatActivity {
         Button addMoneyBtn = findViewById(R.id.insufFunds_addMoney_Btn);
         Button declineBtn = findViewById(R.id.insufFunds_decline_Btn);
 
+        Intent intent = getIntent();
+        String cause = intent.getStringExtra("cause");
+        double amount = intent.getDoubleExtra("amount",0.0);
+        String username = intent.getStringExtra("username");
+
         addMoneyBtn.setOnClickListener(v -> {
-            // TODO Add money code.
+            startActivity(new Intent(InsufficientFunds.this, AddFunds.class).putExtra("amount",amount).putExtra("cause","Deposit").putExtra("username",username));
         });
 
         declineBtn.setOnClickListener(v -> {
