@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
 import com.example.tikiparkapp.db.LocalCache;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONObject;
 
@@ -30,14 +31,14 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_login_screen);
+        setContentView(R.layout.act_login);
 
         localCache = new LocalCache(this);
 
-        EditText usernameInputTxt = findViewById(R.id.login_usernameInput_Txt);
-        EditText passwordInputTxt = findViewById(R.id.login_passwordInput_Txt);
+        TextInputEditText usernameInputTxt = findViewById(R.id.login_usernameInput_Txt);
+        TextInputEditText passwordInputTxt = findViewById(R.id.login_passwordInput_Txt);
         Button okBtn = findViewById(R.id.login_confirm_btn);
-        Button cancelBtn = findViewById(R.id.login_decline_btn);
+        //Button cancelBtn = findViewById(R.id.login_decline_btn);
 
         okBtn.setOnClickListener(view -> {
             String username = usernameInputTxt.getText().toString();
@@ -45,10 +46,10 @@ public class Login extends AppCompatActivity {
             loginUser(username, password);
         });
 
-        cancelBtn.setOnClickListener(view -> {
-            startActivity(new Intent(Login.this, Entry.class));
-            finish();
-        });
+//        cancelBtn.setOnClickListener(view -> {
+//            startActivity(new Intent(Login.this, Entry.class));
+//            finish();
+//        });
     }
 
     public void loginUser(String username, String password) {

@@ -35,7 +35,7 @@
             android:layout_height="200dp"
             android:layout_marginBottom="32dp"
             android:contentDescription="TikiPark Logo"
-            android:src="@drawable/screen_1" />
+            android:src="@drawable/tikipark" />
 
 
         <LinearLayout
