@@ -115,10 +115,8 @@
 
     <Button
         android:id="@+id/insufFunds_addMoney_Btn"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="32dp"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="80dp"
         android:background="@drawable/rounded_green_button"
         app:backgroundTint="@null"
@@ -129,6 +127,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="1.0" />
 

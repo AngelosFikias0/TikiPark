@@ -2,6 +2,7 @@ package com.example.tikiparkapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,14 +33,16 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class FindParking extends AppCompatActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
     private MapView mMapView;
     private GoogleMap gMap;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
-
     ParkingSpotManager pManager = new ParkingSpotManager();
+    private String selectedSpot = "";
+    private boolean isMapReady = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +63,36 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         Button findParkingBtn = findViewById(R.id.findParking_confirm_Btn);
         Button cancelBtn = findViewById(R.id.findParking_cancel_Btn);
         Spinner parkingSpots = findViewById(R.id.findParking_parkingSpots_spinner);
-        parkingSpots.setOnItemSelectedListener(this);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
         fillSpots(parkingSpots);
 
+        parkingSpots.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedSpot = adapterView.getItemAtPosition(i).toString();
+                gMap.clear();
+                ParkingSpot selected = pManager.getParkingSpot(selectedSpot);
+                if (selected != null) {
+                    LatLng position = new LatLng(selected.getLat(), selected.getLon());
+                    gMap.moveCamera(CameraUpdateFactory.newLatLng(position));
+                    gMap.addMarker(new MarkerOptions().position(position).title("Parking Spot"));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Optional: handle case when nothing is selected
+            }
+        });
+
         findParkingBtn.setOnClickListener(v -> {
-            startActivity(new Intent(FindParking.this, ParkCompletion.class).putExtra("username",username));
+            startParking(username,selectedSpot);
+            updateUserStats();
+            startActivity(new Intent(FindParking.this, ParkCompletion.class).putExtra("username",username).putExtra("selectedSpot",selectedSpot));
             finish();
-            gMap.addMarker(new MarkerOptions().position(new LatLng(25, 25)).title("Marker"));
         });
 
         cancelBtn.setOnClickListener(v -> {
@@ -137,6 +159,115 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         }).start();
     }
 
+    private void startParking(String username, String selectedSpot) {
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            OutputStream os = null;
+            InputStream is = null;
+
+            try {
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/startParking.php");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+                // Prepare POST data
+                String postData = "username=" + URLEncoder.encode(username, "UTF-8") +
+                        "&location=" + URLEncoder.encode(selectedSpot, "UTF-8");
+
+                os = conn.getOutputStream();
+                os.write(postData.getBytes());
+                os.flush();
+
+                int responseCode = conn.getResponseCode();
+                is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(is));
+
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                String response = responseBuilder.toString();
+                Log.d("startParking", "Server response: " + response);
+
+                JSONObject jsonResponse = new JSONObject(response);
+                boolean success = jsonResponse.optBoolean("success", false);
+                String message = jsonResponse.optString("message", "No message returned");
+
+                if (!success) {
+                    Log.e("startParking", "Parking failed: " + message);
+                }
+
+            } catch (Exception e) {
+                Log.e("startParking", "Exception occurred", e);
+            } finally {
+                try { if (os != null) os.close(); } catch (IOException ignored) {}
+                try { if (reader != null) reader.close(); } catch (IOException ignored) {}
+                try { if (is != null) is.close(); } catch (IOException ignored) {}
+                if (conn != null) conn.disconnect();
+            }
+        }).start();
+    }
+
+    private void updateUserStats() {
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            OutputStream os = null;
+            InputStream is = null;
+
+            try {
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/updateUserStats.php");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+                conn.connect();
+
+                int responseCode = conn.getResponseCode();
+                is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(is));
+
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                String response = responseBuilder.toString();
+                Log.d("updateUserStats", "Server response: " + response);
+
+                JSONObject jsonResponse = new JSONObject(response);
+                String message = jsonResponse.optString("message", "");
+                String error = jsonResponse.optString("error", "");
+
+                if (!error.isEmpty()) {
+                    Log.e("updateUserStats", "Failed to update stats: " + error);
+                } else {
+                    Log.i("updateUserStats", "Success: " + message);
+                }
+
+            } catch (Exception e) {
+                Log.e("updateUserStats", "Exception occurred", e);
+            } finally {
+                try { if (os != null) os.close(); } catch (IOException ignored) {}
+                try { if (reader != null) reader.close(); } catch (IOException ignored) {}
+                try { if (is != null) is.close(); } catch (IOException ignored) {}
+                if (conn != null) conn.disconnect();
+            }
+        }).start();
+    }
+
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -171,9 +302,11 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap map) {
         gMap = map;
-        //gMap.addMarker(new MarkerOptions().position(new LatLng(39.362356, 22.946812)).title("Marker"));
+        isMapReady = true;
+        // Optional: initial camera setup
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(21.315603, -157.858093), 16.0f));
     }
+
 
     @Override
     protected void onPause() {

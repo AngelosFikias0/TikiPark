@@ -47,7 +47,6 @@ CREATE TABLE IF NOT EXISTS reservations (
     spot_id INT NOT NULL,
     start_time TIMESTAMP NULL,
     end_time TIMESTAMP NULL,
-    status ENUM('active', 'completed') DEFAULT 'active',
     total_amount DECIMAL(10, 2) NOT NULL,
     payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
     FOREIGN KEY (user_id) REFERENCES users(user_id),

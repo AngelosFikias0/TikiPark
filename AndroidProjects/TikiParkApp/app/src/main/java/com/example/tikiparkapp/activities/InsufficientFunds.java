@@ -20,7 +20,6 @@ public class InsufficientFunds extends AppCompatActivity {
         TextView currentAmount = findViewById(R.id.insufFunds_requiredAmount_Txt);
         TextView difference = findViewById(R.id.insufFunds_difference_Txt);
         Button addMoneyBtn = findViewById(R.id.insufFunds_addMoney_Btn);
-        Button declineBtn = findViewById(R.id.insufFunds_decline_Btn);
 
         Intent intent = getIntent();
         String cause = intent.getStringExtra("cause");
@@ -31,9 +30,5 @@ public class InsufficientFunds extends AppCompatActivity {
             startActivity(new Intent(InsufficientFunds.this, AddFunds.class).putExtra("amount",amount).putExtra("cause","Deposit").putExtra("username",username));
         });
 
-        declineBtn.setOnClickListener(v -> {
-            // TODO startActivity(); go to previous activity.
-            finish();
-        });
     }
 }
