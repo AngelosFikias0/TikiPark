@@ -3,7 +3,6 @@ package com.example.tikiparkapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,15 +34,22 @@ public class Login extends AppCompatActivity {
 
         localCache = new LocalCache(this);
 
-        TextInputEditText usernameInputTxt = findViewById(R.id.login_usernameInput_Txt);
-        TextInputEditText passwordInputTxt = findViewById(R.id.login_passwordInput_Txt);
+        TextInputEditText usernameInputTxt = findViewById(R.id.login_username_editTxt);
+        TextInputEditText passwordInputTxt = findViewById(R.id.login_password_editTxt);
         Button okBtn = findViewById(R.id.login_confirm_btn);
+        Button registerBtn = findViewById(R.id.login_register_btn);
         //Button cancelBtn = findViewById(R.id.login_decline_btn);
 
         okBtn.setOnClickListener(view -> {
             String username = usernameInputTxt.getText().toString();
             String password = passwordInputTxt.getText().toString();
             loginUser(username, password);
+        });
+
+        registerBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Login.this, Register.class);
+            startActivity(intent);
+            finish();
         });
 
 //        cancelBtn.setOnClickListener(view -> {

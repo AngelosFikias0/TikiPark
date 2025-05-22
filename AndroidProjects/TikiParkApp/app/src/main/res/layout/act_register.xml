@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Login"
+    tools:context=".activities.Register"
     android:background="#A3FDE2A1"
     android:orientation="vertical">
 
@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome back!"
+        android:text="Welcome to TikiPark!"
         android:fontFamily="@font/ubuntu_mono"
         android:textStyle="bold"
         android:textSize="45sp"
@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login: "
+        android:text="Register: "
         android:fontFamily="@font/ubuntu_mono"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -54,7 +54,22 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_username_editTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:id="@+id/register_email_editTxt">
+
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/register_username_editTxt"
                 android:hint="Username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -70,7 +85,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/login_password_editTxt"
+                android:id="@+id/register_password_editTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password">
@@ -80,48 +95,18 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_confirm_btn"
+            android:id="@+id/register_confirm_btn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@null"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="35dp"
             android:layout_gravity="center"
-            android:text="Login"
+            android:text="Register"
             android:textStyle="bold"
             android:fontFamily="@font/ubuntu_mono"
             android:textSize="30sp">
 
         </Button>
-
-        <LinearLayout
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:text="New user?"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/ubuntu_mono">
-
-            </TextView>
-
-            <Button
-                android:id="@+id/login_register_btn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:text="Register"
-                android:fontFamily="@font/ubuntu_mono"
-                android:textStyle="bold"
-                android:textSize="30sp">
-
-            </Button>
-
-        </LinearLayout>
 
     </LinearLayout>
 
