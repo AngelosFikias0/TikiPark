@@ -59,7 +59,7 @@
                     android:textSize="22sp" />
 
                 <EditText
-                    android:id="@+id/login_usernameInput_Txt"
+                    android:id="@+id/login_username_editTxt"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="2"
@@ -87,7 +87,7 @@
                     android:textSize="22sp" />
 
                 <EditText
-                    android:id="@+id/login_passwordInput_Txt"
+                    android:id="@+id/login_password_editTxt"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="2"

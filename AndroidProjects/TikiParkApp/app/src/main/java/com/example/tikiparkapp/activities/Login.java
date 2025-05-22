@@ -1,11 +1,8 @@
 package com.example.tikiparkapp.activities;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,38 +34,11 @@ public class Login extends AppCompatActivity {
 
         localCache = new LocalCache(this);
 
-        TextInputEditText usernameInputTxt = findViewById(R.id.login_usernameInput_Txt);
-        TextInputEditText passwordInputTxt = findViewById(R.id.login_passwordInput_Txt);
+        TextInputEditText usernameInputTxt = findViewById(R.id.login_username_editTxt);
+        TextInputEditText passwordInputTxt = findViewById(R.id.login_password_editTxt);
         Button okBtn = findViewById(R.id.login_confirm_btn);
-        Button register = findViewById(R.id.register_login);
-        Button forgotPass = findViewById(R.id.forgot_password_btn);
-
-        forgotPass.setOnClickListener(view -> {
-            String username = usernameInputTxt.getText().toString().trim();
-
-            // Optional: validate username before showing popup
-            if (username.isEmpty()) {
-                Toast.makeText(this, "Please enter your username first.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Inflate custom dialog view
-            View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
-
-            // Build dialog
-            final Dialog dialog = new Dialog(this);
-            dialog.setContentView(dialogView);
-            dialog.setCancelable(true);
-
-            // Find OK button in dialog and set dismiss
-            Button popOk = dialogView.findViewById(R.id.popupOkBtn);
-            popOk.setOnClickListener(v -> dialog.dismiss());
-
-            // Show dialog
-            dialog.show();
-
-            // Here you can trigger your password reset logic (e.g. backend call) using 'username'
-        });
+        Button registerBtn = findViewById(R.id.login_register_btn);
+        //Button cancelBtn = findViewById(R.id.login_decline_btn);
 
         okBtn.setOnClickListener(view -> {
             String username = usernameInputTxt.getText().toString();
@@ -76,10 +46,16 @@ public class Login extends AppCompatActivity {
             loginUser(username, password);
         });
 
-        register.setOnClickListener(view -> {
+        registerBtn.setOnClickListener(v -> {
             Intent intent = new Intent(Login.this, Register.class);
             startActivity(intent);
+            finish();
         });
+
+//        cancelBtn.setOnClickListener(view -> {
+//            startActivity(new Intent(Login.this, Entry.class));
+//            finish();
+//        });
     }
 
     public void loginUser(String username, String password) {
