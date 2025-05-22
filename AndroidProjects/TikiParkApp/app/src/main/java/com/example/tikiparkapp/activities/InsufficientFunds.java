@@ -26,8 +26,16 @@ public class InsufficientFunds extends AppCompatActivity {
         double amount = intent.getDoubleExtra("amount",0.0);
         String username = intent.getStringExtra("username");
 
+        if(cause.equalsIgnoreCase("Withdraw")){
+            addMoneyBtn.setText("Okey");
+        }
+
         addMoneyBtn.setOnClickListener(v -> {
-            startActivity(new Intent(InsufficientFunds.this, AddFunds.class).putExtra("amount",amount).putExtra("cause","Deposit").putExtra("username",username));
+            if(cause.equalsIgnoreCase("Withdraw")){
+                startActivity(new Intent(InsufficientFunds.this, UserWelcome.class));
+            }else{
+                startActivity(new Intent(InsufficientFunds.this, AddFunds.class).putExtra("amount",amount).putExtra("cause","Deposit").putExtra("username",username));
+            }
         });
 
     }

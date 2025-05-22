@@ -12,9 +12,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/tikipark"
-        android:layout_marginLeft="130dp">
-
-    </ImageView>
+        android:layout_marginLeft="130dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -23,9 +21,7 @@
         android:fontFamily="@font/ubuntu_mono"
         android:textStyle="bold"
         android:textSize="45sp"
-        android:layout_marginLeft="20dp">
-
-    </TextView>
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,9 +31,7 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp">
-
-    </TextView>
+        android:layout_marginLeft="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,9 +51,7 @@
                 android:id="@+id/login_usernameInput_Txt"
                 android:hint="Username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,11 +65,23 @@
                 android:id="@+id/login_passwordInput_Txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:hint="Password" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Forgot Password button -->
+        <Button
+            android:id="@+id/forgot_password_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textStyle="bold"
+            android:fontFamily="@font/ubuntu_mono"
+            android:textSize="18sp"
+            android:background="@color/button_background"
+            android:textColor="@color/button_text"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp" />
 
         <Button
             android:id="@+id/login_confirm_btn"
@@ -89,9 +93,7 @@
             android:text="Login"
             android:textStyle="bold"
             android:fontFamily="@font/ubuntu_mono"
-            android:textSize="30sp">
-
-        </Button>
+            android:textSize="30sp" />
 
         <LinearLayout
             android:layout_marginTop="50dp"
@@ -105,24 +107,20 @@
                 android:text="New user?"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/ubuntu_mono">
-
-            </TextView>
+                android:fontFamily="@font/ubuntu_mono" />
 
             <Button
+                android:id="@+id/register_login"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:text="Register"
                 android:fontFamily="@font/ubuntu_mono"
                 android:textStyle="bold"
-                android:textSize="30sp">
-
-            </Button>
+                android:textSize="30sp" />
 
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

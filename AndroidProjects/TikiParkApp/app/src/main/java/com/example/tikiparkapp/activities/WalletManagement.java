@@ -43,7 +43,7 @@ public class WalletManagement extends AppCompatActivity {
         withdrawBtn.setOnClickListener(v -> {
             if(!amountTxt.getText().toString().isEmpty()){
                 double amount = Double.parseDouble(amountTxt.getText().toString());
-                startActivity(new Intent(WalletManagement.this, AddFunds.class).putExtra("amount",amount).putExtra("cause","Withdraw").putExtra("username",username));
+                startActivity(new Intent(WalletManagement.this, PaymentDone.class).putExtra("amount",amount).putExtra("cause","Withdraw").putExtra("username",username));
                 finish();
             }else{
                 Toast.makeText(WalletManagement.this, "Please Put the amount first!", Toast.LENGTH_SHORT).show();
