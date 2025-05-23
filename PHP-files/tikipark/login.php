@@ -2,17 +2,8 @@
 header('Content-Type: application/json');
 
 // Database connection
-//These are placeholder, put actual values here:
-$host = 'localhost';
-$user = 'root';
-$pass = '123';
-$dbname = 'tikipark';
 
-$conn = new mysqli($host, $user, $pass, $dbname);
-if ($conn->connect_error) {
-    http_response_code(500);
-    die(json_encode(["success" => false, "message" => "Database connection failed."]));
-}
+require_once 'config.php'; 
 
 // Get and sanitize POST data
 $username = trim($_POST['username'] ?? '');

@@ -55,7 +55,7 @@ public class UserWelcome extends AppCompatActivity {
             // Handle case where username or role is not passed correctly
             //Toast.makeText(UserWelcome.this, "Session expired or invalid", Toast.LENGTH_LONG).show();
             // Redirect to MainActivity if session data is invalid
-            Intent redirectIntent = new Intent(UserWelcome.this, MainActivity.class);
+            Intent redirectIntent = new Intent(UserWelcome.this, Entry.class);
             startActivity(redirectIntent);
             finish();
         }

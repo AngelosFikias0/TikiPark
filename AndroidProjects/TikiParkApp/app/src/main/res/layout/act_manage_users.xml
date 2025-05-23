@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="1dp" />
+        android:layout_marginTop="8dp" />
 
     <!-- ListView for users -->
     <ListView
@@ -32,16 +32,16 @@
         app:layout_constraintTop_toBottomOf="@id/manage_users_title"
         app:layout_constraintBottom_toTopOf="@id/edit_user_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,UnknownId" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Edit Container (Role Only) -->
+    <!-- Edit Container -->
     <LinearLayout
         android:id="@+id/edit_user_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/listView_users"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btn_back_user">
@@ -50,14 +50,12 @@
             android:id="@+id/edit_role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/black"
             android:hint="Role (user / admin)"
             android:inputType="text"
             android:minHeight="48dp"
+            android:backgroundTint="@color/black"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null"
-            android:autofillHints="" />
+            android:textCursorDrawable="@null" />
 
         <Button
             android:id="@+id/btn_update_user"
@@ -66,7 +64,8 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/black"
             android:text="Update Role"
-            android:textColor="@android:color/white" />
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/ubuntu_mono" />
 
         <Button
             android:id="@+id/btn_delete_user"
@@ -75,7 +74,8 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_red_dark"
             android:text="Delete User"
-            android:textColor="@android:color/white" />
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/ubuntu_mono" />
     </LinearLayout>
 
     <!-- Back Button -->
@@ -84,12 +84,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Back"
+        android:backgroundTint="@color/button_background"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/ubuntu_mono"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_green_button"
-        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

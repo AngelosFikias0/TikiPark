@@ -66,7 +66,7 @@ public class AdminWelcome extends AppCompatActivity {
             // Handle case where the session is not valid (username or role is not passed)
             Toast.makeText(AdminWelcome.this, "Session expired or invalid", Toast.LENGTH_LONG).show();
             // Optionally, redirect to the MainActivity (login screen)
-            Intent redirectIntent = new Intent(AdminWelcome.this, MainActivity.class);
+            Intent redirectIntent = new Intent(AdminWelcome.this, Entry.class);
             startActivity(redirectIntent);
             finish(); // Finish current activity to prevent returning to AdminWelcome
         }

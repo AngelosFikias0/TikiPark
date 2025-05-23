@@ -17,7 +17,7 @@
             android:id="@+id/popLocationAllowTxt"
             android:layout_width="280dp"
             android:layout_height="105dp"
-            android:fontFamily="@font/alexandria_medium"
+            android:fontFamily="@font/ubuntu_mono"
             android:text="Do you want to authorise this app to know your location?"
             android:textAlignment="center"
             android:textColor="@color/light_white"
@@ -41,12 +41,13 @@
 
             <Button
                 android:id="@+id/popDeclineBtn"
-                android:layout_width="0dp"
+                android:background="@color/button_background"
+                android:textColor="#FFFFFF"
                 app:backgroundTint="@null"
-                android:background="@drawable/rounded_green_button"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/alexandria_medium"
+                android:fontFamily="@font/ubuntu_mono"
                 android:text="No" />
 
             <TextView
@@ -57,12 +58,13 @@
 
             <Button
                 android:layout_weight="1"
-                android:id="@+id/popAcceptBtn"
+                android:background="@color/button_background"
+                android:textColor="#FFFFFF"
                 app:backgroundTint="@null"
-                android:background="@drawable/rounded_green_button"
+                android:id="@+id/popAcceptBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/alexandria_medium"
+                android:fontFamily="@font/ubuntu_mono"
                 android:text="Yes" />
         </LinearLayout>
 

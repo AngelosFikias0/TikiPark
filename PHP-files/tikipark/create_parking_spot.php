@@ -2,20 +2,7 @@
 header('Content-Type: application/json');
 
 // Database connection
-//These are placeholder, put actual values here:
-$host = 'localhost';
-$user = 'root';
-$pass = '123';
-$dbname = 'tikipark';
-
-// Establish connection
-$conn = new mysqli($host, $user, $pass);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Select the database
-$conn->select_db($dbname);
+require_once 'config.php'; 
 
 // Check if POST data is received
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

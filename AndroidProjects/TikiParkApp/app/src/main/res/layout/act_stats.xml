@@ -7,79 +7,79 @@
     android:background="@color/primary_background"
     tools:context=".activities.Stats">
 
-    <!-- Title Text -->
+    <!-- Title -->
     <TextView
         android:id="@+id/stats_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
         android:text="Stats Overview"
         android:fontFamily="@font/ubuntu_mono"
         android:textColor="@android:color/black"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Back Button (top-left) -->
+    <Button
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
+        android:id="@+id/stats_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/button_background"
+        android:text="← Back"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/stats_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp" />
 
     <!-- Total Amount Spent -->
     <TextView
         android:id="@+id/stats_amountSpent_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:fontFamily="@font/ubuntu_mono"
-        android:text="Total Amount Spent: "
+        android:text="Total Amount Spent:"
         android:textColor="@android:color/black"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stats_back_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stats_title" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
 
     <!-- Total Reservations -->
     <TextView
         android:id="@+id/stats_reservations_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
         android:fontFamily="@font/ubuntu_mono"
-        android:text="Total Reservations: "
+        android:text="Total Reservations:"
         android:textColor="@android:color/black"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintTop_toBottomOf="@id/stats_amountSpent_txt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stats_amountSpent_txt" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"/>
 
     <!-- Total Parking Time -->
     <TextView
         android:id="@+id/stats_parkingTime_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="Total Parking Time: "
+        android:fontFamily="@font/ubuntu_mono"
+        android:text="Total Parking Time:"
         android:textColor="@android:color/black"
-        android:fontFamily="@font/ubuntu_mono"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintTop_toBottomOf="@id/stats_reservations_txt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stats_reservations_txt" />
-
-    <!-- Back Button -->
-    <Button
-        android:id="@+id/stats_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:layout_marginEnd="160dp"
-        android:fontFamily="@font/ubuntu_mono"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Back"
-        android:textColor="#FFB74D"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stats_parkingTime_txt" />
+        android:layout_marginTop="24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

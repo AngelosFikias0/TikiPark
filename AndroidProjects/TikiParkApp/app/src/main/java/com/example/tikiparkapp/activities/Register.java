@@ -33,7 +33,7 @@ public class Register extends AppCompatActivity {
         EditText usernameInput = findViewById(R.id.register_username_editTxt);
         EditText passwordInput = findViewById(R.id.register_password_editTxt);
         Button okBtn = findViewById(R.id.register_confirm_btn);
-//        Button cancelBtn = findViewById(R.id.register_decline_btn);
+        Button cancelBtn = findViewById(R.id.register_back_btn);
 
         okBtn.setOnClickListener(view -> {
             String email = emailInput.getText().toString();
@@ -42,9 +42,9 @@ public class Register extends AppCompatActivity {
             registerUser(email, username, password);
         });
 
-//        cancelBtn.setOnClickListener(view -> {
-//            startActivity(new Intent(Register.this, Entry.class));
-//        });
+        cancelBtn.setOnClickListener(view -> {
+            startActivity(new Intent(Register.this, Entry.class));
+        });
 
     }
 

@@ -43,6 +43,7 @@ public class WalletManagement extends AppCompatActivity {
         withdrawBtn.setOnClickListener(v -> {
             if(!amountTxt.getText().toString().isEmpty()){
                 double amount = Double.parseDouble(amountTxt.getText().toString());
+                //Insufficient
                 startActivity(new Intent(WalletManagement.this, PaymentDone.class).putExtra("amount",amount).putExtra("cause","Withdraw").putExtra("username",username));
                 finish();
             }else{

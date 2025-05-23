@@ -8,17 +8,22 @@
     tools:context=".activities.AdminWelcome">
 
     <!-- Exit Button -->
+
+    <!-- User Icon -->
+
     <Button
         android:id="@+id/exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/exit"
-        android:textColor="#FFB74D"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="312dp"
+        android:background="@color/button_background"
+        android:text="← Back"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- User Icon -->
     <ImageView
         android:id="@+id/user_icon"
         android:layout_width="165dp"
@@ -128,10 +133,12 @@
     <!-- Create Parking Spots Button -->
     <Button
         android:id="@+id/create_parking_spots_button"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Create Parking Spots"
-        android:textColor="#FFB74D"
         app:layout_constraintTop_toBottomOf="@id/statistics_box"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,10 +149,12 @@
     <!-- View All Button -->
     <Button
         android:id="@+id/view_all_button"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="View All"
-        android:textColor="#FFB74D"
         app:layout_constraintTop_toBottomOf="@id/create_parking_spots_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,10 +165,12 @@
     <!-- Manage Users Button -->
     <Button
         android:id="@+id/manage_users_button"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Manage Users"
-        android:textColor="#FFB74D"
         app:layout_constraintTop_toBottomOf="@id/view_all_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -27,6 +27,7 @@ public class ParkCompletion extends AppCompatActivity {
 
         pay.setOnClickListener(view -> {
             startActivity(new Intent(ParkCompletion.this, InsufficientFunds.class).putExtra("amount",amount).putExtra("cause","Pay").putExtra("username",username));
+            //startActivity(new Intent(ParkCompletion.this, PaymentDone.class);
             finish();
         });
     }

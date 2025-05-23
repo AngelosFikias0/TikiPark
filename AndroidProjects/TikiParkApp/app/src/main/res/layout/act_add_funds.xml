@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#A3FDE2A1"
     tools:context=".activities.AddFunds"
-    android:background="#A3FDE2A1">
+    android:padding="16dp">
 
+    <!-- Vertical content layout -->
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="150dp"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/addFunds_Confirm_Btn">
 
         <!-- Title -->
         <TextView
@@ -25,11 +28,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Add funds"
+            android:text="Add Funds"
             android:textColor="#000000"
             android:textSize="34sp" />
 
-        <!-- Image -->
+        <!-- Logo -->
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -37,25 +40,28 @@
             android:contentDescription="TikiPark Logo"
             android:src="@drawable/tikipark" />
 
+        <!-- Amount input row -->
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="Amount:"
                 android:fontFamily="@font/ubuntu_mono"
+                android:text="Amount:"
                 android:textColor="#000000"
-                android:textSize="26sp" />
+                android:textSize="26sp"
+                android:layout_marginEnd="12dp" />
 
             <EditText
                 android:id="@+id/addFunds_Amount_EdTxt"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@android:drawable/edit_text"
                 android:inputType="numberDecimal"
                 android:hint="0.00"
@@ -63,55 +69,40 @@
                 android:padding="8dp"
                 android:textAlignment="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:layout_marginStart="8dp"/>
         </LinearLayout>
 
     </LinearLayout>
 
+    <!-- Confirm Button -->
     <Button
         android:id="@+id/addFunds_Confirm_Btn"
-        android:layout_width="170dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="50dp"
-        android:background="@drawable/rounded_green_button"
-        android:fontFamily="@font/ubuntu_mono"
         android:text="Confirm"
-        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/button_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toStartOf="@+id/insufFunds_decline_Btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp" />
 
+    <!-- Cancel Button -->
     <Button
         android:id="@+id/insufFunds_decline_Btn"
-        android:layout_width="170dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/rounded_green_button"
-        android:fontFamily="@font/ubuntu_mono"
         android:text="Cancel"
-        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/addFunds_Confirm_Btn"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/button_background"
+        app:layout_constraintStart_toEndOf="@id/addFunds_Confirm_Btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/addFunds_Confirm_Btn"
-        app:layout_constraintTop_toTopOf="@+id/addFunds_Confirm_Btn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

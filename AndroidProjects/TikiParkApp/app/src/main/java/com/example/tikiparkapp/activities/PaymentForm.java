@@ -18,6 +18,11 @@ public class PaymentForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_payment_form);
 
+        Intent intent = getIntent();
+        String cause = intent.getStringExtra("cause");
+        double amount = intent.getDoubleExtra("amount",0.0);
+        String username = intent.getStringExtra("username");
+
         TextView cost = findViewById(R.id.payment_cost_txt);
         EditText cardNumber = findViewById(R.id.payment_cardNum_editTxt);
         EditText cardholderName = findViewById(R.id.payment_cardholderName_editTxt);
@@ -25,9 +30,6 @@ public class PaymentForm extends AppCompatActivity {
         EditText expirationYear = findViewById(R.id.payment_expirationYear_editTxt);
         Button confirmBtn = findViewById(R.id.payment_confirm_btn);
         Button declineBtn = findViewById(R.id.payment_decline_btn);
-        Intent intent = getIntent();
-        double amount = intent.getDoubleExtra("amount",0.0);
-        String username = intent.getStringExtra("username");
 
         confirmBtn.setOnClickListener(v -> {
             String cardNumberStr = cardNumber.getText().toString().trim();
@@ -42,7 +44,7 @@ public class PaymentForm extends AppCompatActivity {
 
                 startActivity(new Intent(PaymentForm.this, AddFunds.class)
                         .putExtra("amount", amount)
-                        .putExtra("cause", "Deposit")
+                        .putExtra("cause", cause)
                         .putExtra("username", username));
                 finish();
 

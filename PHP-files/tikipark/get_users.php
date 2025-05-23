@@ -2,17 +2,7 @@
 header('Content-Type: application/json');
 
 // Database connection
-//These are placeholder, put actual values here:
-$host = 'localhost';
-$user = 'root';
-$pass = '123';
-$dbname = 'tikipark';
-
-$conn = new mysqli($host, $user, $pass, $dbname);
-
-if ($conn->connect_error) {
-    die(json_encode(["success" => false, "message" => "Connection failed: " . $conn->connect_error]));
-}
+require_once 'config.php'; 
 
 $sql = "SELECT username, role FROM users";
 $result = $conn->query($sql);

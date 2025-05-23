@@ -93,12 +93,13 @@
 
     <!-- Create Button -->
     <Button
-        android:background="@drawable/rounded_green_button"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:id="@+id/btn_create_spot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Create"
-        android:textColor="#FFB74D"
         app:layout_constraintTop_toBottomOf="@id/edit_longitude"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,12 +107,13 @@
 
     <!-- Back Button -->
     <Button
-        android:background="@drawable/rounded_green_button"
         android:id="@+id/btn_back"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Back"
-        android:textColor="#FFB74D"
         app:layout_constraintTop_toBottomOf="@id/btn_create_spot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

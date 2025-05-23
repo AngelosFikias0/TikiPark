@@ -25,6 +25,7 @@ public class LocalCache extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //Caches user session
     public void cacheUserSession(String username, String role) {
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             db.beginTransaction();

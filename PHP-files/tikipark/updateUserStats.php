@@ -2,16 +2,7 @@
 header('Content-Type: application/json');
 
 // Database connection
-$host = 'localhost';
-$user = 'root';
-$pass = '123';
-$dbname = 'tikipark';
-
-$conn = new mysqli($host, $user, $pass, $dbname);
-if ($conn->connect_error) {
-    echo json_encode(["error" => "Connection failed"]);
-    exit;
-}
+require_once 'config.php'; 
 
 // Function to update user statistics based on reservations
 function updateUserStatistics($conn) {

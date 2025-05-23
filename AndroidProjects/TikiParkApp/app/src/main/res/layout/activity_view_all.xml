@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/spot_list"
@@ -14,28 +15,53 @@
         android:id="@+id/edit_spot_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
         android:text="Edit Spot"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="8dp"/>
 
-    <!-- Scrollable list of spots -->
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/btn_back"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/button_background"
+        android:text="Back"
+        app:layout_constraintTop_toBottomOf="@id/edit_spot_title"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- ListView -->
+    <ListView
+        android:id="@+id/list_spots"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:choiceMode="singleChoice"
+        app:layout_constraintTop_toBottomOf="@id/btn_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit_container"
+        app:layout_constraintVertical_bias="0.0" />
 
     <!-- Edit Container -->
-
     <LinearLayout
         android:id="@+id/edit_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_back"
+        app:layout_constraintTop_toBottomOf="@id/list_spots"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
             android:id="@+id/edit_status"
@@ -47,8 +73,7 @@
             android:inputType="text"
             android:minHeight="48dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null"
-            android:autofillHints="" />
+            android:textCursorDrawable="@null" />
 
         <EditText
             android:id="@+id/edit_price"
@@ -60,51 +85,28 @@
             android:inputType="numberDecimal"
             android:minHeight="48dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null"
-            android:autofillHints="" />
+            android:textCursorDrawable="@null" />
 
         <Button
             android:id="@+id/btn_update"
+            android:background="@color/button_background"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/black"
-            android:text="Update Spot"
-            android:textColor="@android:color/white" />
+            android:text="Update Spot"/>
 
         <Button
             android:id="@+id/btn_delete"
+            android:background="@color/button_background"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_red_dark"
-            android:text="Delete Spot"
-            android:textColor="@android:color/white" />
+            android:text="Delete Spot"/>
     </LinearLayout>
-
-    <!-- Back Button -->
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/button_background"
-        android:text="Back"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ListView
-        android:id="@+id/list_spots"
-        android:layout_width="372dp"
-        android:layout_height="250dp"
-        android:choiceMode="singleChoice"
-        app:layout_constraintBottom_toTopOf="@+id/edit_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_spot_title"
-        app:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

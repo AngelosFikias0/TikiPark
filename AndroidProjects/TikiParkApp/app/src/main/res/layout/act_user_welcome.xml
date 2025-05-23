@@ -12,15 +12,15 @@
 
     <Button
         android:id="@+id/userWeclome_findParking_btn"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
-        android:background="@drawable/rounded_green_button"
         android:text="Search for spot"
-        android:textColor="#FFFFFF"
         android:fontFamily="@font/ubuntu_mono"
-        app:backgroundTint="@null"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/imageView"

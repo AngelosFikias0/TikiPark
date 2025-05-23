@@ -8,25 +8,26 @@
     tools:context=".activities.WalletManagement">
 
     <!-- Back Button -->
-    <Button
-        android:id="@+id/wallet_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu_mono"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:backgroundTint="@null"
-        android:background="@drawable/rounded_green_button"
-        android:text="@string/back"
-        android:textColor="#FFB74D"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp" />
 
     <!-- Manage Wallet Title -->
 
     <!-- EditText for Entering Money Amount -->
+
+    <Button
+        android:id="@+id/wallet_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="296dp"
+        android:background="@color/button_background"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textColor="#FFFFFF"
+        android:text="← Back"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/manage_wallet_title"
@@ -63,15 +64,15 @@
     <!-- Deposit Button -->
     <Button
         android:id="@+id/wallet_deposit_btn"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu_mono"
         android:text="Deposit"
-        android:textColor="#FFB74D"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:backgroundTint="@null"
-        android:background="@drawable/rounded_green_button"
         app:layout_constraintTop_toBottomOf="@id/wallet_amount_editTxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,15 +83,15 @@
     <!-- Withdraw Button -->
     <Button
         android:id="@+id/wallet_withdraw_btn"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Withdraw"
         android:fontFamily="@font/ubuntu_mono"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:backgroundTint="@null"
-        android:background="@drawable/rounded_green_button"
-        android:textColor="#FFB74D"
         app:layout_constraintTop_toBottomOf="@id/wallet_deposit_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

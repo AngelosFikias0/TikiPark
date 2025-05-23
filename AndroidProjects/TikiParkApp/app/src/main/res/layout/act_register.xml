@@ -8,26 +8,40 @@
     android:background="#A3FDE2A1"
     android:orientation="vertical">
 
+    <!-- Back button -->
+    <Button
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
+        android:id="@+id/register_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="← Back"
+        android:backgroundTint="@null"
+        android:textStyle="bold"
+        android:fontFamily="@font/ubuntu_mono"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:layout_gravity="start" />
+
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/tikipark"
-        android:layout_marginLeft="130dp">
-
-    </ImageView>
+        android:layout_marginLeft="130dp" />
 
     <TextView
+        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to TikiPark!"
         android:fontFamily="@font/ubuntu_mono"
         android:textStyle="bold"
         android:textSize="45sp"
-        android:layout_marginLeft="20dp">
-
-    </TextView>
+        android:layout_marginLeft="20dp" />
 
     <TextView
+        android:textColor="#000000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register: "
@@ -35,9 +49,7 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp">
-
-    </TextView>
+        android:layout_marginLeft="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,9 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:id="@+id/register_email_editTxt">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:id="@+id/register_email_editTxt" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,9 +82,7 @@
                 android:id="@+id/register_username_editTxt"
                 android:hint="Username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,27 +96,24 @@
                 android:id="@+id/register_password_editTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password">
-
-            </com.google.android.material.textfield.TextInputEditText>
+                android:hint="Password" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/register_confirm_btn"
+            android:background="@color/button_background"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="@null"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@null"
             android:layout_marginTop="35dp"
             android:layout_gravity="center"
             android:text="Register"
             android:textStyle="bold"
             android:fontFamily="@font/ubuntu_mono"
-            android:textSize="30sp">
-
-        </Button>
+            android:textSize="30sp" />
 
     </LinearLayout>
-
 
 </LinearLayout>

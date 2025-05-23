@@ -1,17 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
-$host = 'localhost';
-$user = 'root';
-$pass = '123';
-$dbname = 'tikipark';
-
-$conn = new mysqli($host, $user, $pass, $dbname);
-if ($conn->connect_error) {
-    http_response_code(500);
-    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
-    exit;
-}
+//DB Connection
+require_once 'config.php'; 
 
 $result = $conn->query("SELECT location, latitude, longitude FROM parking_spots");
 

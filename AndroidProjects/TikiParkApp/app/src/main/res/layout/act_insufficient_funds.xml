@@ -53,6 +53,7 @@
                 android:textColor="#000000"
                 android:textSize="24sp" />
 
+
             <TextView
                 android:id="@+id/insufFunds_requiredAmount_Txt"
                 android:layout_width="50dp"
@@ -115,13 +116,13 @@
 
     <Button
         android:id="@+id/insufFunds_addMoney_Btn"
+        android:background="@color/button_background"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:layout_marginBottom="80dp"
-        android:background="@drawable/rounded_green_button"
-        app:backgroundTint="@null"
         android:text="Add cash"
-        android:textColor="#FFFFFF"
         android:fontFamily="@font/ubuntu_mono"
         android:textSize="16sp"
         android:textStyle="bold"

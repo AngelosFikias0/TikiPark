@@ -2,19 +2,7 @@
 header('Content-Type: application/json');
 
 // Database connection
-//These are placeholder, put actual values here:
-$host = 'localhost';
-$user = 'root';
-$pass = '123';
-$dbname = 'tikipark';
-
-// Create connection
-$conn = new mysqli($host, $user, $pass, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die(json_encode(["success" => false, "message" => "Connection failed: " . $conn->connect_error]));
-}
+require_once 'config.php'; 
 
 // Get data from POST
 $spot_id = $_POST['spot_id'];

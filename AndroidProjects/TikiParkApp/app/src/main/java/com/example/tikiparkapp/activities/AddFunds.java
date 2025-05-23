@@ -28,28 +28,20 @@ public class AddFunds extends AppCompatActivity {
         String username = intent.getStringExtra("username");
 
         declineBtn.setOnClickListener(v -> {
-            if(cause.equalsIgnoreCase("Withdraw")||cause.equalsIgnoreCase("Deposit")){
+            if(cause.equalsIgnoreCase("Deposit")){
                 startActivity(new Intent(AddFunds.this, UserWelcome.class));
                 finish();
             }else if(cause.equalsIgnoreCase("Pay")){
                 Toast.makeText(AddFunds.this, "You have to complete your payment first!", Toast.LENGTH_SHORT).show();
             }
-
         });
 
         confirmBtn.setOnClickListener(v -> {
-            if(cause.equalsIgnoreCase("Withdraw")){
-                if(check(username)){
-                    withdraw(username);
-                }else{
-                    startActivity(new Intent(AddFunds.this, InsufficientFunds.class));
-                    finish();
-                }
-            }else if(cause.equalsIgnoreCase("Deposit")){
+            if(cause.equalsIgnoreCase("Deposit")){
                 deposit(amount,username);
             }else if(cause.equalsIgnoreCase("Pay")){
                 if(check(username)){
-                    withdraw(username);
+                    pay(username);
                 }
             }
         });
@@ -61,7 +53,7 @@ public class AddFunds extends AppCompatActivity {
         return false;
     }
 
-    public void withdraw(String username){
+    public void pay(String username){
 
         startActivity(new Intent(AddFunds.this, PaymentDone.class));
     }
