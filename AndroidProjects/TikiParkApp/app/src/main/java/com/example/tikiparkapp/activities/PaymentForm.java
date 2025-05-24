@@ -49,12 +49,16 @@ public class PaymentForm extends AppCompatActivity {
                 finish();
 
             } else {
-                Toast.makeText(PaymentForm.this, "Please fill in all payment fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PaymentForm.this, "Please fill in all payment fields!", Toast.LENGTH_SHORT).show();
             }
         });
 
         declineBtn.setOnClickListener(v -> {
-            startActivity(new Intent(PaymentForm.this, UserWelcome.class));
+            if(!cause.equalsIgnoreCase("Pay")){
+                startActivity(new Intent(PaymentForm.this, UserWelcome.class));
+            }else{
+                Toast.makeText(PaymentForm.this, "You have to complete the payment.", Toast.LENGTH_SHORT).show();
+            }
             finish();
         });
 

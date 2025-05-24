@@ -37,6 +37,7 @@ public class AddFunds extends AppCompatActivity {
         });
 
         confirmBtn.setOnClickListener(v -> {
+            //Update users
             if(cause.equalsIgnoreCase("Deposit")){
                 deposit(amount,username);
             }else if(cause.equalsIgnoreCase("Pay")){

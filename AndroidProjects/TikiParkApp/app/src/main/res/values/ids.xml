@@ -6,4 +6,5 @@
     <item name="edit_status" type="id" />
     <item name="edit_price" type="id" />
     <item name="btn_update" type="id" />
+    <item name="findParking_location_txt" type="id" />
 </resources>
