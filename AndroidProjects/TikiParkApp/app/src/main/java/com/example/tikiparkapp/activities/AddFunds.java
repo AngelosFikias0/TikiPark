@@ -41,7 +41,7 @@ public class AddFunds extends AppCompatActivity {
             if(cause.equalsIgnoreCase("Deposit")){
                 deposit(amount,username);
             }else if(cause.equalsIgnoreCase("Pay")){
-                if(check(username)){
+                if(!check(username)){
                     pay(username);
                 }
             }

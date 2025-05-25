@@ -68,6 +68,8 @@ public class Login extends AppCompatActivity {
 
             // Show dialog
             dialog.show();
+
+            //sendEmail();
         });
 
     }

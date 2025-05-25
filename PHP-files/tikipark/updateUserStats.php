@@ -1,34 +1,56 @@
 <?php
 header('Content-Type: application/json');
+require_once 'config.php';
 
-// Database connection
-require_once 'config.php'; 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(["error" => "Only POST requests allowed"]);
+    exit;
+}
 
-// Function to update user statistics based on reservations
-function updateUserStatistics($conn) {
-    // Start transaction
+$username = isset($_POST['username']) ? trim($_POST['username']) : '';
+if ($username === '') {
+    echo json_encode(["error" => "Invalid or missing username"]);
+    exit;
+}
+
+// Step 1: Get user_id from username
+$stmtUser = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+$stmtUser->bind_param("s", $username);
+$stmtUser->execute();
+$stmtUser->bind_result($user_id);
+if (!$stmtUser->fetch()) {
+    echo json_encode(["error" => "User not found"]);
+    $stmtUser->close();
+    $conn->close();
+    exit;
+}
+$stmtUser->close();
+
+function updateUserStatistics($conn, $user_id) {
     $conn->begin_transaction();
 
-    // Get aggregated stats from reservations
-    $sql = "
+    // Step 2: Aggregate only for this user_id
+    $stmtAgg = $conn->prepare("
         SELECT
-            user_id,
             COUNT(*) AS total_reservations,
             COALESCE(SUM(total_amount), 0) AS total_amount_spent,
             COALESCE(SUM(TIMESTAMPDIFF(MINUTE, start_time, end_time)), 0) AS total_parking_time_minutes
         FROM reservations
-        WHERE payment_status = 'completed'
-        GROUP BY user_id
-    ";
-
-    $result = $conn->query($sql);
-    if (!$result) {
+        WHERE payment_status = 'completed' AND user_id = ?
+    ");
+    $stmtAgg->bind_param("i", $user_id);
+    $stmtAgg->execute();
+    $stmtAgg->bind_result($total_reservations, $total_amount_spent, $total_parking_time_minutes);
+    
+    if (!$stmtAgg->fetch()) {
         $conn->rollback();
-        echo json_encode(["error" => "Aggregation query failed: " . $conn->error]);
-        exit;
+        echo json_encode(["error" => "Failed to fetch aggregated stats"]);
+        $stmtAgg->close();
+        return;
     }
+    $stmtAgg->close();
 
-    // Prepare insert/update statement
+    // Step 3: Insert or update user_statistics
     $stmt = $conn->prepare("
         INSERT INTO user_statistics (user_id, total_amount_spent, total_reservations, total_parking_time)
         VALUES (?, ?, ?, ?)
@@ -39,31 +61,35 @@ function updateUserStatistics($conn) {
     ");
     if (!$stmt) {
         $conn->rollback();
-        echo json_encode(["error" => "Prepare statement failed: " . $conn->error]);
-        exit;
+        echo json_encode(["error" => "Prepare failed: " . $conn->error]);
+        return;
     }
 
-    while ($row = $result->fetch_assoc()) {
-        $user_id = (int)$row['user_id'];
-        $total_reservations = (int)$row['total_reservations'];
-        $total_amount_spent = (float)$row['total_amount_spent'];
-        $total_parking_time = (int)$row['total_parking_time_minutes'];
-
-        $stmt->bind_param("idii", $user_id, $total_amount_spent, $total_reservations, $total_parking_time);
-
-        if (!$stmt->execute()) {
-            $conn->rollback();
-            echo json_encode(["error" => "Execute failed: " . $stmt->error]);
-            exit;
-        }
+    $stmt->bind_param("idii", $user_id, $total_amount_spent, $total_reservations, $total_parking_time_minutes);
+    if (!$stmt->execute()) {
+        $conn->rollback();
+        echo json_encode(["error" => "Execute failed: " . $stmt->error]);
+        $stmt->close();
+        return;
     }
-
     $stmt->close();
+
     $conn->commit();
-    echo json_encode(["message" => "User statistics updated successfully"]);
+
+    // Step 4: Return wallet_balance
+    $stmtBalance = $conn->prepare("SELECT wallet_balance FROM users WHERE user_id = ?");
+    $stmtBalance->bind_param("i", $user_id);
+    $stmtBalance->execute();
+    $stmtBalance->bind_result($wallet_balance);
+    $stmtBalance->fetch();
+    $stmtBalance->close();
+
+    echo json_encode([
+        "message" => "User statistics updated successfully",
+        "wallet_balance" => $wallet_balance
+    ]);
 }
 
-// Call the function
-updateUserStatistics($conn);
-
+updateUserStatistics($conn, $user_id);
 $conn->close();
+?>

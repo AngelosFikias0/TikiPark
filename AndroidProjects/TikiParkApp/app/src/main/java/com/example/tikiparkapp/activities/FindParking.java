@@ -22,7 +22,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -39,14 +38,14 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 
 public class FindParking extends AppCompatActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
-
     private MapView mMapView;
     private GoogleMap gMap;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
-
     ParkingSpotManager pManager = new ParkingSpotManager();
     private TextView selectedSpotTxt;
     private boolean isMapReady = false;
+    private double balance = 0;
+    private double fee = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +53,12 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.act_find_parking);
 
         Bundle mapViewBundle = null;
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
         mMapView = findViewById(R.id.findParking_map_gmap);
         mMapView.onCreate(mapViewBundle);
         mMapView.getMapAsync(this);
-//        applyInsets(map);
 
         Button findParkingBtn = findViewById(R.id.findParking_confirm_Btn);
         Button cancelBtn = findViewById(R.id.findParking_cancel_Btn);
@@ -70,28 +68,17 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
-        //fillSpots(parkingSpots); --> Temporarily disabled to test things.
-        pManager.addParkingSpot("PAMAK", 40.625511, 22.960412);
-        pManager.addParkingSpot("Kaftanzogleio", 40.625096, 22.965412);
-        pManager.addParkingSpot("Kaftanzogleio2", 40.625006, 22.965509);
-
-        // Note: If two or more markers have the same name, they will overwrite one another. Save different marker names
-        // even if the locations are close to each other.
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(FindParking.this,
-                android.R.layout.simple_spinner_dropdown_item,
-                pManager.getParkingSpotNames());
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        parkingSpots.setAdapter(adapter);
+        fillSpots(parkingSpots);
 
         findParkingBtn.setOnClickListener(v -> {
             startParking(username, selectedSpotTxt.getText().toString());
-            updateUserStats();
-            ParkingSpot selectedSpot = pManager.getParkingSpot(selectedSpotTxt.getText().toString());
+            balance = updateUserStats(username);
+            fee = getSpotFee(selectedSpotTxt.getText().toString());
             startActivity(new Intent(FindParking.this, ParkCompletion.class)
-                    .putExtra("username",username).putExtra("selectedSpotTxt", selectedSpotTxt.getText().toString())
-                    .putExtra("fee", selectedSpot.getFeePerHour()));
+                    .putExtra("username", username)
+                    .putExtra("selectedSpotTxt", selectedSpotTxt.getText().toString())
+                    .putExtra("fee", fee)
+                    .putExtra("balance", balance));
             finish();
         });
 
@@ -101,91 +88,68 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
+    private double getSpotFee(String spot) {
+        final double[] cost = { 0 };
+        Thread thread = new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            OutputStream os = null;
+            InputStream is = null;
 
-        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
-        }
+            try {
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/getSpotFee.php");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-        mMapView.onSaveInstanceState(mapViewBundle);
-    }
+                String postData = "spot=" + URLEncoder.encode(spot, "UTF-8");
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mMapView.onResume();
-    }
+                os = conn.getOutputStream();
+                os.write(postData.getBytes());
+                os.flush();
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mMapView.onStart();
-    }
+                int responseCode = conn.getResponseCode();
+                is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(is));
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mMapView.onStop();
-    }
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
 
-    @Override
-    public void onMapReady(GoogleMap map) {
-        gMap = map;
-        isMapReady = true;
-        // Optional: initial camera setup
+                String response = responseBuilder.toString();
+                Log.d("getSpotFee", "Server response: " + response);
 
-        HashMap<String, ParkingSpot> pSpots = pManager.getParkingSpots();
-        for(ParkingSpot i : pSpots.values()) {
-            LatLng position = new LatLng(i.getLat(), i.getLon());
-            gMap.addMarker(new MarkerOptions().position(position)).setTitle(i.getName());
-        }
+                JSONObject jsonResponse = new JSONObject(response);
+                boolean success = jsonResponse.optBoolean("success", false);
+                if (success) {
+                    cost[0] = jsonResponse.optDouble("price_per_hour", 0);
+                } else {
+                    Log.e("getSpotFee", "Fee fetch failed: " + jsonResponse.optString("message", "No message"));
+                }
 
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.625511, 22.960412), 16.0f));
-        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-
-                selectedSpotTxt.setText(marker.getTitle());
-                return true;
+            } catch (Exception e) {
+                Log.e("getSpotFee", "Exception occurred", e);
+            } finally {
+                try { if (os != null) os.close(); } catch (IOException ignored) {}
+                try { if (reader != null) reader.close(); } catch (IOException ignored) {}
+                try { if (is != null) is.close(); } catch (IOException ignored) {}
+                if (conn != null) conn.disconnect();
             }
         });
-    }
+        thread.start();
 
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    @Override
-    protected void onPause() {
-        mMapView.onPause();
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        mMapView.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mMapView.onLowMemory();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//        gMap.clear();
-//        ParkingSpot selectedSpotTxt = pManager.getParkingSpot(adapterView.getItemAtPosition(i).toString());
-//        LatLng position = new LatLng(selectedSpotTxt.getLat(), selectedSpotTxt.getLon());
-//        gMap.moveCamera(CameraUpdateFactory.newLatLng(position));
-//        gMap.addMarker(new MarkerOptions().position(position)).setTitle("Parking Spot");
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
+        return cost[0];
     }
 
     private void fillSpots(Spinner parkingSpots) {
@@ -222,11 +186,9 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
                     double lat = spot.getDouble("latitude");
                     double lon = spot.getDouble("longitude");
 
-                    // Add to your manager (adjust based on your implementation)
                     pManager.addParkingSpot(location, lat, lon);
                 }
 
-                // UI update must be run on main thread
                 runOnUiThread(() -> {
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(FindParking.this,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -234,6 +196,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     parkingSpots.setAdapter(adapter);
+                    parkingSpots.setOnItemSelectedListener(FindParking.this);
                 });
 
             } catch (Exception e) {
@@ -246,12 +209,14 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         }).start();
     }
 
-    private void updateUserStats() {
-        new Thread(() -> {
+    private double updateUserStats(String username) {
+        final double[] balance = { 0 };
+
+        Thread thread = new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
-            OutputStream os = null;
             InputStream is = null;
+            OutputStream os = null;
 
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/updateUserStats.php");
@@ -262,7 +227,12 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
                 conn.setDoOutput(true);
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
-                conn.connect();
+                String postData = "username=" + URLEncoder.encode(username, "UTF-8");
+
+                // 🔥 Write the POST data correctly
+                os = conn.getOutputStream();
+                os.write(postData.getBytes());
+                os.flush();
 
                 int responseCode = conn.getResponseCode();
                 is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
@@ -278,24 +248,32 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
                 Log.d("updateUserStats", "Server response: " + response);
 
                 JSONObject jsonResponse = new JSONObject(response);
-                String message = jsonResponse.optString("message", "");
-                String error = jsonResponse.optString("error", "");
-
-                if (!error.isEmpty()) {
-                    Log.e("updateUserStats", "Failed to update stats: " + error);
+                if (jsonResponse.has("wallet_balance")) {
+                    balance[0] = jsonResponse.getDouble("wallet_balance");
+                    Log.i("updateUserStats", "Balance = " + balance[0]);
                 } else {
-                    Log.i("updateUserStats", "Success: " + message);
+                    Log.e("updateUserStats", "wallet_balance missing from JSON");
                 }
 
             } catch (Exception e) {
                 Log.e("updateUserStats", "Exception occurred", e);
             } finally {
-                try { if (os != null) os.close(); } catch (IOException ignored) {}
                 try { if (reader != null) reader.close(); } catch (IOException ignored) {}
                 try { if (is != null) is.close(); } catch (IOException ignored) {}
+                try { if (os != null) os.close(); } catch (IOException ignored) {}
                 if (conn != null) conn.disconnect();
             }
-        }).start();
+        });
+
+        thread.start();
+
+        try {
+            thread.join(); // wait for the thread to complete
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return balance[0]; // return the fetched balance
     }
 
     private void startParking(String username, String selectedSpot) {
@@ -352,5 +330,94 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
                 if (conn != null) conn.disconnect();
             }
         }).start();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        gMap = map;
+        isMapReady = true;
+
+        HashMap<String, ParkingSpot> pSpots = pManager.getParkingSpots();
+        for (ParkingSpot spot : pSpots.values()) {
+            LatLng position = new LatLng(spot.getLat(), spot.getLon());
+            gMap.addMarker(new MarkerOptions().position(position).title(spot.getName()));
+        }
+
+        LatLng initialPosition = new LatLng(21.291982, -157.843144);
+        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, 16.0f));
+
+        gMap.setOnMarkerClickListener(marker -> {
+            String title = marker.getTitle();
+            selectedSpotTxt.setText(title);
+
+            Spinner spinner = findViewById(R.id.findParking_parkingSpots_spinner);
+            ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
+            int pos = adapter.getPosition(title);
+            if (pos >= 0) spinner.setSelection(pos);
+
+            return false; // allow default behavior (show info window)
+        });
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if (!isMapReady) return;
+
+        ParkingSpot selectedSpot = pManager.getParkingSpot(adapterView.getItemAtPosition(i).toString());
+        System.out.println(selectedSpot.getName());
+        if (selectedSpot == null) return;
+
+        selectedSpotTxt.setText(selectedSpot.getName());
+
+        gMap.clear();
+        LatLng position = new LatLng(selectedSpot.getLat(), selectedSpot.getLon());
+        gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 16.0f));
+        gMap.addMarker(new MarkerOptions().position(position).title(selectedSpot.getName()));
+    }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
+        }
+        mMapView.onSaveInstanceState(mapViewBundle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mMapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mMapView.onStop();
+    }
+    @Override
+    protected void onPause() {
+        mMapView.onPause();
+        super.onPause();
+    }
+    @Override
+    protected void onDestroy() {
+        mMapView.onDestroy();
+        super.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

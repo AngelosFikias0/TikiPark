@@ -48,11 +48,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/start"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Start time:"
                 android:fontFamily="@font/ubuntu_mono"
+                android:text="Start time:"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -73,11 +74,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/duration"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Duration:"
                 android:fontFamily="@font/ubuntu_mono"
+                android:text="Duration:"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -97,11 +99,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/cost"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Estimated Cost:"
                 android:fontFamily="@font/ubuntu_mono"
+                android:text="Estimated Cost:"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 

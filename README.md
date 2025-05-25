@@ -1,12 +1,46 @@
-# 🚗 TikiPark Android Application
-
-![TikiPark Logo](Mockups/logo.jpg)
+# 🚗 TikiPark – Smart Android Parking App
 
 ## 📌 Project Overview
 
+**TikiPark** is a real-time, full-featured **Android parking assistant app** developed in **Java**, designed to simplify finding and reserving urban parking spots. Created as a **collaborative university project**, it combines a modern Android frontend with a robust **PHP/MySQL** backend, **SQLite caching**, and **Google Maps API** for a seamless user experience.
+
 ---
 
-## 📊 Project Details
+## 🚀 Key Features
+
+- 🔐 Secure Login & **Role-Based Authorization** (Admin/User)
+- 📍 Interactive **Google Maps API Integration**
+- 📊 **Real-Time Parking Availability** via RESTful API
+- 📡 **Offline Support** with local **SQLite** caching
+- 💳 Wallet-ready architecture for **Payment Integration**
+- 🧱 **Modular & Scalable Codebase**
+
+---
+
+## 🧰 Tech Stack
+
+### **Frontend (Android)**
+
+- Java with Android SDK
+- XML Layouts
+- SQLite (offline storage)
+- Google Maps API
+
+### **Backend**
+
+- PHP 8.x
+- MySQL
+
+### **DevOps & Tools**
+
+- Git & GitHub
+- Android Studio
+- Visual Studio Code
+- XAMPP (Apache + MySQL)
+
+---
+
+## 📊 Repository Badges
 
 <p align="center">
   <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark?style=for-the-badge&color=blue" alt="Repo Size">
@@ -16,47 +50,50 @@
   <img src="https://img.shields.io/github/contributors/AngelosFikias0/TikiPark?style=for-the-badge&color=purple" alt="Contributors">
 </p>
 
-## 📱 Τεχνολογίες & Εργαλεία
-<p align="center">
-  <img src="https://img.shields.io/badge/Android_Studio-Java-green?style=for-the-badge&logo=android" alt="Android">
-  <img src="https://img.shields.io/badge/XAMPP-PHP_&_MySQL-orange?style=for-the-badge&logo=mysql" alt="XAMPP">
-  <img src="https://img.shields.io/badge/GitHub_Actions-CI/CD-blue?style=for-the-badge&logo=github-actions" alt="GitHub Actions">
-</p>
+## 🛠️ Installation Guide
 
----
+### ✅ Step 1: Clone the Repository
 
-## 🛠 Installation
-
-### 1. Κλωνοποίηση του Repository
 ```bash
 git clone https://github.com/AngelosFikias0/TikiPark.git
 cd TikiPark
 ```
 
-### 2. Άνοιγμα στο Android Studio 
+## ✅ Step 2: Android Setup
 
-1. Άνοιξε το **Android Studio**
-2. Επίλεξε **Open an Existing Project**
-3. Εντόπισε και επέλεξε το φάκελο **TikiPark**
-4. Πάτα **Run** για εκτέλεση σε Emulator ή πραγματική συσκευή
+1. Launch **Android Studio**
+2. Select **Open an Existing Project**
+3. Navigate to and open the `TikiPark/` directory
+4. Click **Run** to build and deploy on an emulator or physical device
 
-### 3. **Ρύθμιση XAMPP**
-
-1. Εγκατέστησε το XAMPP από το Apache Friends
-2. Ξεκίνησε Apache και MySQL από το XAMPP Control Panel
-3. Αντέγραψε τα αρχεία PHP από το Backend/ στο C:\xampp\htdocs\TikiPark
-4. Εισήγαγε τη βάση δεδομένων:
-5. Άνοιξε το phpMyAdmin (http://localhost/phpmyadmin/)
-6. Δημιούργησε μια νέα βάση δεδομένων με όνομα TikiPark
-7. Εισήγαγε το Database/tikipark.sql
-8. Ενημέρωσε το Backend/config.php με τα διαπιστευτήρια της βάσης
-   
 ---
 
-## 👥 Συμμετοχή & Contributing
+## ✅ Step 3: Backend Setup (XAMPP)
 
-### 1. **Κλωνοποίηση & Ρύθμιση του Repository**
-Πριν ξεκινήσεις, βεβαιώσου ότι έχεις την τελευταία έκδοση του κώδικα:
+1. Download & install [XAMPP](https://www.apachefriends.org/)
+2. Start **Apache** and **MySQL** from the XAMPP Control Panel
+3. Copy the contents of `Backend/` to:
+
+    ```bash
+    C:\xampp\htdocs\TikiPark
+    ```
+
+4. Open [phpMyAdmin](http://localhost/phpmyadmin/)
+5. Create a new database named `TikiPark`
+6. Import the schema:
+
+    - File: `Database/tikipark.sql`
+
+7. Update the database credentials in:
+
+    - `Backend/config.php`
+
+---
+
+## 👥 Contribution Guide
+
+### 📌 1. Clone & Set Up Locally
+
 ```bash
 git clone https://github.com/AngelosFikias0/TikiPark.git
 cd TikiPark
@@ -65,40 +102,96 @@ git fetch origin
 git pull origin main
 ```
 
-### 2. **Δημιουργία Branch για τις Αλλαγές σου**
+---
+
+### 📌 2. Create a New Feature Branch
+
 ```bash
-git checkout -b feature-branch
+git checkout -b feature-branch-name
 ```
 
-### 3. **Fetch & Pull Πριν τις Αλλαγές (Αποφυγή Conflicts)**
+---
+
+### 📌 3. Sync Before Coding
+
 ```bash
 git fetch origin
 git pull origin main
 ```
 
-### 4. **Commit & Push των Αλλαγών σου**
+---
+
+### 📌 4. Commit & Push Your Changes
+
 ```bash
 git add .
-git commit -m "Προσθήκη νέας λειτουργίας"
-git push origin feature-branch
+git commit -m "✅ Add: New feature implementation"
+git push origin feature-branch-name
 ```
 
-### 5. **Δημιουργία Pull Request (PR)**
-1. Πήγαινε στο repository στο GitHub
-2. Πάτα **New Pull Request**
-3. Επίλεξε το `feature-branch` και σύγκρινέ το με το `main`
-4. Πρόσθεσε περιγραφή και πάτα **Create Pull Request**
-5. Περίμενε έγκριση και merge από τους maintainers
+---
 
-### 6. **Ενημέρωση του Τοπικού Main Branch Μετά το Merge**
+### 📌 5. Submit Pull Request
+
+1. Go to the GitHub Repository: [https://github.com/AngelosFikias0/TikiPark](https://github.com/AngelosFikias0/TikiPark)
+2. Click **New Pull Request**
+3. Compare `feature-branch-name` with `main`
+4. Add a description and click **Create Pull Request**
+
+---
+
+### 📌 6. Sync After Merge
+
 ```bash
 git checkout main
-git fetch origin
 git pull origin main
 ```
 
-### 7. **Διαγραφή του Feature Branch (Τοπικά & Remote, Προαιρετικό)**
+---
+
+### 📌 7. (Optional) Delete Feature Branch
+
 ```bash
-git branch -d feature-branch
-git push origin --delete feature-branch
+git branch -d feature-branch-name
+git push origin --delete feature-branch-name
 ```
+
+---
+
+## 💡 Get Involved
+
+Built with teamwork, clean architecture, and real-world tools, **TikiPark** is open to feedback, ideas, and contributors. Perfect for students, hobbyists, or professionals who want to sharpen mobile development skills.
+
+📬 **Questions? Bugs? Suggestions?**
+
+- [Open an Issue](https://github.com/AngelosFikias0/TikiPark/issues)
+- [Message on LinkedIn](https://www.linkedin.com/in/angelosfikias)
+
+
+---
+
+## 📄 Documentation
+
+Coming soon...
+
+---
+
+## 📈 Analysis
+
+Coming soon...
+
+---
+
+## 📺 YouTube Video
+
+Coming soon...
+
+---
+
+## 📸 Screenshots
+
+Coming soon...
+
+---
+
+![TikiPark Logo](Mockups/logo.jpg)

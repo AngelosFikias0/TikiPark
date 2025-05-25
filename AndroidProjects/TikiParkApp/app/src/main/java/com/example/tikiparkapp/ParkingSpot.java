@@ -5,7 +5,7 @@ public class ParkingSpot {
     String name;
     double lat;
     double lon;
-    float feePerHour;
+    double feePerHour;
 
     public ParkingSpot(String name, double lat, double lon) {
         this.name = name;
@@ -13,7 +13,7 @@ public class ParkingSpot {
         this.lon = lon;
     }
 
-    public float getFeePerHour() {return feePerHour;}
+    public double getFeePerHour() {return feePerHour;}
 
     public String getName() {
         return name;
