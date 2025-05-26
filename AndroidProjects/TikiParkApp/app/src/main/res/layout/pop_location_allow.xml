@@ -18,7 +18,7 @@
             android:layout_width="280dp"
             android:layout_height="105dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Do you want to authorise this app to know your location?"
+            android:text="@string/do_you_want_to_authorise_this_app_to_know_your_location"
             android:textAlignment="center"
             android:textColor="@color/light_white"
             android:textSize="20sp"
@@ -26,7 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.100000024" />
+            app:layout_constraintVertical_bias="0.100000024"
+            tools:ignore="TextSizeCheck" />
 
         <LinearLayout
             android:id="@+id/popupBtnLayout"
@@ -37,18 +38,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/popLocationAllowTxt"
             app:layout_constraintStart_toStartOf="@+id/popLocationAllowTxt"
-            app:layout_constraintTop_toBottomOf="@+id/popLocationAllowTxt">
+            app:layout_constraintTop_toBottomOf="@+id/popLocationAllowTxt"
+            tools:ignore="TextSizeCheck">
 
             <Button
                 android:id="@+id/popDeclineBtn"
-                android:background="@color/button_background"
-                android:textColor="#FFFFFF"
-                app:backgroundTint="@null"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/button_background"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="No" />
+                android:text="@string/no"
+                android:textColor="#000000"
+                app:backgroundTint="@null" />
 
             <TextView
                 android:id="@+id/layoutPadding"
@@ -57,15 +59,15 @@
                 android:layout_weight="1" />
 
             <Button
-                android:layout_weight="1"
-                android:background="@color/button_background"
-                android:textColor="#FFFFFF"
-                app:backgroundTint="@null"
                 android:id="@+id/popAcceptBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/button_background"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Yes" />
+                android:text="@string/yes"
+                android:textColor="#000000"
+                app:backgroundTint="@null" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

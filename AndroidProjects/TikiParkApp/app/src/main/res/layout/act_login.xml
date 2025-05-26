@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#A3FDE2A1"
@@ -18,13 +19,14 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/tikipark"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="24dp"
+            tools:ignore="ContentDescription" />
 
         <!-- Welcome -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome back!"
+            android:text="@string/welcome_back"
             android:fontFamily="@font/ubuntu_mono"
             android:textStyle="bold"
             android:textSize="28sp"
@@ -35,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login:"
+            android:text="@string/login"
             android:fontFamily="@font/ubuntu_mono"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -51,7 +53,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_username_editTxt"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -65,7 +67,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_password_editTxt"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -76,7 +78,7 @@
             android:id="@+id/login_confirm_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/login"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/ubuntu_mono"
             android:textSize="18sp"
@@ -96,7 +98,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New user?"
+                android:text="@string/new_user"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:fontFamily="@font/ubuntu_mono"
@@ -106,7 +108,7 @@
                 android:id="@+id/login_register_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register"
+                android:text="@string/register2"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:fontFamily="@font/ubuntu_mono"
@@ -119,7 +121,7 @@
             android:id="@+id/forgot_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Forgot Password?"
+            android:text="@string/forgot_password"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"

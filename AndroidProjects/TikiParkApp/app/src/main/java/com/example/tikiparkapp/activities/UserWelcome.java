@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,7 +20,7 @@ import com.example.tikiparkapp.db.LocalCache;
 
 public class UserWelcome extends AppCompatActivity {
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +62,7 @@ public class UserWelcome extends AppCompatActivity {
         }
 
         // Handle Search Logic
-        search.setOnClickListener(v -> {
-            popLocationAllow.show();
-        });
+        search.setOnClickListener(v -> popLocationAllow.show());
 
         popAccept.setOnClickListener(view -> {
             // Create an Intent to pass the location to a new activity (SearchActivity)
@@ -74,9 +73,7 @@ public class UserWelcome extends AppCompatActivity {
             finish();
         });
 
-        popDecline.setOnClickListener(view -> {
-            popLocationAllow.dismiss();
-        });
+        popDecline.setOnClickListener(view -> popLocationAllow.dismiss());
 
         // Handle Wallet Management Logic
         wallet.setOnClickListener(v -> {
@@ -98,8 +95,17 @@ public class UserWelcome extends AppCompatActivity {
         // Handle exit button click
         exitButton.setOnClickListener(v -> {
             try {
-                LocalCache localCache = new LocalCache(UserWelcome.this);
-                localCache.clearSession();
+                LocalCache localCache = null;
+                try{
+                    localCache = new LocalCache(UserWelcome.this);
+                }catch (Exception e){
+                    Log.d("Cache","Cache failed");
+                }
+                if (localCache != null) {
+                    localCache.clearSession();
+                } else {
+                    Log.e("Cache", "localCache is null. Cannot clear session.");
+                }
 
                 Intent exitIntent = new Intent(UserWelcome.this, Entry.class);
                 exitIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

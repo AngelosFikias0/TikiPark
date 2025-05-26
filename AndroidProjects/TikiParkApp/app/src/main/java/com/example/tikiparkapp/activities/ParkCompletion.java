@@ -47,6 +47,7 @@ public class ParkCompletion extends AppCompatActivity {
         // Payment button logic
         payButton.setOnClickListener(view -> {
             //Close transaction
+            //Update reservations
             double currentCost = calculateCost();
             if (balance < currentCost) {
                 Intent insufficientIntent = new Intent(ParkCompletion.this, InsufficientFunds.class);
@@ -57,8 +58,8 @@ public class ParkCompletion extends AppCompatActivity {
                 startActivity(insufficientIntent);
             } else {
                 //Update Wallet
-                updateWallet(balance-currentCost);
-                startActivity(new Intent(ParkCompletion.this, PaymentDone.class));
+                balance = updateWallet(balance-currentCost);
+                startActivity(new Intent(ParkCompletion.this, PaymentDone.class).putExtra("balance",balance));
             }
             finish();
         });
@@ -67,8 +68,9 @@ public class ParkCompletion extends AppCompatActivity {
         startUpdatingDurationAndCost();
     }
 
-    private void updateWallet(double newBalance) {
+    private double updateWallet(double balance) {
 
+        return 0;
     }
 
     private void startUpdatingDurationAndCost() {

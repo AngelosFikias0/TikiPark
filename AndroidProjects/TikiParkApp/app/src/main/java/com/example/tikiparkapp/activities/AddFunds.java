@@ -24,8 +24,9 @@ public class AddFunds extends AppCompatActivity {
         amountInput = findViewById(R.id.addFunds_Amount_EdTxt);
         Intent intent = getIntent();
         String cause = intent.getStringExtra("cause");
-        double amount = intent.getDoubleExtra("amount",0.0);
+        double balance = intent.getDoubleExtra("balance",0.0);
         String username = intent.getStringExtra("username");
+        double fee = intent.getDoubleExtra("fee", 0.0);
 
         declineBtn.setOnClickListener(v -> {
             if(cause.equalsIgnoreCase("Deposit")){
@@ -39,10 +40,10 @@ public class AddFunds extends AppCompatActivity {
         confirmBtn.setOnClickListener(v -> {
             //Update users
             if(cause.equalsIgnoreCase("Deposit")){
-                deposit(amount,username);
+                deposit(fee,username);
             }else if(cause.equalsIgnoreCase("Pay")){
                 if(!check(username)){
-                    pay(username);
+                    pay(fee,username);
                 }
             }
         });
@@ -54,12 +55,13 @@ public class AddFunds extends AppCompatActivity {
         return false;
     }
 
-    public void pay(String username){
+    public void pay(double fee, String username){
 
         startActivity(new Intent(AddFunds.this, PaymentDone.class));
     }
 
-    public void deposit(double amount, String username){
+    public void deposit(double fee, String username){
+
         startActivity(new Intent(AddFunds.this, PaymentDone.class));
     }
 

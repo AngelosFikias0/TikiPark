@@ -13,8 +13,6 @@ public class ParkingSpot {
         this.lon = lon;
     }
 
-    public double getFeePerHour() {return feePerHour;}
-
     public String getName() {
         return name;
     }

@@ -15,7 +15,7 @@
         android:id="@+id/edit_spot_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Spot"
+        android:text="@string/edit_spot"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:backgroundTint="@color/button_background"
-        android:text="Back"
+        android:text="@string/back"
         app:layout_constraintTop_toBottomOf="@id/edit_spot_title"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -69,11 +69,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/black"
-            android:hint="Status (available / occupied / reserved)"
+            android:hint="@string/status_available_occupied_reserved"
             android:inputType="text"
             android:minHeight="48dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/edit_price"
@@ -81,11 +82,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@color/black"
-            android:hint="Price Per Hour"
+            android:hint="@string/price_per_hour"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btn_update"
@@ -95,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Update Spot"/>
+            android:text="@string/update_spot"/>
 
         <Button
             android:id="@+id/btn_delete"
@@ -106,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_red_dark"
-            android:text="Delete Spot"/>
+            android:text="@string/delete_spot"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

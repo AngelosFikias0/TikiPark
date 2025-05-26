@@ -29,13 +29,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/black"
-        android:hint="Location"
+        android:hint="@string/location"
         android:inputType="text"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/create_title"
-        tools:ignore="DuplicateClickableBoundsCheck" />
+        tools:ignore="Autofill,DuplicateClickableBoundsCheck" />
 
     <!-- Status Spinner -->
     <Spinner
@@ -56,12 +56,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/black"
-        android:hint="Price Per Hour"
+        android:hint="@string/price_per_hour"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_status" />
+        app:layout_constraintTop_toBottomOf="@id/spinner_status"
+        tools:ignore="Autofill" />
 
     <!-- Latitude -->
     <EditText
@@ -70,12 +71,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/black"
-        android:hint="Latitude"
+        android:hint="@string/latitude"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_price_per_hour" />
+        app:layout_constraintTop_toBottomOf="@id/edit_price_per_hour"
+        tools:ignore="Autofill" />
 
     <!-- Longitude -->
     <EditText
@@ -84,12 +86,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/black"
-        android:hint="Longitude"
+        android:hint="@string/longitude"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_latitude" />
+        app:layout_constraintTop_toBottomOf="@id/edit_latitude"
+        tools:ignore="Autofill" />
 
     <!-- Create Button -->
     <Button
@@ -99,7 +102,7 @@
         android:id="@+id/btn_create_spot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Create"
+        android:text="@string/create"
         app:layout_constraintTop_toBottomOf="@id/edit_longitude"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +116,7 @@
         app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="@string/back"
         app:layout_constraintTop_toBottomOf="@id/btn_create_spot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

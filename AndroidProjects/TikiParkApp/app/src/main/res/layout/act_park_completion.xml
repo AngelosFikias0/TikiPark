@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="You parked successfully!"
+            android:text="@string/you_parked_successfully"
             android:textColor="#000000"
             android:fontFamily="@font/ubuntu_mono"
             android:textSize="24sp"
@@ -37,7 +37,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginBottom="32dp"
-            android:contentDescription="TikiPark Logo"
+            android:contentDescription="@string/tikipark_logo"
             android:src="@drawable/tikipark" />
 
         <!-- Time Info Row -->
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Start time:"
+                android:text="@string/start_time"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -63,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <!-- Duration Row -->
@@ -79,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Duration:"
+                android:text="@string/duration"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -89,7 +90,8 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <!-- Estimated Cost Row -->
@@ -104,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Estimated Cost:"
+                android:text="@string/estimated_cost"
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
@@ -114,7 +116,8 @@
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
     </LinearLayout>
 
@@ -123,7 +126,7 @@
         android:id="@+id/parkCompletion_confirm_btn"
         android:layout_width="160dp"
         android:layout_height="60dp"
-        android:text="Leave &amp; Pay"
+        android:text="@string/leave_amp_pay"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"

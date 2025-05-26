@@ -3,6 +3,7 @@ package com.example.tikiparkapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tikiparkapp.R;
 import com.example.tikiparkapp.databinding.ActMapsBinding;
@@ -15,20 +16,21 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Maps extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private ActMapsBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActMapsBinding.inflate(getLayoutInflater());
+        com.example.tikiparkapp.databinding.ActMapsBinding binding = ActMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        }else{
+            Log.d("Maps","Maps loading failed");
+        }
     }
 
     /**
@@ -42,11 +44,10 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng honolulu = new LatLng(21, -157);
-        mMap.addMarker(new MarkerOptions().position(honolulu).title("Marker in Honolulu"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(honolulu));
+        googleMap.addMarker(new MarkerOptions().position(honolulu).title("Marker in Honolulu"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(honolulu));
     }
 }

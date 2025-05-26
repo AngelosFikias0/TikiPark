@@ -18,7 +18,7 @@ public class PaymentDone extends AppCompatActivity {
         Button confirmBtn = findViewById(R.id.paymentDone_confirm_btn);
 
         confirmBtn.setOnClickListener(v -> {
-            //Update users, reservations
+            //Update users wallet
             startActivity(new Intent(PaymentDone.this, UserWelcome.class));
             finish();
         });

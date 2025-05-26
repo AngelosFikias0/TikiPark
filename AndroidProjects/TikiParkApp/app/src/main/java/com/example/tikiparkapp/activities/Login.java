@@ -1,5 +1,6 @@
 package com.example.tikiparkapp.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 
@@ -43,9 +45,13 @@ public class Login extends AppCompatActivity {
         Button passBut = findViewById(R.id.forgot_pass);
 
         okBtn.setOnClickListener(view -> {
-            String username = usernameInputTxt.getText().toString();
-            String password = passwordInputTxt.getText().toString();
-            loginUser(username, password);
+            if(!Objects.requireNonNull(usernameInputTxt.getText()).toString().isEmpty()&&!Objects.requireNonNull(passwordInputTxt.getText()).toString().isEmpty()){
+                String username = usernameInputTxt.getText().toString();
+                String password = passwordInputTxt.getText().toString();
+                loginUser(username, password);
+            }else{
+                Toast.makeText(Login.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            }
         });
 
         registerBtn.setOnClickListener(v -> {
@@ -56,7 +62,7 @@ public class Login extends AppCompatActivity {
 
 
         passBut.setOnClickListener(view -> {
-            View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
+            @SuppressLint("InflateParams") View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
 
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(dialogView);
@@ -156,4 +162,6 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
         finish(); // Prevent going back to login screen
     }
+
+//    public void sendEmail(){}
 }

@@ -18,7 +18,7 @@
             android:layout_width="280dp"
             android:layout_height="105dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="There was a problem fetching the location, please try again."
+            android:text="@string/there_was_a_problem_fetching_the_location_please_try_again"
             android:textAlignment="center"
             android:textColor="@color/light_white"
             android:textSize="20sp"
@@ -26,17 +26,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13" />
+            app:layout_constraintVertical_bias="0.13"
+            tools:ignore="TextSizeCheck" />
 
         <Button
             android:id="@+id/popLocationErrorAccept"
-            android:background="@color/button_background"
-            android:textColor="#FFFFFF"
-            app:backgroundTint="@null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Ok"
+            android:background="@color/button_background"
+            android:text="@string/ok"
+            android:textColor="#000000"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/popLocationErrorTxt"
             app:layout_constraintHorizontal_bias="0.494"

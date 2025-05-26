@@ -36,15 +36,17 @@ public class Register extends AppCompatActivity {
         Button cancelBtn = findViewById(R.id.register_back_btn);
 
         okBtn.setOnClickListener(view -> {
-            String email = emailInput.getText().toString();
-            String username = usernameInput.getText().toString();
-            String password = passwordInput.getText().toString();
-            registerUser(email, username, password);
+            if(!emailInput.getText().toString().isEmpty()&&!usernameInput.getText().toString().isEmpty()&&!passwordInput.getText().toString().isEmpty()){
+                String email = emailInput.getText().toString();
+                String username = usernameInput.getText().toString();
+                String password = passwordInput.getText().toString();
+                registerUser(email, username, password);
+            }else{
+                Toast.makeText(Register.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            }
         });
 
-        cancelBtn.setOnClickListener(view -> {
-            startActivity(new Intent(Register.this, Entry.class));
-        });
+        cancelBtn.setOnClickListener(view -> startActivity(new Intent(Register.this, Entry.class)));
 
     }
 
@@ -81,7 +83,7 @@ public class Register extends AppCompatActivity {
                 String message = response.getString("message");
 
                 runOnUiThread(() -> Toast.makeText(Register.this, message, Toast.LENGTH_SHORT).show());
-                goToWelcomeScreen(username, "user");
+                goToWelcomeScreen(username);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -106,12 +108,12 @@ public class Register extends AppCompatActivity {
 
     // Currently you can only register Users. There is no option to register an admin.
     // (It makes sense. Admins are probably going to be created from some other screen.)
-    private void goToWelcomeScreen(String username, String role) {
+    private void goToWelcomeScreen(String username) {
         Intent intent;
         intent = new Intent(Register.this, UserWelcome.class);
 
         intent.putExtra("username", username);
-        intent.putExtra("role", role);
+        intent.putExtra("role", "user");
         startActivity(intent);
         finish(); // Prevent going back to login screen
     }

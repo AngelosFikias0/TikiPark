@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Selected Location:"
+                android:text="@string/selected_location"
                 android:textStyle="bold"
                 android:textSize="18sp" />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Some location."
+                android:text="@string/some_location"
                 android:textStyle="bold"
                 android:textSize="18sp" />
 
@@ -83,11 +83,12 @@
                 android:layout_marginEnd="8dp"
                 android:background="@color/button_background"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:backgroundTint="@null" />
+                app:backgroundTint="@null"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/findParking_confirm_Btn"
@@ -97,11 +98,12 @@
                 android:layout_marginStart="8dp"
                 android:background="@color/button_background"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Confirm"
+                android:text="@string/confirm"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:backgroundTint="@null" />
+                app:backgroundTint="@null"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

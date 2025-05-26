@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Add Funds"
+            android:text="@string/add_funds"
             android:textColor="#000000"
             android:textSize="34sp" />
 
@@ -37,7 +37,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginBottom="32dp"
-            android:contentDescription="TikiPark Logo"
+            android:contentDescription="@string/tikipark_logo"
             android:src="@drawable/tikipark" />
 
         <!-- Amount input row -->
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Amount:"
+                android:text="@string/amount"
                 android:textColor="#000000"
                 android:textSize="26sp"
                 android:layout_marginEnd="12dp" />
@@ -64,10 +64,11 @@
                 android:layout_weight="1"
                 android:background="@android:drawable/edit_text"
                 android:inputType="numberDecimal"
-                android:hint="0.00"
+                android:hint="@string/_0_00"
                 android:textSize="18sp"
                 android:padding="8dp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                tools:ignore="Autofill" />
 
         </LinearLayout>
 
@@ -78,7 +79,7 @@
         android:id="@+id/addFunds_Confirm_Btn"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:textSize="20sp"
         android:textStyle="bold"
         android:fontFamily="@font/ubuntu_mono"
@@ -94,7 +95,7 @@
         android:id="@+id/insufFunds_decline_Btn"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textSize="20sp"
         android:textStyle="bold"
         android:fontFamily="@font/ubuntu_mono"

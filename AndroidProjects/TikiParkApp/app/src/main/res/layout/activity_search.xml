@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Select Parking Spot"
+        android:text="@string/select_parking_spot"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -24,15 +24,15 @@
 
     <!-- RecyclerView for Locations -->
     <Button
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
+        android:background="@color/button_background"
         android:text="@string/back"
+        android:textColor="#000000"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/select_parking_spot_title" />
 
@@ -64,19 +64,19 @@
     <!-- Park Button -->
     <Button
         android:id="@+id/park_button"
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
+        android:background="@color/button_background"
         android:text="@string/park"
+        android:textColor="#000000"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/map_container"
-        />
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

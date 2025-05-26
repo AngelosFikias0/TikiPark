@@ -14,7 +14,7 @@
         android:id="@+id/manage_users_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Manage Users"
+        android:text="@string/manage_users"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -50,12 +50,13 @@
             android:id="@+id/edit_role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Role (user / admin)"
+            android:hint="@string/role_user_admin"
             android:inputType="text"
             android:minHeight="48dp"
             android:backgroundTint="@color/black"
             android:textColor="@android:color/black"
-            android:textCursorDrawable="@null" />
+            android:textCursorDrawable="@null"
+            tools:ignore="Autofill" />
 
         <Button
             android:id="@+id/btn_update_user"
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/black"
-            android:text="Update Role"
+            android:text="@string/update_role"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/ubuntu_mono" />
 
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/holo_red_dark"
-            android:text="Delete User"
+            android:text="@string/delete_user"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/ubuntu_mono" />
     </LinearLayout>
@@ -83,7 +84,7 @@
         android:id="@+id/btn_back_user"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="@string/back"
         android:backgroundTint="@color/button_background"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/ubuntu_mono"

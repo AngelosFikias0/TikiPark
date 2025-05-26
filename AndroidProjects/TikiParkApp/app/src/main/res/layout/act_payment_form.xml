@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/ubuntu_mono"
-            android:text="Payment"
+            android:text="@string/payment"
             android:textColor="#000000"
             android:textSize="26sp" />
 
@@ -35,13 +35,15 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
             android:text="-"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="100dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/mastercard_logo" />
+            android:src="@drawable/mastercard_logo"
+            tools:ignore="ContentDescription" />
 
         <!-- Card Number -->
         <LinearLayout
@@ -55,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Card Number:"
+                android:text="@string/card_number"
                 android:textSize="20sp"
                 android:gravity="center_vertical" />
 
@@ -63,8 +65,10 @@
                 android:id="@+id/payment_cardNum_editTxt"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
                 android:inputType="number"
-                android:backgroundTint="@color/black" />
+                tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                android:importantForAutofill="no" />
         </LinearLayout>
 
         <!-- Cardholder Name -->
@@ -79,16 +83,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Cardholder Name:"
+                android:text="@string/cardholder_name"
                 android:textSize="20sp"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                tools:ignore="VisualLintBounds" />
 
             <EditText
                 android:id="@+id/payment_cardholderName_editTxt"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
                 android:inputType="textPersonName"
-                android:backgroundTint="@color/black" />
+                tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <!-- Expiration -->
@@ -104,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="Expiration Date:"
+                android:text="@string/expiration_date"
                 android:textSize="20sp"
                 android:gravity="center_vertical" />
 
@@ -112,24 +118,28 @@
                 android:id="@+id/payment_expirationMonth_editTxt"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:hint="MM"
+                android:backgroundTint="@color/black"
+                android:hint="@string/mm"
                 android:inputType="number"
-                android:backgroundTint="@color/black" />
+                tools:ignore="Autofill,TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="4dp"
                 android:text=" / "
-                android:textSize="18sp" />
+                android:textColor="#795548"
+                android:textSize="18sp"
+                tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/payment_expirationYear_editTxt"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:hint="YY"
+                android:backgroundTint="@color/black"
+                android:hint="@string/yy"
                 android:inputType="number"
-                android:backgroundTint="@color/black" />
+                tools:ignore="Autofill,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <!-- CVC -->
@@ -144,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
-                android:text="CVV:"
+                android:text="@string/cvv"
                 android:textSize="20sp"
                 android:gravity="center_vertical" />
 
@@ -152,8 +162,9 @@
                 android:id="@+id/payment_cvv_editTxt"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/black"
                 android:inputType="number"
-                android:backgroundTint="@color/black" />
+                tools:ignore="Autofill,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <!-- Buttons -->
@@ -171,12 +182,14 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/button_background"
-                android:text="Confirm"
+                android:text="@string/confirm"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/ubuntu_mono"
-                android:layout_marginEnd="8dp" />
+                android:layout_marginEnd="8dp"
+                tools:ignore="VisualLintButtonSize"
+                style="?android:attr/buttonBarButtonStyle" />
 
             <Button
                 android:id="@+id/payment_decline_btn"
@@ -184,12 +197,14 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/button_background"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/ubuntu_mono"
-                android:layout_marginStart="8dp" />
+                android:layout_marginStart="8dp"
+                tools:ignore="ButtonOrder,VisualLintButtonSize"
+                style="?android:attr/buttonBarButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 

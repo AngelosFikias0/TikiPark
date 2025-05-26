@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -333,7 +334,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(GoogleMap map) {
+    public void onMapReady(@NonNull GoogleMap map) {
         gMap = map;
         isMapReady = true;
 
@@ -351,10 +352,16 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
             selectedSpotTxt.setText(title);
 
             Spinner spinner = findViewById(R.id.findParking_parkingSpots_spinner);
-            ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
-            int pos = adapter.getPosition(title);
-            if (pos >= 0) spinner.setSelection(pos);
+            SpinnerAdapter rawAdapter = spinner.getAdapter();
 
+            if (rawAdapter instanceof ArrayAdapter) {
+                @SuppressWarnings("unchecked")
+                ArrayAdapter<String> adapter = (ArrayAdapter<String>) rawAdapter;
+                int pos = adapter.getPosition(title);
+                if (pos >= 0) spinner.setSelection(pos);
+            } else {
+                Log.e("SpinnerSetup", "Unexpected adapter type for spinner");
+            }
             return false; // allow default behavior (show info window)
         });
     }
@@ -364,7 +371,6 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
         ParkingSpot selectedSpot = pManager.getParkingSpot(adapterView.getItemAtPosition(i).toString());
         System.out.println(selectedSpot.getName());
-        if (selectedSpot == null) return;
 
         selectedSpotTxt.setText(selectedSpot.getName());
 

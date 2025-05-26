@@ -16,14 +16,12 @@ import java.net.URL;
 
 public class Entry extends AppCompatActivity {
 
-    private LocalCache localCache;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_entry_screen);
 
-        localCache = new LocalCache(this);
+        LocalCache localCache = new LocalCache(this);
 
         Button loginBtn = findViewById(R.id.userWeclome_findParking_btn);
         Button registerBtn = findViewById(R.id.entry_Register_Btn);

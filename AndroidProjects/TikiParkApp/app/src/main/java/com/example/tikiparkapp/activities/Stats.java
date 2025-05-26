@@ -1,10 +1,9 @@
 package com.example.tikiparkapp.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,6 +40,7 @@ public class Stats extends AppCompatActivity {
         });
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private void getUserStatistics(TextView amountSpent, TextView parkingTime, TextView totalReservations) {
         new Thread(() -> {
             HttpURLConnection conn = null;

@@ -19,7 +19,7 @@
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
-        android:text="Search for spot"
+        android:text="@string/search_for_spot"
         android:fontFamily="@font/ubuntu_mono"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/ubuntu_mono"
         android:layout_marginTop="4dp"
-        android:text="TikiPark"
+        android:text="@string/tikipark"
         android:textColor="#000000"
         android:textSize="50sp"
         android:textStyle="bold"
@@ -55,7 +55,8 @@
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logout" />
+        app:srcCompat="@drawable/logout"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -66,7 +67,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.41"
-        app:srcCompat="@drawable/tikipark" />
+        app:srcCompat="@drawable/tikipark"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/userWelcome_wallet_imgBtn"
@@ -79,7 +81,8 @@
         app:layout_constraintEnd_toStartOf="@+id/userWelcome_stats_imgBtn"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/userWeclome_findParking_btn"
-        app:layout_constraintTop_toBottomOf="@+id/userWeclome_findParking_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/userWeclome_findParking_btn"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/userWelcome_stats_imgBtn"
@@ -90,14 +93,15 @@
         android:src="@drawable/stats"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/userWeclome_findParking_btn"
-        app:layout_constraintTop_toBottomOf="@+id/userWeclome_findParking_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/userWeclome_findParking_btn"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/userWeclome_welcome_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu_mono"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
