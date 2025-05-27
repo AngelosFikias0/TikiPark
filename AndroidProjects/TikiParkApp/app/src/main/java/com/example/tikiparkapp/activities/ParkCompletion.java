@@ -1,26 +1,41 @@
 package com.example.tikiparkapp.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class ParkCompletion extends AppCompatActivity {
 
-    private TextView durationTextView, costTextView, startTimeTextView;
-    private Button payButton;
+    private TextView durationTextView;
+    private TextView costTextView;
 
     private double feePerHour;
     private long startTimeMillis;
-    private double balance;
+    private double prevBalance;
 
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private Runnable updateRunnable;
 
     @Override
@@ -31,35 +46,35 @@ public class ParkCompletion extends AppCompatActivity {
         // Initialize UI components
         durationTextView = findViewById(R.id.parkCompletion_duration_txt);
         costTextView = findViewById(R.id.parkCompletion_cost_txt);
-        startTimeTextView = findViewById(R.id.parkCompletion_startTime_txt);
-        payButton = findViewById(R.id.parkCompletion_confirm_btn);
+        TextView startTimeTextView = findViewById(R.id.parkCompletion_startTime_txt);
+        Button payButton = findViewById(R.id.parkCompletion_confirm_btn);
 
         // Extract data from Intent
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String spot = intent.getStringExtra("selectedSpotTxt");
         feePerHour = intent.getDoubleExtra("fee", 0);
-        balance = intent.getDoubleExtra("balance", 0);
+        prevBalance = intent.getDoubleExtra("balance", 0);
 
-        startTimeMillis = System.currentTimeMillis() - 1000 * 60 * 1; // Simulate start 1 minute ago
+        startTimeMillis = System.currentTimeMillis() - 1000 * 60; // Simulate start 1 minute ago
         startTimeTextView.setText(DateFormat.format("HH:mm:ss", startTimeMillis));
 
         // Payment button logic
         payButton.setOnClickListener(view -> {
-            //Close transaction
-            //Update reservations
             double currentCost = calculateCost();
-            if (balance < currentCost) {
+            finishReservation(spot,username,currentCost);
+            if (prevBalance < currentCost) {
                 Intent insufficientIntent = new Intent(ParkCompletion.this, InsufficientFunds.class);
                 insufficientIntent.putExtra("fee", currentCost);
                 insufficientIntent.putExtra("cause", "Pay");
                 insufficientIntent.putExtra("username", username);
-                insufficientIntent.putExtra("balance", balance);
+                insufficientIntent.putExtra("balance", prevBalance);
                 startActivity(insufficientIntent);
             } else {
-                //Update Wallet
-                balance = updateWallet(balance-currentCost);
-                startActivity(new Intent(ParkCompletion.this, PaymentDone.class).putExtra("balance",balance));
+                startActivity(new Intent(ParkCompletion.this, PaymentDone.class)
+                        .putExtra("balance",prevBalance-currentCost)
+                        .putExtra("username",username)
+                        .putExtra("cause","pay"));
             }
             finish();
         });
@@ -68,9 +83,62 @@ public class ParkCompletion extends AppCompatActivity {
         startUpdatingDurationAndCost();
     }
 
-    private double updateWallet(double balance) {
+    private void finishReservation(String spot, String username, double currentCost){
+        Thread thread = new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+            InputStream is = null;
+            OutputStream os = null;
 
-        return 0;
+            try {
+                // Make sure this matches your PHP filename
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/finishReservation.php");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+                String postData = "spot=" + URLEncoder.encode(spot, "UTF-8") +
+                        "&username=" + URLEncoder.encode(username, "UTF-8") +
+                        "&cost=" + URLEncoder.encode(String.valueOf(currentCost), "UTF-8");
+
+                os = conn.getOutputStream();
+                os.write(postData.getBytes(StandardCharsets.UTF_8));
+                os.flush();
+
+                int responseCode = conn.getResponseCode();
+                is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(is));
+
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                String response = responseBuilder.toString();
+                Log.d("finishReservation", "Server response: " + response);
+
+                JSONObject jsonResponse = new JSONObject(response);
+                if (jsonResponse.has("success") && jsonResponse.getBoolean("success")) {
+                    Log.i("finishReservation", "Wallet updated successfully");
+                } else {
+                    String error = jsonResponse.optString("error", "Unknown error");
+                    Log.e("finishReservation", "Server error: " + error);
+                }
+
+            } catch (Exception e) {
+                Log.e("finishReservation", "Exception occurred", e);
+            } finally {
+                try { if (reader != null) reader.close(); } catch (IOException ignored) {}
+                try { if (is != null) is.close(); } catch (IOException ignored) {}
+                try { if (os != null) os.close(); } catch (IOException ignored) {}
+                if (conn != null) conn.disconnect();
+            }
+        });
+        thread.start();
     }
 
     private void startUpdatingDurationAndCost() {
@@ -84,6 +152,7 @@ public class ParkCompletion extends AppCompatActivity {
         handler.post(updateRunnable);
     }
 
+    @SuppressLint("DefaultLocale")
     private void updateDurationAndCostUI() {
         long now = System.currentTimeMillis();
         long durationMillis = now - startTimeMillis;

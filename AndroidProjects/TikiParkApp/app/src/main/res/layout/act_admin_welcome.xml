@@ -19,7 +19,7 @@
         android:layout_marginEnd="312dp"
         android:background="@color/button_background"
         android:text="@string/back"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -133,49 +133,52 @@
     <!-- Create Parking Spots Button -->
     <Button
         android:id="@+id/create_parking_spots_button"
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/create_parking_spots"
-        app:layout_constraintTop_toBottomOf="@id/statistics_box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/button_background"
+        android:text="@string/create_parking_spots"
+        android:textColor="#000000"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statistics_box"
+        tools:ignore="VisualLintButtonSize" />
 
     <!-- View All Button -->
     <Button
         android:id="@+id/view_all_button"
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/view_all"
-        app:layout_constraintTop_toBottomOf="@id/create_parking_spots_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/button_background"
+        android:text="@string/view_all"
+        android:textColor="#000000"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_parking_spots_button"
+        tools:ignore="VisualLintButtonSize" />
 
     <!-- Manage Users Button -->
     <Button
         android:id="@+id/manage_users_button"
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/manage_users"
-        app:layout_constraintTop_toBottomOf="@id/view_all_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@color/button_background"
+        android:text="@string/manage_users"
+        android:textColor="#000000"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_all_button"
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

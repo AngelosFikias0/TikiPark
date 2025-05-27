@@ -41,7 +41,7 @@ function updateUserStatistics($conn, $user_id) {
     $stmtAgg->bind_param("i", $user_id);
     $stmtAgg->execute();
     $stmtAgg->bind_result($total_reservations, $total_amount_spent, $total_parking_time_minutes);
-    
+
     if (!$stmtAgg->fetch()) {
         $conn->rollback();
         echo json_encode(["error" => "Failed to fetch aggregated stats"]);
@@ -76,17 +76,9 @@ function updateUserStatistics($conn, $user_id) {
 
     $conn->commit();
 
-    // Step 4: Return wallet_balance
-    $stmtBalance = $conn->prepare("SELECT wallet_balance FROM users WHERE user_id = ?");
-    $stmtBalance->bind_param("i", $user_id);
-    $stmtBalance->execute();
-    $stmtBalance->bind_result($wallet_balance);
-    $stmtBalance->fetch();
-    $stmtBalance->close();
-
+    // Step 4: Return success message ONLY (no wallet_balance)
     echo json_encode([
-        "message" => "User statistics updated successfully",
-        "wallet_balance" => $wallet_balance
+        "message" => "User statistics updated successfully"
     ]);
 }
 

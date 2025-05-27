@@ -32,10 +32,13 @@ public class Stats extends AppCompatActivity {
         TextView totalReservations = findViewById(R.id.stats_reservations_txt);
         Button backBtn = findViewById(R.id.stats_back_btn);
 
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+
         getUserStatistics(amountSpent,parkingTime,totalReservations);
 
         backBtn.setOnClickListener(v -> {
-            startActivity(new Intent(Stats.this, UserWelcome.class));
+            startActivity(new Intent(Stats.this, UserWelcome.class).putExtra("username",username));
             finish();
         });
     }

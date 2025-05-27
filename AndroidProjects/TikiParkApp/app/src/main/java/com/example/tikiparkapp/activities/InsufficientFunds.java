@@ -17,25 +17,38 @@ public class InsufficientFunds extends AppCompatActivity {
         setContentView(R.layout.act_insufficient_funds);
 
         TextView requiredAmount = findViewById(R.id.insufFunds_requiredAmount_Txt);
-        TextView currentAmount = findViewById(R.id.insufFunds_requiredAmount_Txt);
+        TextView currentAmount = findViewById(R.id.insufFunds_currentAmount_Txt); // ✅ Fixed ID
         TextView difference = findViewById(R.id.insufFunds_difference_Txt);
         Button addMoneyBtn = findViewById(R.id.insufFunds_addMoney_Btn);
 
         Intent intent = getIntent();
         String cause = intent.getStringExtra("cause");
-        double amount = intent.getDoubleExtra("amount",0.0);
+        double fee = intent.getDoubleExtra("fee", 0.0);
+        double balance = intent.getDoubleExtra("balance", 0.0);
         String username = intent.getStringExtra("username");
 
-        if(cause.equalsIgnoreCase("Withdraw")){
+        // Calculate difference
+        double diff = Math.max(fee - balance, 0.0);
+
+        // Populate values in TextViews
+        requiredAmount.setText(String.format("Required: €%.2f", fee));
+        currentAmount.setText(String.format("Current: €%.2f", balance));
+        difference.setText(String.format("Deficit: €%.2f", diff));
+
+        if ("Withdraw".equalsIgnoreCase(cause)) {
             addMoneyBtn.setText("Okay");
         }
+
         addMoneyBtn.setOnClickListener(v -> {
-            if(cause.equalsIgnoreCase("Withdraw")){
-                startActivity(new Intent(InsufficientFunds.this, UserWelcome.class));
-            }else{
-                startActivity(new Intent(InsufficientFunds.this, PaymentForm.class).putExtra("amount",amount).putExtra("cause",cause).putExtra("username",username));
+            if ("Withdraw".equalsIgnoreCase(cause)) {
+                startActivity(new Intent(InsufficientFunds.this, UserWelcome.class).putExtra("username",username));
+            } else {
+                startActivity(new Intent(InsufficientFunds.this, PaymentForm.class)
+                        .putExtra("fee", fee)
+                        .putExtra("cause", cause)
+                        .putExtra("balance", balance)
+                        .putExtra("username", username));
             }
         });
-
     }
 }

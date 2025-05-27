@@ -10,13 +10,22 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tikiparkapp.BuildConfig;
 import com.example.tikiparkapp.R;
 import com.example.tikiparkapp.db.LocalCache;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 public class UserWelcome extends AppCompatActivity {
 
@@ -27,7 +36,6 @@ public class UserWelcome extends AppCompatActivity {
         setContentView(R.layout.act_user_welcome);
 
         // Initialize views
-        TextView welcomeTextView = findViewById(R.id.userWeclome_welcome_txt);
         ImageButton exitButton = findViewById(R.id.userWelcome_logout_imgBtn);
         Button search = findViewById(R.id.userWeclome_findParking_btn);
         ImageButton wallet = findViewById(R.id.userWelcome_wallet_imgBtn);
@@ -46,20 +54,8 @@ public class UserWelcome extends AppCompatActivity {
         // Get intent extras (username, role)
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
-        String role = intent.getStringExtra("role");
 
-        // Check if username and role are valid
-        if (username != null && role != null) {
-            // Use the passed username and role to show the welcome message
-            welcomeTextView.setText("Welcome, " + role + ": \"" + username + "\"!");
-        } else {
-            // Handle case where username or role is not passed correctly
-            //Toast.makeText(UserWelcome.this, "Session expired or invalid", Toast.LENGTH_LONG).show();
-            // Redirect to MainActivity if session data is invalid
-            Intent redirectIntent = new Intent(UserWelcome.this, Entry.class);
-            startActivity(redirectIntent);
-            finish();
-        }
+        updateUserStats(username);
 
         // Handle Search Logic
         search.setOnClickListener(v -> popLocationAllow.show());
@@ -118,5 +114,48 @@ public class UserWelcome extends AppCompatActivity {
             }
         });
 
+    }
+    private void updateUserStats(String username) {
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/updateUserStats.php");
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+                String postData = "username=" + URLEncoder.encode(username, "UTF-8");
+
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(postData.getBytes());
+                    os.flush();
+                }
+
+                int responseCode = conn.getResponseCode();
+                InputStream is = (responseCode >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(is));
+
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+
+                Log.d("updateUserStats", "Server response: " + responseBuilder);
+
+            } catch (Exception e) {
+                Log.e("updateUserStats", "Exception occurred", e);
+            } finally {
+                try {
+                    if (reader != null) reader.close();
+                } catch (IOException ignored) {}
+                if (conn != null) conn.disconnect();
+            }
+        }).start();
     }
 }

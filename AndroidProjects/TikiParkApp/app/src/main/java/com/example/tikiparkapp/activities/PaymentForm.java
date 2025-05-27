@@ -53,12 +53,9 @@ public class PaymentForm extends AppCompatActivity {
             String expirationMonthStr = expirationMonth.getText().toString().trim();
             String expirationYearStr = expirationYear.getText().toString().trim();
 
-            if (!cardNumberStr.isEmpty() &&
-                    !cardholderNameStr.isEmpty() &&
-                    !expirationMonthStr.isEmpty() &&
-                    !expirationYearStr.isEmpty()) {
-
-                //Add Funds
+//          if (validatePaymentFields(cardNumberStr, cardholderNameStr, expirationMonthStr, expirationYearStr)) {
+            if (true) {
+                // Proceed to add funds
                 Intent addFundsIntent = new Intent(PaymentForm.this, AddFunds.class);
                 addFundsIntent.putExtra("fee", fee);
                 addFundsIntent.putExtra("cause", cause);
@@ -66,9 +63,8 @@ public class PaymentForm extends AppCompatActivity {
                 addFundsIntent.putExtra("balance", balance);
                 startActivity(addFundsIntent);
                 finish();
-
             } else {
-                Toast.makeText(PaymentForm.this, "Please fill in all payment fields!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PaymentForm.this, "Please enter valid card details.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -81,4 +77,15 @@ public class PaymentForm extends AppCompatActivity {
             }
         });
     }
+
+    /*private boolean validatePaymentFields(String cardNumber, String cardholder, String month, String year) {
+        if (cardNumber.length() < 13 || cardNumber.length() > 19 || !cardNumber.matches("\\d+")) return false;
+        if (cardholder.length() < 3) return false;
+        if (!month.matches("\\d{1,2}") || !year.matches("\\d{2,4}")) return false;
+
+        int mm = Integer.parseInt(month);
+        int yy = Integer.parseInt(year.length() == 2 ? "20" + year : year);
+
+        return mm >= 1 && mm <= 12 && yy >= 2024;
+    }*/
 }

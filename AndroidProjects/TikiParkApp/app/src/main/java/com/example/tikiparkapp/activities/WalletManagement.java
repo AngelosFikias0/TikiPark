@@ -42,7 +42,7 @@ public class WalletManagement extends AppCompatActivity {
         balance = getBalance(username);
 
         backBtn.setOnClickListener(v -> {
-            startActivity(new Intent(WalletManagement.this, UserWelcome.class));
+            startActivity(new Intent(WalletManagement.this, UserWelcome.class).putExtra("username",username));
             finish();
         });
 
@@ -65,19 +65,19 @@ public class WalletManagement extends AppCompatActivity {
         //2
         withdrawBtn.setOnClickListener(v -> {
             if (!amountTxt.getText().toString().isEmpty()) {
-                double amount = Double.parseDouble(amountTxt.getText().toString());
+                double fee = Double.parseDouble(amountTxt.getText().toString());
                 //2.1 PayDone
-                if (amount < balance) {
+                if (fee < balance) {
                     startActivity(new Intent(WalletManagement.this, PaymentDone.class)
-                            .putExtra("amount", amount)
-                            .putExtra("cause", "Withdraw")
-                            .putExtra("username", username));
+                            .putExtra("username", username)
+                            .putExtra("balance",balance-fee));
                 } //2.1 Insufficient
                 else{
                     startActivity(new Intent(WalletManagement.this, InsufficientFunds.class)
-                            .putExtra("amount", amount)
-                            .putExtra("cause", "Withdraw")
-                            .putExtra("username", username));
+                            .putExtra("fee", fee)
+                            .putExtra("username", username)
+                            .putExtra("cause", "withdraw")
+                            .putExtra("balance",balance));
                 }
                 finish();
             } else {

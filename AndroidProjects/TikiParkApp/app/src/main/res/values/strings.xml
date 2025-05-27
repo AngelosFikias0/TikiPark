@@ -61,7 +61,7 @@
     <string name="cancel">Cancel</string>
     <string name="transaction_completed">Transaction Completed!</string>
     <string name="your_receipt_will_be_sent_to_your_email_address">Your receipt will be sent to your email address!</string>
-    <string name="continue">Continue</string>
+    <string name="Continue">Continue</string>
     <string name="you_parked_successfully">You parked successfully!</string>
     <string name="tikipark_logo">TikiPark Logo</string>
     <string name="start_time">Start time:</string>

@@ -71,9 +71,10 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
         fillSpots(parkingSpots);
 
+        balance = getBalance(username);
+
         findParkingBtn.setOnClickListener(v -> {
             startParking(username, selectedSpotTxt.getText().toString());
-            balance = updateUserStats(username);
             fee = getSpotFee(selectedSpotTxt.getText().toString());
             startActivity(new Intent(FindParking.this, ParkCompletion.class)
                     .putExtra("username", username)
@@ -210,17 +211,16 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         }).start();
     }
 
-    private double updateUserStats(String username) {
+    public double getBalance(String username){
         final double[] balance = { 0 };
-
         Thread thread = new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
-            InputStream is = null;
             OutputStream os = null;
+            InputStream is = null;
 
             try {
-                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/updateUserStats.php");
+                URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/getBalance.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setConnectTimeout(5000);
@@ -230,7 +230,6 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
                 String postData = "username=" + URLEncoder.encode(username, "UTF-8");
 
-                // 🔥 Write the POST data correctly
                 os = conn.getOutputStream();
                 os.write(postData.getBytes());
                 os.flush();
@@ -246,35 +245,32 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
                 }
 
                 String response = responseBuilder.toString();
-                Log.d("updateUserStats", "Server response: " + response);
+                Log.d("getSpotFee", "Server response: " + response);
 
                 JSONObject jsonResponse = new JSONObject(response);
-                if (jsonResponse.has("wallet_balance")) {
-                    balance[0] = jsonResponse.getDouble("wallet_balance");
-                    Log.i("updateUserStats", "Balance = " + balance[0]);
+                boolean success = jsonResponse.optBoolean("success", false);
+                if (success) {
+                    balance[0] = jsonResponse.optDouble("wallet_balance", 0);
                 } else {
-                    Log.e("updateUserStats", "wallet_balance missing from JSON");
+                    Log.e("getSpotFee", "Fee fetch failed: " + jsonResponse.optString("message", "No message"));
                 }
 
             } catch (Exception e) {
-                Log.e("updateUserStats", "Exception occurred", e);
+                Log.e("getBalance", "Exception occurred", e);
             } finally {
+                try { if (os != null) os.close(); } catch (IOException ignored) {}
                 try { if (reader != null) reader.close(); } catch (IOException ignored) {}
                 try { if (is != null) is.close(); } catch (IOException ignored) {}
-                try { if (os != null) os.close(); } catch (IOException ignored) {}
                 if (conn != null) conn.disconnect();
             }
         });
-
         thread.start();
-
         try {
-            thread.join(); // wait for the thread to complete
+            thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        return balance[0]; // return the fetched balance
+        return balance[0];
     }
 
     private void startParking(String username, String selectedSpot) {
