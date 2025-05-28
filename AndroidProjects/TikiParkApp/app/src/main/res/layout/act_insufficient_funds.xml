@@ -45,7 +45,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="278dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/insufFunds_requiredAmount_Txt"
-                android:layout_width="50dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="#000000"
@@ -82,7 +82,7 @@
 
             <TextView
                 android:id="@+id/insufFunds_currentAmount_Txt"
-                android:layout_width="50dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="#000000"
@@ -107,7 +107,7 @@
 
             <TextView
                 android:id="@+id/insufFunds_difference_Txt"
-                android:layout_width="50dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:text="-"
                 android:textColor="#000000"

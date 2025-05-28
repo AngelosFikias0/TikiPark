@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,11 +52,15 @@ public class UserWelcome extends AppCompatActivity {
         Button popAccept = popLocationAllow.findViewById(R.id.popAcceptBtn);
         Button popDecline = popLocationAllow.findViewById(R.id.popDeclineBtn);
 
+        TextView welcome = findViewById(R.id.userWeclome_welcome_txt);
+
         // Get intent extras (username, role)
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
-        updateUserStats(username);
+        welcome.setText("Welcome "+username+" !");
+
+        updateUserStats();
 
         // Handle Search Logic
         search.setOnClickListener(v -> popLocationAllow.show());
@@ -115,13 +120,23 @@ public class UserWelcome extends AppCompatActivity {
         });
 
     }
-    private void updateUserStats(String username) {
+    private void updateUserStats() {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
 
             try {
+                LocalCache localCache = new LocalCache(UserWelcome.this);
+                LocalCache.UserSession session = localCache.getUserSession();
+
+                if (session == null || session.username == null) {
+                    Log.e("updateUserStats", "User session or username is null. Aborting update.");
+                    return;
+                }
+
+                String username = session.username;
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/updateUserStats.php");
+
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setConnectTimeout(5000);
@@ -150,6 +165,7 @@ public class UserWelcome extends AppCompatActivity {
 
             } catch (Exception e) {
                 Log.e("updateUserStats", "Exception occurred", e);
+                runOnUiThread(() -> Toast.makeText(UserWelcome.this, "Failed to update stats.", Toast.LENGTH_SHORT).show());
             } finally {
                 try {
                     if (reader != null) reader.close();

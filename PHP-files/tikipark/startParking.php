@@ -1,10 +1,12 @@
 <?php
 header('Content-Type: application/json');
 require_once 'config.php'; 
+date_default_timezone_set("Europe/Athens"); 
 
 // Get POST data
 $username = $_POST['username'] ?? '';
 $spotLocation = $_POST['location'] ?? '';
+$startTime = $_POST['startTime'] ?? '';
 
 if (!$username || !$spotLocation) {
     echo json_encode(["error" => "Missing parameters"]);
@@ -38,16 +40,17 @@ if (!$spot_id) {
 }
 
 // Reserve the spot
-$insert = $conn->prepare("INSERT INTO reservations (user_id, spot_id, start_time, total_amount, payment_status) VALUES (?, ?, NOW(), 0.00, 'pending')");
-$insert->bind_param("ii", $user_id, $spot_id);
+$startTimeFormatted = date("Y-m-d H:i:s", $startTime / 1000);
+$insert = $conn->prepare("INSERT INTO reservations (user_id, spot_id, start_time, total_amount, payment_status) VALUES (?, ?, ?, 0.00, 'pending')");
+$insert->bind_param("iis", $user_id, $spot_id, $startTimeFormatted); 
 $insert->execute();
 
 // Update spot status to 'reserved'
-$update = $conn->prepare("UPDATE parking_spots SET status = 'reserved' WHERE spot_id = ?");
+$update = $conn->prepare("UPDATE parking_spots SET status = 'occupied' WHERE spot_id = ?");
 $update->bind_param("i", $spot_id);
 $update->execute();
 
-echo json_encode(["message" => "Reservation created", "reservation_id" => $conn->insert_id]);
+echo json_encode(["success" => true, "message" => "Created Succesfully"]);
 
 $conn->close();
 ?>

@@ -1,5 +1,6 @@
 package com.example.tikiparkapp.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,11 +24,13 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class PaymentDone extends AppCompatActivity {
 
     private Handler mainHandler;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +82,7 @@ public class PaymentDone extends AppCompatActivity {
                         "&balance=" + URLEncoder.encode(String.valueOf(newBalance), "UTF-8");
 
                 os = conn.getOutputStream();
-                os.write(postData.getBytes("UTF-8"));
+                os.write(postData.getBytes(StandardCharsets.UTF_8));
                 os.flush();
 
                 int responseCode = conn.getResponseCode();
@@ -100,26 +103,20 @@ public class PaymentDone extends AppCompatActivity {
                     Log.i("updateUserWallet", "Wallet updated successfully");
 
                     // Show success message on main thread
-                    mainHandler.post(() -> {
-                        Toast.makeText(PaymentDone.this, "Payment completed successfully!", Toast.LENGTH_SHORT).show();
-                    });
+                    mainHandler.post(() -> Toast.makeText(PaymentDone.this, "Payment completed successfully!", Toast.LENGTH_SHORT).show());
                 } else {
                     String error = jsonResponse.optString("error", "Unknown error");
                     Log.e("updateUserWallet", "Server error: " + error);
 
                     // Show error message on main thread
-                    mainHandler.post(() -> {
-                        Toast.makeText(PaymentDone.this, "Update failed: " + error, Toast.LENGTH_LONG).show();
-                    });
+                    mainHandler.post(() -> Toast.makeText(PaymentDone.this, "Update failed: " + error, Toast.LENGTH_LONG).show());
                 }
 
             } catch (Exception e) {
                 Log.e("updateUserWallet", "Exception occurred", e);
 
                 // Show error message on main thread
-                mainHandler.post(() -> {
-                    Toast.makeText(PaymentDone.this, "Network error occurred", Toast.LENGTH_LONG).show();
-                });
+                mainHandler.post(() -> Toast.makeText(PaymentDone.this, "Network error occurred", Toast.LENGTH_LONG).show());
             } finally {
                 try { if (reader != null) reader.close(); } catch (IOException ignored) {}
                 try { if (is != null) is.close(); } catch (IOException ignored) {}

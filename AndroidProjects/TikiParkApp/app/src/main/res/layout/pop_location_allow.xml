@@ -49,8 +49,9 @@
                 android:background="@color/button_background"
                 android:fontFamily="@font/ubuntu_mono"
                 android:text="@string/no"
-                android:textColor="#000000"
-                app:backgroundTint="@null" />
+                android:textColor="#FFFFFF"
+                app:backgroundTint="@null"
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/layoutPadding"
@@ -66,8 +67,9 @@
                 android:background="@color/button_background"
                 android:fontFamily="@font/ubuntu_mono"
                 android:text="@string/yes"
-                android:textColor="#000000"
-                app:backgroundTint="@null" />
+                android:textColor="#FFFFFF"
+                app:backgroundTint="@null"
+                tools:ignore="TextContrastCheck" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

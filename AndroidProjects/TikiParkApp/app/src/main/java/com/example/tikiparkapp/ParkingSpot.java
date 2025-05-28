@@ -5,7 +5,6 @@ public class ParkingSpot {
     String name;
     double lat;
     double lon;
-    double feePerHour;
 
     public ParkingSpot(String name, double lat, double lon) {
         this.name = name;

@@ -32,11 +32,12 @@ public class ParkCompletion extends AppCompatActivity {
     private TextView costTextView;
 
     private double feePerHour;
-    private long startTimeMillis;
     private double prevBalance;
 
     private final Handler handler = new Handler();
     private Runnable updateRunnable;
+    private long startTimeMillis;
+    private long endTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +56,15 @@ public class ParkCompletion extends AppCompatActivity {
         String spot = intent.getStringExtra("selectedSpotTxt");
         feePerHour = intent.getDoubleExtra("fee", 0);
         prevBalance = intent.getDoubleExtra("balance", 0);
+        startTimeMillis = intent.getLongExtra("startTime",0);
 
-        startTimeMillis = System.currentTimeMillis() - 1000 * 60; // Simulate start 1 minute ago
         startTimeTextView.setText(DateFormat.format("HH:mm:ss", startTimeMillis));
 
         // Payment button logic
         payButton.setOnClickListener(view -> {
             double currentCost = calculateCost();
-            finishReservation(spot,username,currentCost);
+            endTime = System.currentTimeMillis()+1000 * 60;
+            finishReservation(spot,username,currentCost,endTime);
             if (prevBalance < currentCost) {
                 Intent insufficientIntent = new Intent(ParkCompletion.this, InsufficientFunds.class);
                 insufficientIntent.putExtra("fee", currentCost);
@@ -83,7 +85,7 @@ public class ParkCompletion extends AppCompatActivity {
         startUpdatingDurationAndCost();
     }
 
-    private void finishReservation(String spot, String username, double currentCost){
+    private void finishReservation(String spot, String username, double currentCost, long endTime){
         Thread thread = new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
@@ -102,7 +104,8 @@ public class ParkCompletion extends AppCompatActivity {
 
                 String postData = "spot=" + URLEncoder.encode(spot, "UTF-8") +
                         "&username=" + URLEncoder.encode(username, "UTF-8") +
-                        "&cost=" + URLEncoder.encode(String.valueOf(currentCost), "UTF-8");
+                        "&cost=" + URLEncoder.encode(String.valueOf(currentCost), "UTF-8") +
+                        "&time=" + URLEncoder.encode(String.valueOf(endTime), "UTF-8");
 
                 os = conn.getOutputStream();
                 os.write(postData.getBytes(StandardCharsets.UTF_8));

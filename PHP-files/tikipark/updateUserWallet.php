@@ -28,11 +28,6 @@ try {
         throw new Exception("Execute failed: " . $stmt->error);
     }
 
-    // Check if any rows were affected (user exists)
-    if ($stmt->affected_rows === 0) {
-        throw new Exception("User not found or balance unchanged");
-    }
-
     // Fetch the updated balance to confirm
     $selectStmt = $conn->prepare("SELECT wallet_balance FROM users WHERE username = ?");
     $selectStmt->bind_param("s", $username);

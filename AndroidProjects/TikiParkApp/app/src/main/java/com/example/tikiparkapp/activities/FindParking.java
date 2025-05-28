@@ -47,6 +47,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
     private boolean isMapReady = false;
     private double balance = 0;
     private double fee = 0;
+    private long startTimeMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,19 +74,22 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
         balance = getBalance(username);
 
+        startTimeMillis = System.currentTimeMillis();
+
         findParkingBtn.setOnClickListener(v -> {
-            startParking(username, selectedSpotTxt.getText().toString());
+            startParking(username, selectedSpotTxt.getText().toString(),startTimeMillis);
             fee = getSpotFee(selectedSpotTxt.getText().toString());
             startActivity(new Intent(FindParking.this, ParkCompletion.class)
                     .putExtra("username", username)
                     .putExtra("selectedSpotTxt", selectedSpotTxt.getText().toString())
                     .putExtra("fee", fee)
-                    .putExtra("balance", balance));
+                    .putExtra("balance", balance)
+                    .putExtra("startTime",startTimeMillis));
             finish();
         });
 
         cancelBtn.setOnClickListener(v -> {
-            startActivity(new Intent(FindParking.this, UserWelcome.class));
+            startActivity(new Intent(FindParking.this, UserWelcome.class).putExtra("username",username));
             finish();
         });
     }
@@ -273,7 +277,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         return balance[0];
     }
 
-    private void startParking(String username, String selectedSpot) {
+    private void startParking(String username, String selectedSpot, long startTimeMillis) {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
@@ -291,7 +295,8 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
 
                 // Prepare POST data
                 String postData = "username=" + URLEncoder.encode(username, "UTF-8") +
-                        "&location=" + URLEncoder.encode(selectedSpot, "UTF-8");
+                        "&location=" + URLEncoder.encode(selectedSpot, "UTF-8")+
+                        "&startTime=" + URLEncoder.encode(String.valueOf(startTimeMillis), "UTF-8");
 
                 os = conn.getOutputStream();
                 os.write(postData.getBytes());
