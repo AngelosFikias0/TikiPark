@@ -135,7 +135,7 @@ public class CreateParkingSpots extends AppCompatActivity {
         }).start();
     }
 
-     //Builds the URL-encoded POST data string.
+     //Builds the URL-encoded POST data string. This is a remnant of a different way to call PHP
     private String buildPostData(String location, String pricePerHour, String latitude, String longitude, String status) throws UnsupportedEncodingException {
         return "location=" + URLEncoder.encode(location, "UTF-8") +
                 "&price_per_hour=" + URLEncoder.encode(pricePerHour, "UTF-8") +

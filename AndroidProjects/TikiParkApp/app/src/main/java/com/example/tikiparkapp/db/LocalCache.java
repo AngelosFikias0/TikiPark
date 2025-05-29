@@ -14,6 +14,7 @@ public class LocalCache extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    //Creates the user Table
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS UserSession (username TEXT, role TEXT, isLoggedIn INTEGER)");

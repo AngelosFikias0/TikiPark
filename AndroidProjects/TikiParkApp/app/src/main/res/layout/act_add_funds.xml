@@ -68,7 +68,7 @@
                 android:textSize="18sp"
                 android:padding="8dp"
                 android:textAlignment="center"
-                tools:ignore="Autofill" />
+                tools:ignore="Autofill,VisualLintTextFieldSize" />
 
         </LinearLayout>
 
@@ -88,7 +88,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/insufFunds_decline_Btn"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        tools:ignore="VisualLintButtonSize" />
 
     <!-- Cancel Button -->
     <Button
@@ -104,6 +105,7 @@
         app:layout_constraintStart_toEndOf="@id/addFunds_Confirm_Btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginStart="8dp" />
+        android:layout_marginStart="8dp"
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

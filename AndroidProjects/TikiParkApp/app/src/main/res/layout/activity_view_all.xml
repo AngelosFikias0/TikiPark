@@ -27,17 +27,17 @@
     <!-- Back Button -->
     <Button
         android:id="@+id/btn_back"
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:background="@color/button_background"
         android:backgroundTint="@color/button_background"
         android:text="@string/back"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_spot_title"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:ignore="TextContrastCheck" />
 
     <!-- ListView -->
     <ListView
@@ -74,7 +74,8 @@
             android:minHeight="48dp"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/edit_price"
@@ -87,28 +88,31 @@
             android:minHeight="48dp"
             android:textColor="@android:color/black"
             android:textCursorDrawable="@null"
-            android:autofillHints="" />
+            android:autofillHints=""
+            tools:ignore="VisualLintTextFieldSize" />
 
         <Button
             android:id="@+id/btn_update"
-            android:background="@color/button_background"
-            android:textColor="#FFFFFF"
-            app:backgroundTint="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/update_spot"/>
+            android:background="@color/button_background"
+            android:text="@string/update_spot"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="@null"
+            tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
         <Button
             android:id="@+id/btn_delete"
-            android:background="@color/button_background"
-            android:textColor="#FFFFFF"
-            app:backgroundTint="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:background="@color/button_background"
             android:backgroundTint="@android:color/holo_red_dark"
-            android:text="@string/delete_spot"/>
+            android:text="@string/delete_spot"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="@null"
+            tools:ignore="TextContrastCheck,VisualLintButtonSize" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

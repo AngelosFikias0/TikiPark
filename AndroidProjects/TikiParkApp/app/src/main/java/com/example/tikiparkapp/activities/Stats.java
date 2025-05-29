@@ -22,6 +22,7 @@ import java.net.URL;
 
 public class Stats extends AppCompatActivity {
 
+    //User statistics screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class Stats extends AppCompatActivity {
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
+        //Gets user's statistics
         getUserStatistics(amountSpent,parkingTime,totalReservations);
 
         backBtn.setOnClickListener(v -> {
@@ -43,6 +45,7 @@ public class Stats extends AppCompatActivity {
         });
     }
 
+    //Gets user's statistics
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private void getUserStatistics(TextView amountSpent, TextView parkingTime, TextView totalReservations) {
         new Thread(() -> {

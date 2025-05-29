@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/create_title"
-        tools:ignore="Autofill,DuplicateClickableBoundsCheck" />
+        tools:ignore="Autofill,DuplicateClickableBoundsCheck,VisualLintTextFieldSize" />
 
     <!-- Status Spinner -->
     <Spinner
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinner_status"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <!-- Latitude -->
     <EditText
@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_price_per_hour"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <!-- Longitude -->
     <EditText
@@ -92,34 +92,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_latitude"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill,VisualLintTextFieldSize" />
 
     <!-- Create Button -->
     <Button
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:id="@+id/btn_create_spot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/button_background"
         android:text="@string/create"
-        app:layout_constraintTop_toBottomOf="@id/edit_longitude"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_longitude"
+        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
     <!-- Back Button -->
     <Button
         android:id="@+id/btn_back"
-        android:background="@color/button_background"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="@null"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/button_background"
         android:text="@string/back"
-        app:layout_constraintTop_toBottomOf="@id/btn_create_spot"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_create_spot"
+        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

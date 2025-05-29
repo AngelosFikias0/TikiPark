@@ -53,9 +53,10 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_username_editTxt"
-                android:hint="@string/username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -67,10 +68,11 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_password_editTxt"
-                android:hint="@string/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Login Button -->
@@ -78,14 +80,15 @@
             android:id="@+id/login_confirm_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textColor="#FFFFFF"
-            android:fontFamily="@font/ubuntu_mono"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:layout_marginBottom="32dp"
             android:background="@color/button_background"
-            app:backgroundTint="@null" />
+            android:fontFamily="@font/ubuntu_mono"
+            android:text="@string/login"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            tools:ignore="DuplicateSpeakableTextCheck,VisualLintButtonSize" />
 
         <!-- Register Section -->
         <LinearLayout
@@ -108,12 +111,13 @@
                 android:id="@+id/login_register_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/button_background"
+                android:fontFamily="@font/ubuntu_mono"
                 android:text="@string/register2"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:fontFamily="@font/ubuntu_mono"
-                android:background="@color/button_background"
-                app:backgroundTint="@null" />
+                app:backgroundTint="@null"
+                tools:ignore="TextContrastCheck" />
         </LinearLayout>
 
         <!-- Forgot Password -->
@@ -127,7 +131,8 @@
             android:textStyle="bold"
             android:fontFamily="@font/ubuntu_mono"
             android:background="@color/button_background"
-            app:backgroundTint="@null" />
+            app:backgroundTint="@null"
+            tools:ignore="VisualLintButtonSize" />
     </LinearLayout>
 
 </ScrollView>

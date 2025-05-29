@@ -35,10 +35,12 @@ public class InsufficientFunds extends AppCompatActivity {
         currentAmount.setText(String.format("Current: €%.2f", balance));
         difference.setText(String.format("Deficit: €%.2f", diff));
 
+        //Withdraw option
         if ("Withdraw".equalsIgnoreCase(cause)) {
             addMoneyBtn.setText("Okay");
         }
 
+        //Add money option
         addMoneyBtn.setOnClickListener(v -> {
             if ("Withdraw".equalsIgnoreCase(cause)) {
                 startActivity(new Intent(InsufficientFunds.this, UserWelcome.class).putExtra("username",username));

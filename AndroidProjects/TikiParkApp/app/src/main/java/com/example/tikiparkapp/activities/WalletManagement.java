@@ -39,39 +39,43 @@ public class WalletManagement extends AppCompatActivity {
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
+        //Returns user's balance
         balance = getBalance(username);
 
+        //Back to the Main User Screen
         backBtn.setOnClickListener(v -> {
             startActivity(new Intent(WalletManagement.this, UserWelcome.class).putExtra("username",username));
             finish();
         });
 
-        //1
+        //1. Scenario
         depositBtn.setOnClickListener(v -> {
             if (!amountTxt.getText().toString().isEmpty()) {
                 double amount = Double.parseDouble(amountTxt.getText().toString());
-                //1.1 PayForm
+                //1.1 Scenario -> PayForm
                 startActivity(new Intent(WalletManagement.this, PaymentForm.class)
                         .putExtra("fee", amount)
                         .putExtra("cause", "Deposit")
                         .putExtra("username", username)
                         .putExtra("balance", balance));
                 finish();
-            } else {
+            } else
+            //1.2 Scenario -> Toast
+            {
                 Toast.makeText(WalletManagement.this, "Please Put the amount first!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        //2
+        //2. Scenario
         withdrawBtn.setOnClickListener(v -> {
             if (!amountTxt.getText().toString().isEmpty()) {
                 double fee = Double.parseDouble(amountTxt.getText().toString());
-                //2.1 PayDone
+                //2.1 Scenario -> PaymentDone
                 if (fee < balance) {
                     startActivity(new Intent(WalletManagement.this, PaymentDone.class)
                             .putExtra("username", username)
                             .putExtra("balance",balance-fee));
-                } //2.1 Insufficient
+                } //2.2 Scenario -> Insufficient
                 else{
                     startActivity(new Intent(WalletManagement.this, InsufficientFunds.class)
                             .putExtra("fee", fee)
@@ -80,12 +84,15 @@ public class WalletManagement extends AppCompatActivity {
                             .putExtra("balance",balance));
                 }
                 finish();
-            } else {
+            } else
+            //2.3 Scenario -> Toast
+            {
                 Toast.makeText(WalletManagement.this, "Please Put the amount first!", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
+    //Returns user's balance
     public double getBalance(String username){
         final double[] balance = { 0 };
         Thread thread = new Thread(() -> {

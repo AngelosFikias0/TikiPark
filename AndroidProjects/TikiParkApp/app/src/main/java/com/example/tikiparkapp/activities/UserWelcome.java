@@ -60,13 +60,14 @@ public class UserWelcome extends AppCompatActivity {
 
         welcome.setText("Welcome "+username+" !");
 
+        //Updates the statistics of the user
         updateUserStats();
 
-        // Handle Search Logic
+        // Handles Search Logic
         search.setOnClickListener(v -> popLocationAllow.show());
 
+        //Intent to go to the search act
         popAccept.setOnClickListener(view -> {
-            // Create an Intent to pass the location to a new activity (SearchActivity)
             Intent searchIntent = new Intent(UserWelcome.this, FindParking.class);
             searchIntent.putExtra("username",username);
             startActivity(searchIntent);
@@ -120,6 +121,8 @@ public class UserWelcome extends AppCompatActivity {
         });
 
     }
+
+    //Updates user's statistics
     private void updateUserStats() {
         new Thread(() -> {
             HttpURLConnection conn = null;

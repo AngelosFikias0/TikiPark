@@ -94,6 +94,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
+    //Gets spot's fee
     private double getSpotFee(String spot) {
         final double[] cost = { 0 };
         Thread thread = new Thread(() -> {
@@ -158,6 +159,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         return cost[0];
     }
 
+    //Fills spots view
     private void fillSpots(Spinner parkingSpots) {
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -215,6 +217,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         }).start();
     }
 
+    //Returns user's balance
     public double getBalance(String username){
         final double[] balance = { 0 };
         Thread thread = new Thread(() -> {
@@ -277,6 +280,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         return balance[0];
     }
 
+    //It starts the parking transaction
     private void startParking(String username, String selectedSpot, long startTimeMillis) {
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -334,6 +338,7 @@ public class FindParking extends AppCompatActivity implements OnMapReadyCallback
         }).start();
     }
 
+    //Map implementation
     @Override
     public void onMapReady(@NonNull GoogleMap map) {
         gMap = map;

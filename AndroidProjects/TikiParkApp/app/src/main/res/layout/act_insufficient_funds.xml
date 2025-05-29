@@ -45,13 +45,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="278dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/ubuntu_mono"
                 android:text="@string/needed"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:ignore="TextSizeCheck" />
 
 
             <TextView
@@ -78,7 +79,8 @@
                 android:fontFamily="@font/ubuntu_mono"
                 android:text="@string/balance"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:ignore="VisualLintBounds" />
 
             <TextView
                 android:id="@+id/insufFunds_currentAmount_Txt"
@@ -103,7 +105,8 @@
                 android:text="@string/difference"
                 android:fontFamily="@font/ubuntu_mono"
                 android:textColor="#000000"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                tools:ignore="VisualLintBounds" />
 
             <TextView
                 android:id="@+id/insufFunds_difference_Txt"

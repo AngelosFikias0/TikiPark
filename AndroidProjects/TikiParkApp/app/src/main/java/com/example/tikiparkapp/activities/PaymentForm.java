@@ -26,6 +26,7 @@ public class PaymentForm extends AppCompatActivity {
             return;
         }
 
+        //Gets intent and extras
         String cause = intent.getStringExtra("cause");
         double fee = intent.getDoubleExtra("fee", 0.0);
         String username = intent.getStringExtra("username");
@@ -53,6 +54,8 @@ public class PaymentForm extends AppCompatActivity {
             String expirationMonthStr = expirationMonth.getText().toString().trim();
             String expirationYearStr = expirationYear.getText().toString().trim();
 
+            //Goes to the add funds screen
+//          Again left out for faster testing
 //          if (validatePaymentFields(cardNumberStr, cardholderNameStr, expirationMonthStr, expirationYearStr)) {
             if (true) {
                 // Proceed to add funds
@@ -68,6 +71,7 @@ public class PaymentForm extends AppCompatActivity {
             }
         });
 
+        //Decline button
         declineBtn.setOnClickListener(v -> {
             if (!cause.equalsIgnoreCase("Pay")) {
                 startActivity(new Intent(PaymentForm.this, UserWelcome.class));
@@ -78,14 +82,15 @@ public class PaymentForm extends AppCompatActivity {
         });
     }
 
-    /*private boolean validatePaymentFields(String cardNumber, String cardholder, String month, String year) {
-        if (cardNumber.length() < 13 || cardNumber.length() > 19 || !cardNumber.matches("\\d+")) return false;
-        if (cardholder.length() < 3) return false;
-        if (!month.matches("\\d{1,2}") || !year.matches("\\d{2,4}")) return false;
-
-        int mm = Integer.parseInt(month);
-        int yy = Integer.parseInt(year.length() == 2 ? "20" + year : year);
-
-        return mm >= 1 && mm <= 12 && yy >= 2024;
-    }*/
+    //Used for correct validation but commented out for faster testing
+//    private boolean validatePaymentFields(String cardNumber, String cardholder, String month, String year) {
+//        if (cardNumber.length() < 13 || cardNumber.length() > 19 || !cardNumber.matches("\\d+")) return false;
+//        if (cardholder.length() < 3) return false;
+//        if (!month.matches("\\d{1,2}") || !year.matches("\\d{2,4}")) return false;
+//
+//        int mm = Integer.parseInt(month);
+//        int yy = Integer.parseInt(year.length() == 2 ? "20" + year : year);
+//
+//        return mm >= 1 && mm <= 12 && yy >= 2024;
+//    }
 }

@@ -80,6 +80,7 @@ public class AddFunds extends AppCompatActivity {
         });
     }
 
+    //Handles the deposit
     private void handleDeposit(double amount) {
         double newBalance = currentBalance + amount;
         Intent intent = new Intent(this, PaymentDone.class);
@@ -89,6 +90,7 @@ public class AddFunds extends AppCompatActivity {
         finish();
     }
 
+    //Handles the payment
     private void handlePayment(double amount) {
         if ((currentBalance + amount + EPSILON) < requiredFee) {
             Toast.makeText(this, "Even after adding funds, balance is insufficient.", Toast.LENGTH_LONG).show();

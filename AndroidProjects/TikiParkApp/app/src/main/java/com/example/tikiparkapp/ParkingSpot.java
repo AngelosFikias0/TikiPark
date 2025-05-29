@@ -1,5 +1,6 @@
 package com.example.tikiparkapp;
 
+//Class used for the Google Maps API handling
 public class ParkingSpot {
 
     String name;

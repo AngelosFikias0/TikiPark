@@ -64,6 +64,7 @@ public class ParkCompletion extends AppCompatActivity {
         payButton.setOnClickListener(view -> {
             double currentCost = calculateCost();
             endTime = System.currentTimeMillis()+1000 * 60;
+            //Closes the open reservation
             finishReservation(spot,username,currentCost,endTime);
             if (prevBalance < currentCost) {
                 Intent insufficientIntent = new Intent(ParkCompletion.this, InsufficientFunds.class);
@@ -85,6 +86,7 @@ public class ParkCompletion extends AppCompatActivity {
         startUpdatingDurationAndCost();
     }
 
+    //Closes the open reservation
     private void finishReservation(String spot, String username, double currentCost, long endTime){
         Thread thread = new Thread(() -> {
             HttpURLConnection conn = null;
@@ -144,6 +146,7 @@ public class ParkCompletion extends AppCompatActivity {
         thread.start();
     }
 
+    //Updates the cost
     private void startUpdatingDurationAndCost() {
         updateRunnable = new Runnable() {
             @Override
@@ -155,6 +158,7 @@ public class ParkCompletion extends AppCompatActivity {
         handler.post(updateRunnable);
     }
 
+    //Updates the cost's ui
     @SuppressLint("DefaultLocale")
     private void updateDurationAndCostUI() {
         long now = System.currentTimeMillis();
@@ -170,6 +174,7 @@ public class ParkCompletion extends AppCompatActivity {
         costTextView.setText(String.format("€%.2f", cost));
     }
 
+    //Calculates the cost
     private double calculateCost() {
         long now = System.currentTimeMillis();
         long durationMillis = now - startTimeMillis;

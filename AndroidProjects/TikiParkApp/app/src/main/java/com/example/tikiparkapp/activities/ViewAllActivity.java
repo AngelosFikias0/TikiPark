@@ -170,6 +170,7 @@ public class ViewAllActivity extends AppCompatActivity {
         }).start();
     }
 
+    //Updates the spot's details
     private void updateSpot(int spotId) {
         String status = editStatus.getText().toString().trim().toLowerCase();
         String price = editPrice.getText().toString().trim();
@@ -233,6 +234,7 @@ public class ViewAllActivity extends AppCompatActivity {
         }).start();
     }
 
+    //Deletes the spot
     private void deleteSpot(int spotId) {
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -291,6 +293,7 @@ public class ViewAllActivity extends AppCompatActivity {
         }).start();
     }
 
+    //It updates the list view after any action
     private void updateListView() {
         ArrayList<String> spotStrings = new ArrayList<>();
         for (String[] spot : spotList) {

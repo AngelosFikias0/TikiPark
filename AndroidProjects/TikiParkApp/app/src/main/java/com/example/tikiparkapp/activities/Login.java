@@ -61,6 +61,7 @@ public class Login extends AppCompatActivity {
         });
 
 
+        //Password reset button. Email Sending implementation not complete due to time constraints
         passBut.setOnClickListener(view -> {
             @SuppressLint("InflateParams") View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
 
@@ -80,6 +81,7 @@ public class Login extends AppCompatActivity {
 
     }
 
+    //Logs in user
     public void loginUser(String username, String password) {
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -149,6 +151,7 @@ public class Login extends AppCompatActivity {
         }).start();
     }
 
+    //Goes to welcome screen depending the role
     private void goToWelcomeScreen(String username, String role) {
         Intent intent;
         if (role.equalsIgnoreCase("admin")) {
@@ -163,5 +166,6 @@ public class Login extends AppCompatActivity {
         finish(); // Prevent going back to login screen
     }
 
+//    Email Sending implementation not complete due to time constraints
 //    public void sendEmail(){}
 }

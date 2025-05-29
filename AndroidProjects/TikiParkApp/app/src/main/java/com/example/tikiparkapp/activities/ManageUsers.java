@@ -69,6 +69,7 @@ public class ManageUsers extends AppCompatActivity {
         });
     }
 
+    //Fetches all users
     private void fetchUsers() {
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -135,6 +136,7 @@ public class ManageUsers extends AppCompatActivity {
         }).start();
     }
 
+    //Updates the user's role
     private void updateUserRole() {
         if (selectedUsername == null) {
             Toast.makeText(this, "Select a user first.", Toast.LENGTH_SHORT).show();
@@ -201,6 +203,7 @@ public class ManageUsers extends AppCompatActivity {
         }).start();
     }
 
+    //Deletes the user
     private void deleteUser() {
         if (selectedUsername == null) {
             Toast.makeText(this, "Select a user first.", Toast.LENGTH_SHORT).show();

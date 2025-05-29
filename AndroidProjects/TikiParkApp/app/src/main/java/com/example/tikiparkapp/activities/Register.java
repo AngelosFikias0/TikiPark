@@ -26,6 +26,7 @@ public class Register extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Register screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_register);
 
@@ -46,10 +47,12 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        //Cancels and returns to the entry screen
         cancelBtn.setOnClickListener(view -> startActivity(new Intent(Register.this, Entry.class)));
 
     }
 
+    //Registers user
     private void registerUser(String email, String username, String password) {
         new Thread(() -> {
             HttpURLConnection conn = null;

@@ -63,6 +63,7 @@ public class Entry extends AppCompatActivity {
         finish(); // Prevent going back to login screen
     }
 
+    //Initialise db
     public void createDB() {
         new Thread(() -> {
             HttpURLConnection conn = null;

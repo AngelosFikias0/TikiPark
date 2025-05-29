@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//Class used for the Google Maps API handling
 public class ParkingSpotManager {
 
     HashMap<String, ParkingSpot> parkingSpots = new HashMap<>();

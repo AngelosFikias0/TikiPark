@@ -39,6 +39,7 @@ public class PaymentDone extends AppCompatActivity {
         mainHandler = new Handler(Looper.getMainLooper());
         Button confirmBtn = findViewById(R.id.paymentDone_confirm_btn);
 
+        //Gets intent and extras
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         double balance = intent.getDoubleExtra("balance", 0);
@@ -48,9 +49,10 @@ public class PaymentDone extends AppCompatActivity {
             confirmBtn.setEnabled(false);
             confirmBtn.setText("Processing...");
 
+            //Updates the user's wallet
             updateWallet(username, balance);
 
-            // Navigate after a short delay to allow the update to process
+            // Navigate back to the main user screen after a short delay to allow the update to process
             mainHandler.post(() -> {
                 Toast.makeText(PaymentDone.this, "Payment completed successfully!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(PaymentDone.this, UserWelcome.class)
@@ -61,6 +63,7 @@ public class PaymentDone extends AppCompatActivity {
         });
     }
 
+    //Updates the user's wallet
     private void updateWallet(String username, double newBalance) {
         Thread thread = new Thread(() -> {
             HttpURLConnection conn = null;
