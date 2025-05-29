@@ -172,25 +172,25 @@ Built with teamwork, clean architecture, and real-world tools, **TikiPark** is o
 
 ## 📄 Documentation
 
-📄 [Documentation](Documentation.docx)
+➡️ [Documentation](Documentation.docx)
 
 ---
 
 ## 📈 Analysis
 
-Coming soon...
+➡️ Coming soon...
 
 ---
 
 ## 📺 YouTube Video
 
-Coming soon...
+➡️ Coming soon...
 
 ---
 
 ## 📸 Screenshots
 
-Coming soon...
+➡️ Coming soon...
 
 ---
 
