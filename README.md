@@ -172,7 +172,7 @@ Built with teamwork, clean architecture, and real-world tools, **TikiPark** is o
 
 ## 📄 Documentation
 
-![Dcumentation](Documentation.docx)
+📄 [Documentation](Documentation.docx)
 
 ---
 
