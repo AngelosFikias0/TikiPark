@@ -1,7 +1,5 @@
 <?php
 header('Content-Type: application/json');
-
-// Database connection
 require_once 'config.php'; 
 
 // SQL query to fetch all parking spots (spot_id, location, status, price)

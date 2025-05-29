@@ -1,8 +1,5 @@
 <?php
 header('Content-Type: application/json');
-
-// Database connection
-
 require_once 'config.php'; 
 
 // Get and sanitize POST data
@@ -35,9 +32,9 @@ if ($result->num_rows === 1) {
         // Send success response with user details
         $response['success'] = true;
         $response['message'] = "Login successful.";
-        $response['role'] = $row['role']; // Include user role in response
-        $response['user_id'] = $row['user_id']; // Include user ID in response
-        $response['username'] = $username; // Include username in response
+        $response['role'] = $row['role']; 
+        $response['user_id'] = $row['user_id']; 
+        $response['username'] = $username; 
     } else {
         $response['success'] = false;
         $response['message'] = "Invalid credentials.";

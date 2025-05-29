@@ -1,7 +1,5 @@
 <?php
 header('Content-Type: application/json');
-
-//DB Connection
 require_once 'config.php'; 
 
 // Check if username is provided

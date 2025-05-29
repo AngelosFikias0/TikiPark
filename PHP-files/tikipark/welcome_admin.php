@@ -1,11 +1,6 @@
 <?php
 header('Content-Type: application/json');
-
-// Enable error reporting for development (disable in production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-require_once 'config.php'; // Ensure this only sets up $conn with no output
+require_once 'config.php';
 
 // Validate POST and 'action'
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['action']) || $_POST['action'] !== 'getStatistics') {

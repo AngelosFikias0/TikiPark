@@ -39,6 +39,13 @@ if (!$spot_id) {
     exit;
 }
 
+
+// if ($spotStatus !== 'available') {
+//     echo json_encode(["error" => "Spot is not available"]);
+//     exit;
+// }
+// Turned of for faster testing
+
 // Reserve the spot
 $startTimeFormatted = date("Y-m-d H:i:s", $startTime / 1000);
 $insert = $conn->prepare("INSERT INTO reservations (user_id, spot_id, start_time, total_amount, payment_status) VALUES (?, ?, ?, 0.00, 'pending')");

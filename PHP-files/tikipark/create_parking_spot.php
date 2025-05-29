@@ -1,7 +1,5 @@
 <?php
 header('Content-Type: application/json');
-
-// Database connection
 require_once 'config.php'; 
 
 // Check if POST data is received
