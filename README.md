@@ -170,19 +170,19 @@ Built with teamwork, clean architecture, and real-world tools, **TikiPark** is o
 
 ---
 
-## 📄 Documentation  
-➡️ [Documentation](Documentation.docx)
+## 📄 Documentation & Analysis
+- [Main Documentation](./Analysis/TikiPark%20-%20Main%20Deliverable.pdf)  
+- [Additional Documentation](./Documentation.docx)
 
 ---
 
-## 📈 Analysis  
-➡️ [TIKIPARK ΠΑΡΑΔΟΤΕΟ (PDF)](/Analysis/TIKIPARK%20ΠΑΡΑΔΟΤΕΟ.pdf)
-
+## 📈 User Manual  
+- [TikiPark User Manual](./Analysis/TikiPark%20-%20User%20Manual.pdf)
 
 ---
 
-## 📺 YouTube Video
-➡️ Coming soon...
+## 📺 Demo YouTube Video  
+- [Watch Demo on YouTube](https://www.youtube.com/watch?v=mT_ZN3BbIjc)
 
 ---
 
