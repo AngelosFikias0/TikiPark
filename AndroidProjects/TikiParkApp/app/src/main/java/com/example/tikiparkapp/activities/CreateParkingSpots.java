@@ -147,9 +147,7 @@ public class CreateParkingSpots extends AppCompatActivity {
      //Handles the server response after creating a parking spot.
     private void handleCreateSpotResponse(String message) {
         Toast.makeText(CreateParkingSpots.this, message, Toast.LENGTH_SHORT).show();
-        if ("Parking spot created successfully".equals(message)) {
-            finish();
-        }
+        finish();
     }
 
      //Displays an error message via Toast.

@@ -98,5 +98,6 @@
     <string name="add_funds">Add Funds</string>
     <string name="amount">Amount:</string>
     <string name="_0_00">0.00</string>
+    <string name="balance_0_00">Balance: €0.00</string>
 
 </resources>

@@ -44,25 +44,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wallet_back_btn" />
 
+    <!-- Deposit Button -->
+
+    <TextView
+        android:id="@+id/manage_wallet_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:fontFamily="@font/ubuntu_mono"
+        android:text="@string/balance_0_00"
+        android:textColor="@android:color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wallet_back_btn" />
+
     <EditText
         android:id="@+id/wallet_amount_editTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@color/input_background"
-        android:hint="@string/enter_amount"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/manage_wallet_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="32dp"
         android:autofillHints=""
+        android:background="@color/input_background"
+        android:ems="10"
+        android:hint="@string/enter_amount"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manage_wallet_title"
         tools:ignore="VisualLintTextFieldSize" />
 
-    <!-- Deposit Button -->
     <Button
         android:id="@+id/wallet_deposit_btn"
         android:background="@color/button_background"

@@ -1,10 +1,12 @@
 package com.example.tikiparkapp.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import java.net.URLEncoder;
 public class WalletManagement extends AppCompatActivity {
     private double balance = 0;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class WalletManagement extends AppCompatActivity {
         Button backBtn = findViewById(R.id.wallet_back_btn);
         Button depositBtn = findViewById(R.id.wallet_deposit_btn);
         Button withdrawBtn = findViewById(R.id.wallet_withdraw_btn);
+        TextView txtBalance = findViewById(R.id.manage_wallet_balance);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -42,6 +46,7 @@ public class WalletManagement extends AppCompatActivity {
         //Returns user's balance
         balance = getBalance(username);
 
+        txtBalance.setText("Balance: €" + balance);
         //Back to the Main User Screen
         backBtn.setOnClickListener(v -> {
             startActivity(new Intent(WalletManagement.this, UserWelcome.class).putExtra("username",username));

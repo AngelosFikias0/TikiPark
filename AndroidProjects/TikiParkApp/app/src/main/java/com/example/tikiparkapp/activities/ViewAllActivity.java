@@ -170,7 +170,7 @@ public class ViewAllActivity extends AppCompatActivity {
         }).start();
     }
 
-    //Updates the spot's details
+    // Updates the spot's details
     private void updateSpot(int spotId) {
         String status = editStatus.getText().toString().trim().toLowerCase();
         String price = editPrice.getText().toString().trim();
@@ -185,13 +185,13 @@ public class ViewAllActivity extends AppCompatActivity {
         new Thread(() -> {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
-            InputStream is = null ;
+            InputStream is = null;
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/update_spot.php");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
-                conn.setConnectTimeout(5000); // 5 seconds timeout
-                conn.setReadTimeout(5000);    // 5 seconds timeout
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(5000);
                 conn.setDoOutput(true);
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
@@ -214,9 +214,21 @@ public class ViewAllActivity extends AppCompatActivity {
                 }
 
                 JSONObject response = new JSONObject(result.toString());
+                boolean success = response.getBoolean("success");
                 String message = response.getString("message");
 
-                runOnUiThread(() -> Toast.makeText(ViewAllActivity.this, message, Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> {
+                    Toast.makeText(ViewAllActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                    if (success && selectedSpotPosition != -1) {
+                        // Update local list with new data
+                        String[] updatedSpot = spotList.get(selectedSpotPosition);
+                        updatedSpot[1] = status;
+                        updatedSpot[2] = price;
+                        updateListView();
+                        clearSelection();  // Clear fields and reset selection
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
                 runOnUiThread(() -> Toast.makeText(ViewAllActivity.this, "Error updating spot", Toast.LENGTH_SHORT).show());
@@ -235,6 +247,18 @@ public class ViewAllActivity extends AppCompatActivity {
     }
 
     //Deletes the spot
+    // Clears the text fields and resets selection
+    private void clearSelection() {
+        runOnUiThread(() -> {
+            editSpotTitle.setText("");
+            editStatus.setText("");
+            editPrice.setText("");
+            selectedSpotPosition = -1;
+            selectedSpotId = -1;
+        });
+    }
+
+    // Deletes the spot, fixed structure similar to updateSpot
     private void deleteSpot(int spotId) {
         new Thread(() -> {
             HttpURLConnection conn = null;
@@ -271,9 +295,10 @@ public class ViewAllActivity extends AppCompatActivity {
 
                 runOnUiThread(() -> {
                     Toast.makeText(ViewAllActivity.this, message, Toast.LENGTH_SHORT).show();
-                    if (success) {
+                    if (success && selectedSpotPosition != -1) {
                         spotList.remove(selectedSpotPosition);
                         updateListView();
+                        clearSelection();
                     }
                 });
             } catch (Exception e) {
@@ -297,7 +322,7 @@ public class ViewAllActivity extends AppCompatActivity {
     private void updateListView() {
         ArrayList<String> spotStrings = new ArrayList<>();
         for (String[] spot : spotList) {
-            spotStrings.add("Status: " + spot[0] + " - Price: $" + spot[1]);
+            spotStrings.add("Name: " + spot[0] + " | Status: " + spot[1] + " | Price: $" + spot[2]);
         }
         listSpots.setAdapter(new ArrayAdapter<>(ViewAllActivity.this, android.R.layout.simple_list_item_1, spotStrings));
     }

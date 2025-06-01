@@ -2,6 +2,7 @@ package com.example.tikiparkapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -214,6 +215,7 @@ public class ManageUsers extends AppCompatActivity {
             HttpURLConnection conn = null;
             BufferedReader reader = null;
             InputStream is = null;
+
             try {
                 URL url = new URL("http://" + BuildConfig.LOCAL_IP + "/tikipark/delete_user.php");
                 conn = (HttpURLConnection) url.openConnection();
@@ -223,14 +225,18 @@ public class ManageUsers extends AppCompatActivity {
                 conn.setDoOutput(true);
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
+                // Send POST data
                 String postData = "username=" + URLEncoder.encode(selectedUsername, "UTF-8");
-
                 try (OutputStream os = conn.getOutputStream()) {
                     os.write(postData.getBytes());
                     os.flush();
                 }
 
-                is = conn.getInputStream();
+                int responseCode = conn.getResponseCode();
+                is = (responseCode >= 200 && responseCode < 300)
+                        ? conn.getInputStream()
+                        : conn.getErrorStream();
+
                 reader = new BufferedReader(new InputStreamReader(is));
                 StringBuilder result = new StringBuilder();
                 String line;
@@ -238,14 +244,17 @@ public class ManageUsers extends AppCompatActivity {
                     result.append(line);
                 }
 
+                Log.d("users",result.toString());
                 JSONObject response = new JSONObject(result.toString());
                 String message = response.getString("message");
 
                 runOnUiThread(() -> {
                     Toast.makeText(ManageUsers.this, message, Toast.LENGTH_SHORT).show();
-                    selectedUsername = null; // Reset selection
-                    editRoleEditText.setText(""); // Clear edit text
-                    fetchUsers(); // Refresh the user list after deletion
+                    if (response.optBoolean("success", false)) {
+                        selectedUsername = null;
+                        editRoleEditText.setText("");
+                        fetchUsers(); // Refresh after delete
+                    }
                 });
 
             } catch (Exception e) {
