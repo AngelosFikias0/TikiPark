@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS reservations (
     end_time TIMESTAMP NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
     payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (spot_id) REFERENCES parking_spots(spot_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (spot_id) REFERENCES parking_spots(spot_id) ON DELETE CASCADE
 )");
 
 // Create 'user_statistics' table
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS user_statistics (
     total_amount_spent DECIMAL(10, 2) DEFAULT 0.00,
     total_reservations INT DEFAULT 0,
     total_parking_time INT DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 )");
 
 // Insert default admin if not exists
