@@ -73,7 +73,7 @@
     <string name="update_role">Update Role</string>
     <string name="delete_user">Delete User</string>
     <string name="welcome_back">Welcome back!</string>
-    <string name="login">Login:</string>
+    <string name="login">Login</string>
     <string name="new_user">New user?</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="insufficient_funds">Insufficient Funds</string>
