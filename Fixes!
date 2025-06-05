@@ -1,0 +1,163 @@
+<<------------------------------FIXES------------------------------>>:
+
+1. Στην οθόνη διαχείρισης χρηστών, να εμφανίζεται drop down list αντί για manual entry των ρόλων προς update.
+
+2. LocationsAdmin: i)Reserve ii)Update: a) name + b) lat+lon για διαχειριση χωρων.
+
+3. Στην οθόνη προσθήκης θέσης στάθμευσης, να αξιοποιείται το Google Maps API για την επιλογή, αντί για manual entry συντεταγμένων
+3.2. Οριο συντεταγμένων i) Και στο manual ii) και στο maps.
+
+4. Το 'ιστορικό συναλλαγών' να μένει άθικτο ακόμα και μετά το update/delete μιας θέσης ή ενός user.
+ 
+5. Να αποθηκεύεται η 'κάρτα'.
+
+6. Προσθήκη της λειτουργικότητας να καθορίζεται από πριν η επιθυμητή διάρκεια στάθμευσης και να ελέγχεται το υπόλοιπο προτού ξεκινήσει.
+
+7. Το duration της ενεργής στάθμευσης να δείχνει και δευτερόλεπτα.
+
+8. Πιο πλούσια 'στατιστικά' user με διαγράμματα και μηνιαία/εβδομαδιαία/ημερήσια.
+
+9. Πιο πλούσια στατιστικά admin με διαγράμματα και μηνιαία/εβδομαδιαία/ημερήσια ανά user.
+9.2. ιστορικό συναλλαγών.
+
+<<------------------------------DB REDESIGN------------------------------>>:
+
+<?php
+header('Content-Type: application/json');
+
+// Database connection
+$host = 'localhost';
+$user = 'root';
+$pass = '123';
+$dbname = 'tikipark';
+
+// Establish connection
+$conn = new mysqli($host, $user, $pass);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+//<---------------------------CREATION--------------------------->
+
+// Create database if not exists
+$conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
+$conn->select_db($dbname);
+
+// Create 'users' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    wallet_balance DECIMAL(10, 2) DEFAULT 0.00,
+    role ENUM('user', 'admin') DEFAULT 'user'
+)
+");
+
+// Create 'parking_spots' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS parking_spots (
+    spot_id INT AUTO_INCREMENT PRIMARY KEY,
+    location VARCHAR(255) NOT NULL,
+    status ENUM('available', 'occupied', 'reserved') DEFAULT 'available',
+    price_per_hour DECIMAL(10, 2) NOT NULL,
+    latitude DECIMAL(9,6) NOT NULL,
+    longitude DECIMAL(9,6) NOT NULL
+)
+");
+
+// Create 'reservations' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS reservations (
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NULL,
+    spot_id INT NULL,
+    start_time TIMESTAMP NULL,
+    end_time TIMESTAMP NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
+    user_snapshot VARCHAR(255),
+    spot_snapshot VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (spot_id) REFERENCES parking_spots(spot_id) ON DELETE SET NULL
+)
+");
+
+// Create 'user_statistics' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS user_statistics (
+    stat_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    username_snapshot VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    total_amount_spent DECIMAL(10, 2) DEFAULT 0.00,
+    total_reservations INT DEFAULT 0,
+    total_parking_time INT DEFAULT 0
+)
+");
+
+// Create 'transactions' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NULL,
+    reservation_id INT,
+    amount DECIMAL(10, 2) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id)
+)
+");
+
+// Create 'user_card_info' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS user_card_info (
+    card_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    card_holder_name VARCHAR(255),
+    card_token VARCHAR(255),
+    last_four_digits CHAR(4),
+    brand VARCHAR(50),
+    expiry_month CHAR(2),
+    expiry_year CHAR(4),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+)
+");
+
+//<---------------------------INSERTIONS--------------------------->
+
+// Insert default admin if not exists
+$checkAdmin = $conn->query("SELECT user_id FROM users WHERE username = 'admin'");
+if ($checkAdmin->num_rows == 0) {
+    $hashedPassword = password_hash('admin123', PASSWORD_DEFAULT);
+    $email = 'admin@example.com';
+    $role = 'admin';
+    $conn->query("INSERT INTO users (username, password, role, email) VALUES ('$role', '$hashedPassword', '$role', '$email')");
+}
+
+// Insert predefined parking spots (Honolulu-based) if not already inserted
+$checkSpots = $conn->query("SELECT COUNT(*) as count FROM parking_spots");
+$row = $checkSpots->fetch_assoc();
+
+if ((int)$row['count'] === 0) {
+    $spots = [
+        ['Ala Moana Mall', 3.50, 21.291982, -157.843144],
+        ['Waikiki Beachfront', 4.00, 21.275760, -157.827507],
+        ['Downtown Honolulu', 3.00, 21.306944, -157.858333],
+        ['University of Hawaii Manoa', 2.50, 21.300855, -157.817347],
+        ['Diamond Head Trail Lot', 2.75, 21.261563, -157.805661],
+    ];
+
+    $stmt = $conn->prepare("INSERT INTO parking_spots (location, price_per_hour, latitude, longitude) VALUES (?, ?, ?, ?)");
+    foreach ($spots as $spot) {
+        $stmt->bind_param("sddd", $spot[0], $spot[1], $spot[2], $spot[3]);
+        $stmt->execute();
+    }
+    $stmt->close();
+}
+
+echo json_encode(["message" => "Database and tables initialized successfully. Default data inserted."]);
+$conn->close();
+?>
