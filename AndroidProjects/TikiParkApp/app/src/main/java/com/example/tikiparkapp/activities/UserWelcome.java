@@ -58,7 +58,7 @@ public class UserWelcome extends AppCompatActivity {
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
-        welcome.setText("Welcome "+username+" !");
+        welcome.setText("Welcome "+username+"!");
 
         //Updates the statistics of the user
         updateUserStats();
