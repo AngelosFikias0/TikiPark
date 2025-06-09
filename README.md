@@ -75,11 +75,11 @@ cd TikiPark
 3. Copy the contents of `Backend/` to:
 
     ```bash
-    C:\xampp\htdocs\TikiPark
+    C:\xampp\htdocs\tikipark
     ```
 
 4. Open [phpMyAdmin](http://localhost/phpmyadmin/)
-5. Create a new database named `TikiPark`
+5. Create a new database named `tikipark`
 6. Import the schema:
 
     - File: `Database/tikipark.sql`
@@ -163,7 +163,6 @@ git push origin --delete feature-branch-name
 Built with teamwork, clean architecture, and real-world tools, **TikiPark** is open to feedback, ideas, and contributors. Perfect for students, hobbyists, or professionals who want to sharpen mobile development skills.
 
 📬 **Questions? Bugs? Suggestions?**
-
 - [Open an Issue](https://github.com/AngelosFikias0/TikiPark/issues)
 - [Message on LinkedIn](https://www.linkedin.com/in/angelosfikias)
 
