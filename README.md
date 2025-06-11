@@ -181,7 +181,7 @@ Built with teamwork, clean architecture, and real-world tools, **TikiPark** is o
 ---
 
 ## 📺 Demo YouTube Video  
-- [Watch Demo on YouTube](https://www.youtube.com/watch?v=mT_ZN3BbIjc)
+- [Watch Demo on YouTube](https://www.youtube.com/)
 
 ---
 

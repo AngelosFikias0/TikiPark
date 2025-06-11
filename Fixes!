@@ -191,7 +191,6 @@ if ((int)$row['count'] === 0) {
     }
     $stmt->close();
 }
-
 echo json_encode(["message" => "Database and tables initialized with indexes. Default data inserted."]);
 $conn->close();
 ?>

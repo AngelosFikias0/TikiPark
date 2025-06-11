@@ -13,20 +13,24 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Create database if not exists
-$conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
+//<---------------------------CREATION--------------------------->
+// Securely create database
+$conn->query("CREATE DATABASE IF NOT EXISTS `$dbname`");
 $conn->select_db($dbname);
 
 // Create 'users' table
 $conn->query("
 CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     wallet_balance DECIMAL(10, 2) DEFAULT 0.00,
-    role ENUM('user', 'admin') DEFAULT 'user'
-)");
+    role ENUM('user', 'admin') DEFAULT 'user',
+    INDEX (username),
+    INDEX (email)
+)
+");
 
 // Create 'parking_spots' table
 $conn->query("
@@ -36,43 +40,100 @@ CREATE TABLE IF NOT EXISTS parking_spots (
     status ENUM('available', 'occupied', 'reserved') DEFAULT 'available',
     price_per_hour DECIMAL(10, 2) NOT NULL,
     latitude DECIMAL(9,6) NOT NULL,
-    longitude DECIMAL(9,6) NOT NULL
-)");
+    longitude DECIMAL(9,6) NOT NULL,
+    INDEX (location)
+)
+");
 
 // Create 'reservations' table
 $conn->query("
 CREATE TABLE IF NOT EXISTS reservations (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    spot_id INT NOT NULL,
+    user_id INT NULL,
+    spot_id INT NULL,
     start_time TIMESTAMP NULL,
     end_time TIMESTAMP NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
     payment_status ENUM('pending', 'completed', 'failed') DEFAULT 'pending',
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (spot_id) REFERENCES parking_spots(spot_id) ON DELETE CASCADE
-)");
+    user_snapshot VARCHAR(255) NOT NULL,
+    spot_snapshot VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (spot_id) REFERENCES parking_spots(spot_id) ON DELETE SET NULL,
+    INDEX (user_id),
+    INDEX (spot_id)
+)
+");
 
-// Create 'user_statistics' table
+// Create 'user_statistics' table for user stats
 $conn->query("
 CREATE TABLE IF NOT EXISTS user_statistics (
-    user_id INT PRIMARY KEY,
+    stat_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NULL,
+    username_snapshot VARCHAR(255) NOT NULL,
     total_amount_spent DECIMAL(10, 2) DEFAULT 0.00,
     total_reservations INT DEFAULT 0,
     total_parking_time INT DEFAULT 0,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
-)");
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    INDEX (username_snapshot)
+)
+");
+
+// Create 'transactions' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NULL,
+    reservation_id INT NOT NULL,
+    username_snapshot VARCHAR(255) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE SET NULL,
+    FOREIGN KEY (reservation_id) REFERENCES reservations(reservation_id),
+    INDEX (user_id),
+    INDEX (reservation_id),
+    INDEX (user_id, timestamp),
+    INDEX (timestamp)
+)
+");
+
+// Create 'user_card_info' table
+$conn->query("
+CREATE TABLE IF NOT EXISTS user_card_info (
+    card_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    card_holder_name VARCHAR(255),
+    card_token VARCHAR(255),
+    last_four_digits CHAR(4),
+    expiry_month CHAR(2),
+    expiry_year CHAR(4),
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    INDEX (user_id),
+    UNIQUE (card_token)
+)
+");
+
+//<---------------------------INSERTIONS--------------------------->
 
 // Insert default admin if not exists
-$checkAdmin = $conn->query("SELECT user_id FROM users WHERE username = 'admin'");
-if ($checkAdmin->num_rows == 0) {
+$checkAdmin = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
+$adminUsername = 'admin';
+$checkAdmin->bind_param("s", $adminUsername);
+$checkAdmin->execute();
+$result = $checkAdmin->get_result();
+
+if ($result->num_rows === 0) {
     $hashedPassword = password_hash('admin123', PASSWORD_DEFAULT);
     $email = 'admin@example.com';
     $role = 'admin';
-    $conn->query("INSERT INTO users (username, password, role, email) VALUES ('$role', '$hashedPassword', '$role', '$email')");
+    $stmt = $conn->prepare("INSERT INTO users (username, password, role, email) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $role, $hashedPassword, $role, $email);
+    $stmt->execute();
+    $stmt->close();
 }
+$checkAdmin->close();
 
-// Insert predefined parking spots (Honolulu-based) if not already inserted
+// Insert predefined parking spots if none exist
 $checkSpots = $conn->query("SELECT COUNT(*) as count FROM parking_spots");
 $row = $checkSpots->fetch_assoc();
 
@@ -92,7 +153,3 @@ if ((int)$row['count'] === 0) {
     }
     $stmt->close();
 }
-
-echo json_encode(["message" => "Database and tables initialized successfully. Default data inserted."]);
-$conn->close();
-?>
