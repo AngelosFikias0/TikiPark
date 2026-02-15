@@ -1,189 +1,201 @@
 # 🚗 TikiPark – Smart Android Parking App
 
-## 📌 Project Overview
+> **A real-time Android parking assistant that helps users discover, reserve, and manage urban parking spots efficiently.**
 
-**TikiPark** is a real-time, full-featured **Android parking assistant app** developed in **Java**, designed to simplify finding and reserving urban parking spots. Created as a **collaborative university project**, it combines a modern Android frontend with a robust **PHP/MySQL** backend, **SQLite caching**, and **Google Maps API** for a seamless user experience.
-
----
-
-## 🚀 Key Features
-
-- 🔐 Secure Login & **Role-Based Authorization** (Admin/User)
-- 📍 Interactive **Google Maps API Integration**
-- 📊 **Real-Time Parking Availability** via RESTful API
-- 📡 **Offline Support** with local **SQLite** caching
-- 💳 Wallet-ready architecture for **Payment Integration**
-- 🧱 **Modular & Scalable Codebase**
+TikiPark is a collaborative university engineering project that combines a native Android client with a RESTful PHP backend and a robust MySQL database. It features real-time availability tracking, offline-first data handling, and strict database integrity enforcement.
 
 ---
 
-## 🧰 Tech Stack
+## 📌 System Overview
 
-### **Frontend (Android)**
+TikiPark follows a classic **Client–Server Architecture**:
 
-- Java with Android SDK
-- XML Layouts
-- SQLite (offline storage)
-- Google Maps API
+```mermaid
+graph TD
+    A[Android App (Java)] -->|REST API HTTP/JSON| B(PHP Backend)
+    B -->|Queries| C[(MySQL Database)]
+    C -->|Results| B
+    B -->|JSON Response| A
+    A <-->|Cache / Offline Mode| D[(SQLite Local DB)]
+```
 
-### **Backend**
-
-- PHP 8.x
-- MySQL
-
-### **DevOps & Tools**
-
-- Git & GitHub
-- Android Studio
-- Visual Studio Code
-- XAMPP (Apache + MySQL)
+* **Frontend:** Native Android (Java) with Google Maps integration.
+* **Backend:** PHP 8.x handling business logic.
+* **Database:** MySQL with relational integrity and SQLite for local caching.
 
 ---
 
-## 📊 Repository Badges
+## 🚀 Core Features
 
-<p align="center">
-  <img src="https://img.shields.io/github/repo-size/AngelosFikias0/TikiPark?style=for-the-badge&color=blue" alt="Repo Size">
-  <img src="https://img.shields.io/github/issues/AngelosFikias0/TikiPark?style=for-the-badge&color=yellow" alt="Issues">
-  <img src="https://img.shields.io/github/issues-pr/AngelosFikias0/TikiPark?style=for-the-badge&color=brightgreen" alt="Pull Requests">
-  <img src="https://img.shields.io/github/last-commit/AngelosFikias0/TikiPark?style=for-the-badge&color=red" alt="Last Commit">
-  <img src="https://img.shields.io/github/contributors/AngelosFikias0/TikiPark?style=for-the-badge&color=purple" alt="Contributors">
-</p>
+### 🔐 Authentication & Security
+* **Role-Based Access Control:** Distinct interfaces and permissions for **Admins** and **Standard Users**.
+* **Secure Login:** Backend-enforced authorization rules.
 
-## 🛠️ Installation Guide
+### 📍 Smart Map Integration
+* **Real-Time Visualization:** Google Maps API integration showing parking spots.
+* **Dynamic Markers:** Color-coded markers indicating availability.
+* **Live Updates:** Spots update via API polling and refresh triggers.
 
-### ✅ Step 1: Clone the Repository
+### 📡 Offline-First Architecture
+* **Local Caching:** Uses **SQLite** to store data locally.
+* **Auto-Sync:** Detects internet connection restoration and syncs data to reduce API load.
+* **Conflict Resolution:** Conflict-safe data refresh strategies.
 
+### 📊 Robust Backend Logic
+* **RESTful API:** Structured JSON communication with standard HTTP status codes.
+* **Input Validation:** Server-side validation to prevent malformed data.
+* **Wallet-Ready:** Architecture designed to support payment gateway integration.
+
+---
+
+## 🧰 Technical Stack
+
+| Component | Technologies Used |
+| :--- | :--- |
+| **Mobile Client** | Android SDK (Java), XML Layouts, SQLite, Google Maps API |
+| **Backend** | PHP 8.x, RESTful API Architecture |
+| **Database** | MySQL (InnoDB Engine) |
+| **Tools** | Android Studio, VS Code, XAMPP (Apache + MySQL), Git |
+
+---
+
+## 🗄 Database Design & Integrity
+
+The system relies on a **normalized relational schema** with enforced referential integrity.
+
+### 🔗 Foreign Keys & Cascades
+We utilize specific cascade strategies (`ON DELETE CASCADE`, `ON UPDATE CASCADE`) to ensure automatic cleanup of dependent records and prevent orphaned data.
+* `users → reservations`
+* `parking_spots → reservations`
+* `admins → managed_parking_spots`
+
+### 🔄 Transaction Management
+Critical operations, such as creating a reservation, are wrapped in **Database Transactions** to ensure atomicity.
+1.  Begin Transaction
+2.  Validate Availability
+3.  Insert Reservation
+4.  Update Parking Status
+5.  **Commit** (or **Rollback** on failure)
+
+### ⚡ Optimized Queries
+* **Indexed Lookups:** Fast retrieval based on location and availability.
+* **Aggregations:** Optimized `COUNT` and `SUM` queries for admin dashboards.
+* **Security:** All inputs use **Parameterized Queries** to prevent SQL injection.
+
+---
+
+## 📊 API Documentation
+
+The backend exposes endpoints communicating via JSON.
+
+**Example: Get Available Spots**
+`GET /api/parking/available?lat=40.6401&lng=22.9444`
+
+**Response:**
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "spot_id": 12,
+      "latitude": 40.6402,
+      "longitude": 22.9446,
+      "available": true
+    }
+  ]
+}
+```
+
+---
+
+## 📦 Project Structure
+
+```text
+TikiPark/
+│
+├── AndroidApp/       # Native Android Studio Project
+├── Backend/          # PHP Scripts and API Logic
+├── Database/         # SQL Import Files (tikipark.sql)
+├── Analysis/         # PDF Documentation & UMLs
+├── Mockups/          # UI/UX Designs
+└── README.md         # Project Documentation
+```
+
+---
+
+## 🛠 Installation Guide
+
+### 1️⃣ Clone Repository
 ```bash
-git clone https://github.com/AngelosFikias0/TikiPark.git
+git clone [https://github.com/AngelosFikias0/TikiPark.git](https://github.com/AngelosFikias0/TikiPark.git)
 cd TikiPark
 ```
 
-## ✅ Step 2: Android Setup
+### 2️⃣ Backend Setup (XAMPP)
+1.  Install **XAMPP** and start **Apache** and **MySQL**.
+2.  Copy the contents of the `Backend/` folder to your htdocs directory:
+    * `C:\xampp\htdocs\TikiPark`
+3.  Open **phpMyAdmin**, create a database named `tikipark`, and import:
+    * `Database/tikipark.sql`
+4.  Configure database credentials in:
+    * `Backend/config.php`
 
-1. Launch **Android Studio**
-2. Select **Open an Existing Project**
-3. Navigate to and open the `TikiPark/` directory
-4. Click **Run** to build and deploy on an emulator or physical device
-
----
-
-## ✅ Step 3: Backend Setup (XAMPP)
-
-1. Download & install [XAMPP](https://www.apachefriends.org/)
-2. Start **Apache** and **MySQL** from the XAMPP Control Panel
-3. Copy the contents of `Backend/` to:
-
-    ```bash
-    C:\xampp\htdocs\TikiPark
-    ```
-
-4. Open [phpMyAdmin](http://localhost/phpmyadmin/)
-5. Create a new database named `TikiPark`
-6. Import the schema:
-
-    - File: `Database/tikipark.sql`
-
-7. Update the database credentials in:
-
-    - `Backend/config.php`
+### 3️⃣ Android Setup
+1.  Open **Android Studio**.
+2.  Select **"Open Existing Project"**.
+3.  Navigate to and select the `AndroidApp/` folder.
+4.  Build and Run on an Emulator or Physical Device.
 
 ---
 
-## 👥 Contribution Guide
+## 👥 Collaboration Workflow
 
-### 📌 1. Clone & Set Up Locally
+We follow a structured Git branching model:
 
+* `main`: Stable production version.
+* `feature/*`: Development of new features.
+
+**Workflow:**
 ```bash
-git clone https://github.com/AngelosFikias0/TikiPark.git
-cd TikiPark
-git checkout main
-git fetch origin
-git pull origin main
-```
+# Create a new feature branch
+git checkout -b feature-name
 
----
-
-### 📌 2. Create a New Feature Branch
-
-```bash
-git checkout -b feature-branch-name
-```
-
----
-
-### 📌 3. Sync Before Coding
-
-```bash
-git fetch origin
-git pull origin main
-```
-
----
-
-### 📌 4. Commit & Push Your Changes
-
-```bash
+# Work, Add, and Commit
 git add .
-git commit -m "✅ Add: New feature implementation"
-git push origin feature-branch-name
+git commit -m "Add feature: detailed description"
+
+# Push to origin
+git push origin feature-name
 ```
+*Pull Requests are reviewed before merging into main.*
 
 ---
 
-### 📌 5. Submit Pull Request
+## 📺 Demo
 
-1. Go to the GitHub Repository: [https://github.com/AngelosFikias0/TikiPark](https://github.com/AngelosFikias0/TikiPark)
-2. Click **New Pull Request**
-3. Compare `feature-branch-name` with `main`
-4. Add a description and click **Create Pull Request**
+Check out the full demonstration of the application on YouTube:
 
----
-
-### 📌 6. Sync After Merge
-
-```bash
-git checkout main
-git pull origin main
-```
+[![TikiPark Demo](https://img.youtube.com/vi/mT_ZN3BbIjc/0.jpg)](https://www.youtube.com/watch?v=mT_ZN3BbIjc)
 
 ---
 
-### 📌 7. (Optional) Delete Feature Branch
+## 📈 Engineering Highlights & Future Improvements
 
-```bash
-git branch -d feature-branch-name
-git push origin --delete feature-branch-name
-```
+**Highlights:**
+* ✅ Full Client–Server Implementation
+* ✅ Advanced Database Integrity (Cascades/Transactions)
+* ✅ Offline-First Mobile Strategy
 
----
-
-## 💡 Get Involved
-
-Built with teamwork, clean architecture, and real-world tools, **TikiPark** is open to feedback, ideas, and contributors. Perfect for students, hobbyists, or professionals who want to sharpen mobile development skills.
-
-📬 **Questions? Bugs? Suggestions?**
-
-- [Open an Issue](https://github.com/AngelosFikias0/TikiPark/issues)
-- [Message on LinkedIn](https://www.linkedin.com/in/angelosfikias)
-
+**Future Roadmap:**
+* [ ] Migrate backend to Spring Boot or Node.js
+* [ ] Implement JWT (JSON Web Token) Authentication
+* [ ] Dockerize the backend services
+* [ ] Add CI/CD pipelines for automated testing
+* [ ] Implement Rate Limiting and API Monitoring
 
 ---
 
-## 📄 Documentation & Analysis
-- [Main Documentation](./Analysis/TikiPark%20-%20Main%20Deliverable.pdf)  
-- [Additional Documentation](./Documentation.docx)
+## 📄 Documentation
 
----
-
-## 📈 User Manual  
-- [TikiPark User Manual](./Analysis/TikiPark%20-%20User%20Manual.pdf)
-
----
-
-## 📺 Demo YouTube Video  
-- [Watch Demo on YouTube](https://www.youtube.com/watch?v=mT_ZN3BbIjc)
-
----
-
-![TikiPark Logo](Mockups/logo.jpg)
+* **Main Analysis:** `Analysis/TikiPark - Main Deliverable.pdf`
+* **User Manual:** `Analysis/TikiPark - User Manual.pdf`
