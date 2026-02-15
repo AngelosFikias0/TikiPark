@@ -1,4 +1,4 @@
-# 🚗 TikiPark – Smart Android Parking App
+# TikiPark – Smart Android Parking App
 
 > **A real-time Android parking assistant that helps users discover, reserve, and manage urban parking spots efficiently.**
 
