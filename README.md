@@ -10,13 +10,17 @@ TikiPark is a collaborative university engineering project that combines a nativ
 
 TikiPark follows a classic **Client–Server Architecture**:
 
-```mermaid
-graph TD
-    A[Android App (Java)] -->|REST API HTTP/JSON| B(PHP Backend)
-    B -->|Queries| C[(MySQL Database)]
-    C -->|Results| B
-    B -->|JSON Response| A
-    A <-->|Cache / Offline Mode| D[(SQLite Local DB)]
+```text
+Android App (Java)
+        |
+        v
+   PHP Backend
+        |
+        v
+   MySQL Database
+        ^
+        |
+    SQLite Cache
 ```
 
 * **Frontend:** Native Android (Java) with Google Maps integration.
