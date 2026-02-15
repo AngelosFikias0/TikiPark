@@ -10,7 +10,8 @@ TikiPark is a collaborative university engineering project that combines a nativ
 
 TikiPark follows a classic **Client–Server Architecture**:
 
-```text
+```mermaid
+graph TD
     A[Android App (Java)] -->|REST API HTTP/JSON| B(PHP Backend)
     B -->|Queries| C[(MySQL Database)]
     C -->|Results| B
@@ -70,11 +71,11 @@ We utilize specific cascade strategies (`ON DELETE CASCADE`, `ON UPDATE CASCADE`
 
 ### 🔄 Transaction Management
 Critical operations, such as creating a reservation, are wrapped in **Database Transactions** to ensure atomicity.
-1.  Begin Transaction
-2.  Validate Availability
-3.  Insert Reservation
-4.  Update Parking Status
-5.  **Commit** (or **Rollback** on failure)
+1. Begin Transaction
+2. Validate Availability
+3. Insert Reservation
+4. Update Parking Status
+5. **Commit** (or **Rollback** on failure)
 
 ### ⚡ Optimized Queries
 * **Indexed Lookups:** Fast retrieval based on location and availability.
@@ -131,19 +132,19 @@ cd TikiPark
 ```
 
 ### 2️⃣ Backend Setup (XAMPP)
-1.  Install **XAMPP** and start **Apache** and **MySQL**.
-2.  Copy the contents of the `Backend/` folder to your htdocs directory:
+1. Install **XAMPP** and start **Apache** and **MySQL**.
+2. Copy the contents of the `Backend/` folder to your htdocs directory:
     * `C:\xampp\htdocs\TikiPark`
-3.  Open **phpMyAdmin**, create a database named `tikipark`, and import:
+3. Open **phpMyAdmin**, create a database named `tikipark`, and import:
     * `Database/tikipark.sql`
-4.  Configure database credentials in:
+4. Configure database credentials in:
     * `Backend/config.php`
 
 ### 3️⃣ Android Setup
-1.  Open **Android Studio**.
-2.  Select **"Open Existing Project"**.
-3.  Navigate to and select the `AndroidApp/` folder.
-4.  Build and Run on an Emulator or Physical Device.
+1. Open **Android Studio**.
+2. Select **"Open Existing Project"**.
+3. Navigate to and select the `AndroidApp/` folder.
+4. Build and Run on an Emulator or Physical Device.
 
 ---
 
